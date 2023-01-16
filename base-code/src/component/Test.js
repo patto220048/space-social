@@ -1,4 +1,4 @@
-import test from './test.scss'
+import './test.module.scss'
 
 function Test() {
     return ( 
