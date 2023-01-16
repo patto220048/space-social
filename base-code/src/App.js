@@ -1,7 +1,9 @@
+import Test from "./component/Test";
+
 
 
 function App() {
-return ( <p>hello</p>)
+    return <Test/>
 }
 
 export default App;
