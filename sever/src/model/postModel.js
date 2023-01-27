@@ -5,24 +5,37 @@ const Post = new  Schema({
     
     userId:{
         type:String,
-
+        require:true
     },
-   title:{
-    type:String,
-    maxlength : 100,
-    require: true,
+    title:{
+        type:String,
+        maxlength : 100,
+        require: true,
    },
+
    desc:{
-    type:String,
-    maxlength : 1000,
-    require: true,
+        type:String,
+        maxlength : 1000,
+        require: true,
    },
+
    imgPost:{
-    type:String,
+        type:String,
    },
+
    tag:{
-    type:String,
+        type:Array,
+        default:[],
+   },
+   like:{
+        type:Array,
+        default:[]
+   },
+   dislike:{
+        type:Array,
+        default:[]
    }
+   
 
 
 

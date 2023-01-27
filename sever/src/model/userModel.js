@@ -16,22 +16,16 @@ const User = new  Schema({
     },
     fullName : {
         type: String,
+        maxlength: 50
     },
     region:{
         type: String,
+        maxlength: 50
     },
     age: {
         type: Number,
     }
     ,
-    liked : {
-        type: Array,
-        default : [],
-    }
-    ,likedUser : {
-        type: Array,
-        default : [],
-    },
     friend:{
         type: Array,
         default : [],
@@ -50,14 +44,20 @@ const User = new  Schema({
     userCoverImg:{
         type: String,
     },
-    flower :{
+    follower :{
         type: Array,
         default: [],
     },
-    flowerUser:{
+    flowing:{
         type: Array,
-        default: [],
+        default: [],    
+    },
+ 
+    followUser:{
+        type:Number,
+        default: 0,
     }
+
 
 
     
