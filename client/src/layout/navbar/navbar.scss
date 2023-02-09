@@ -97,6 +97,7 @@ $textColor : #D4D8F4;
         overflow-y: scroll;
         max-height: 200px;
         min-height: 0;
+
         // display: none;
         &::-webkit-scrollbar{
             display: none;
@@ -119,7 +120,6 @@ $textColor : #D4D8F4;
                 padding-top: 10px;
                
            
-                
             }
            
         }

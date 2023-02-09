@@ -24,6 +24,7 @@ function Navbar({openSearch,setOpenSearch}) {
                 <div className='data-result'>
                         <div className="data-items">
                             <p>items</p>
+                           
 
 
                         </div>

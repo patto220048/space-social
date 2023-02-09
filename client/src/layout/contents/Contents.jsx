@@ -9,8 +9,24 @@ function Contents() {
             <div className="wapper-contents">
                 <Share/>
                 <Post/>
-
-                
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+           
 
             </div>
             

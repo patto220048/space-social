@@ -4,4 +4,11 @@
     position: sticky;
     top:70px;
     height: 100%;
+    @media (max-width:768px){
+        display: none;    
+    }
+    @media (min-width:769px) and (max-width:1280px){
+        // display: none;    
+        flex: 2;
+    }
 }
