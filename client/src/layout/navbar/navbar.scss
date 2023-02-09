@@ -4,9 +4,12 @@ $mainColor : #424242;
 $textColor : #D4D8F4;
 
 
-.warper{
+.nav-container{
     width: 100%;
-    position: relative;
+    position: sticky;
+    top: 0;
+    padding-bottom: 10px;
+    
     .navbar{
        
         width: 100%;
@@ -44,7 +47,7 @@ $textColor : #D4D8F4;
                     margin: 0 auto;
                 }
             .nav-input{
-                
+               
                 width: 700px;
                 height: 20px;
                 border: none;
@@ -52,6 +55,7 @@ $textColor : #D4D8F4;
                 padding-left: 15px;
                 font-size: 15px;
                 background-color: transparent;
+                
                 //repossive
                 @media (max-width:767px){
                     width: 200px;
@@ -65,7 +69,7 @@ $textColor : #D4D8F4;
             }
             
             .search-icon{
-                
+                flex: 3;
                 right: 0;
                 bottom: -7px;
                 position: absolute;
@@ -82,33 +86,42 @@ $textColor : #D4D8F4;
         }
     //search-results
     .data-result{
-        width: 98%;
+        
+        width: 100%;
         position: absolute;
         background-color: rgb(185, 201, 201);
-        top: 100%;
+        top:100%;
+        right: -1px ;
         border-radius: 15px;
-        height: 300px;
         overflow: hidden;
-        overflow-y: auto;
-        display: none;
+        overflow-y: scroll;
+        max-height: 200px;
+        min-height: 0;
+        // display: none;
         &::-webkit-scrollbar{
             display: none;
         }
         
         .data-items{
-           display: flex;
-           flex-direction: column;
-           align-items: flex-start;
-           justify-content: center;
-           padding-left: 10px;
 
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding-left: 10px;
+            flex: 1;
+            cursor: pointer;
+        
            p{   
+                width: 100%;
                 height: 50px;
                 font-size: 20px;
                 padding-top: 10px;
-                cursor: pointer;
+               
+           
                 
             }
+           
         }
 
     }

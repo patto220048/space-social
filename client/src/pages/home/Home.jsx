@@ -1,19 +1,28 @@
 import { useState } from 'react';
+import Contents from '../../layout/contents/Contents';
 import Navbar from '../../layout/navbar/Navbar';
+import Rightbar from '../../layout/rightbar/Rightbar';
 import Sidebar from '../../layout/sidebar/Sidebar';
+
 import "./home.scss"
 
 function Home() {
+
+    const [openSearch, setOpenSearch] = useState(false)
   
     return ( 
-        <div className="warpper-heading">
-                <Navbar/>
-            <div className='heading'>
-            <Sidebar />
-            </div>
-           
+        <>
+            <Navbar openSearch={openSearch} setOpenSearch={setOpenSearch}/>
+            <div className="container-home">
+                <Sidebar/>
+                <Contents/>
+                <Rightbar/>
 
-        </div>
+
+            </div>
+        </>
+
+       
     );
 
 }

@@ -3,35 +3,35 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
-function Navbar() {
+function Navbar({openSearch,setOpenSearch}) {
+
+
+    const handleOnpenSearch = () =>{
+        setOpenSearch(!openSearch)
+        
+    }
+
     return (  
-        <div className="warper">
+        <div className="nav-container">
             <div className="navbar">
-                <span className="logo">SOCIAL.</span>
+                <span className="logo">.SOCIAL</span>
                 <div className="search">
-                    <input className="nav-input" placeholder='Search...' type="text" />
+                    <input className="nav-input" placeholder='Search...' type="text" onClick={handleOnpenSearch} />
                     <div className="search-icon">
                         <SearchIcon style={{fontSize:"40px"}}/>
                     </div>
+              { openSearch ?
                 <div className='data-result'>
-                    <div className="data-items">
-                        <p>Hello</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
-                    </div>
-                    
+                        <div className="data-items">
+                            <p>items</p>
+
+
+                        </div>
+                        
                 </div>
+                :
+                <></>
+                }
 
                 </div>
                 <div className="nav-items">

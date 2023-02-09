@@ -1,21 +1,25 @@
 
-$height : 68px;
+$height : 80px;
 $mainColor : #424242;
 $textColor : #D4D8F4;
 
 
-.wapper-sidebar {
+.sidebar-container {
+    flex: 0.5;
     width: 100%;
-    height: 100%;
     display: flex;
-    position: fixed;
-    top: 12%;
+    height: 100%;
+    position:sticky;
+    top: 70px;
+    //test
+    
+
+    
     .sidebar{
+        width: 40%;
         border-top-right-radius: 23px;
         border-bottom-right-radius: 25px;
-        bottom: 2%;
         height:calc(100vh - $height);
-        width: 4%;
         background-color: $mainColor;
         color: $textColor;
         display: flex;
@@ -23,31 +27,107 @@ $textColor : #D4D8F4;
         transition: all 1s ease;
         padding-top: 10px;
         padding-bottom: 10px;
-        
         cursor: pointer;
+
+        overflow-y: scroll;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+      
+        
+
         
         .sidebar-item{
-           
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 100%;
             position: relative;
+            padding-left: 3px;
+            margin: 0 auto;
+            transition: all 1s ease;
+            .avatar{
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 10px;
+                padding: 5px;
+                position: relative;
+                transition: all 1s ease;
+                width: 100%;
+                
+                img{
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 1px solid $textColor;
+                    padding: 2px;
+                    
+                }
+                .name{
+                    display: flex;
+                    flex-direction: column;
+                    overflow:hidden;
+                    
+                    .name-items{
+                        font-size: 18px;
+                        font-weight: 500;
+                        
+                    }
+                    .name-status{
+                        font-size: 12px;
+                        font-weight: 200;
+                        
+                      
+                    }
+                    
+                    
+                    
+                }
+                .status{
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: green;
+                    left: 30px;
+                    bottom: 15px;
+
+                }
+                
+                
+            }
+            .line{
+                border: 1px solid $textColor;
+                width: 90%;
+                opacity: 0.5;
+                margin-left: 2px;
+                margin-top: 10px;
+                
+
+            }
             
-            
+          
             .top-side{
+                margin-top: 15%;
+                justify-content: space-between;
                 padding: 5px;
                 display: flex;
                 flex-direction: column;
-                gap: 20px;                                        
+                gap: 30px;
+              
+                
+              
+                                              
                 .top{
-                    padding-left: 8px ;
+                   
                     align-items: center;
                     display: flex;
                     
                     .top-icon{
                         
-                        padding-right:10px ;
+                        padding:0 8px;
                         padding-top: 5px;
 
                     }
@@ -62,6 +142,7 @@ $textColor : #D4D8F4;
                         
                     }
                     &.active{
+                        
                         background-color: rgb(240, 240, 240);
                         border-radius: 10px;
                     }  
@@ -87,14 +168,18 @@ $textColor : #D4D8F4;
 
         }
         &:hover{
-            width: 14%;
+            width: 100%;
             .touch{
                 background-color: $textColor;
                 opacity: 1;
                 
             }
             .sidebar-item{
-                
+                .avatar {
+                    .name{
+                        opacity: 1;
+                    }
+                }
                 .top-side {
 
                     span{
@@ -103,43 +188,89 @@ $textColor : #D4D8F4;
                 }
                 
             }
+            //mobile:hover
             @media (max-width:768px){
+                width: 100%;
+                
                 .sidebar-item{
-                    display:flex;
+                    
+                    display: flex;
+                    
+                   
+                    .avatar{
+                        .name{
+                            display: none;
+                        }
+                    }
                     .top-side {
+                       .top-icon{
+                        padding-left: 5px;
+                       }
                         span{
                             display: none;
                         }
+                        
                     }
                     
                 }
 
             }
+            // ipad : hover
+            @media (min-width:769px) and (max-width:1280px){
+                width: 100%;
+                .top-side {
+                    .top-icon{
+                      display: flex;
+                    }
+                     span{
+                         display: flex;
+                     }
+                     
+                 }
+                
+                
+
+            }
+
 
         }
-
+        //mobile
         @media (max-width:768px) {
+            
+            width: 50%;
 
             .sidebar-item{
               display: none;
             }
         }
-        
+        //ipad
+        @media (min-width:769px) and (max-width:1280px){
+            width: 40%;
+            .avatar{
+                .name{
+                    display: none;
+                    }
+                }
+           
+                .top-side {
+                    .top-icon{
+                      display: flex;
+                    }
+                     span{
+                         display: none;
+                     }
+                     
+                 }
+                
+            
 
-        
-
+        }
+    
 
 
     }
-    .contents{
-        width: 100%;
-        overflow-y: auto;
-        margin-left: 20px;
-        margin-top: 20px;
-        // &::-webkit-scrollbar{
-        //     display: none;
-        // }
+   
 
-    }
+   
     
 }

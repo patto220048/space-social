@@ -22,35 +22,53 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     { icon : <SettingsIcon/>, span : "SETTING" },
                     { icon :<HelpIcon/> , span : "HELP" },
                     { icon : <LogoutIcon/> , span : "LOGOUT" },
-                    { icon :<NightlightRoundIcon/>, span : " LIGHTMODE" }]
+                    { icon :<NightlightRoundIcon/>, span : "LIGHTMODE" }]
     
     return ( 
-        <div className="wapper-sidebar">
+        <div className="sidebar-container">
             <div className="sidebar">
                 <div className="sidebar-item">
+                    <div className="avatar">
+                        <div className="img">
+                            <img src="https://images.unsplash.com/photo-1675711018631-b6b01db685c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80" alt="" />
+                        </div>
+                        <div className="name">
+                            <h3 className="name-items">Alefaafx</h3>
+                            <h4 className="name-status">
+                            Online</h4>
+                            
+                            
+                        </div>
+                        <span className="status"></span>
+                    </div>
+                    <div className="line"></div>
                     <div className="top-side" > 
                         {listTop.map((item,index)=>
                             <div className={"top " + (active === index ? "active" : "none" )} onClick={() =>setActive(index)} >
                                 <div className="top-icon">
                                     {item.icon}
                                 </div>
+
                                 <span>{item.span}</span>
+                                
                             </div>
+                            
+                            
                         )}
+                   
+                    
                     </div>
+                   
               
                 </div>
                 <div className="touch">  
                 </div>
-                {/* <div className="mobie">
-
-                </div> */}
-
-            </div>
-            <div className="contents">
-                <Contents/>
                 
+
+
             </div>
+          
+           
         </div>
      );
 }

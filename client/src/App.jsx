@@ -9,14 +9,8 @@ import Home from './pages/home/Home';
 
 function App() {
 
-  return (
-   
-    <div className="warpper-app">
-      <Home/>
-   
-    </div>
-      
-    
+  return (   
+    <Home/>
    
   );
 }
