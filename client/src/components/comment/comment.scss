@@ -1,0 +1,31 @@
+.comment-container{
+
+
+    .comment-wapper{
+
+        
+        .comment-items{
+            gap: 10px;
+            display: flex;
+            align-items:flex-start;
+            margin: 10px 0;
+            
+            .comment-user-img{
+                width: 35px;
+                height: 35px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            .comment{
+                padding-left: 10px;
+                border-radius: 15px;
+                width: 100%;
+                background-color: rgb(255, 255, 255);
+                .comment-name{
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

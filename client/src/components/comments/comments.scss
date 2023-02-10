@@ -1,0 +1,58 @@
+$mainColor : #424242;
+$textColor : #D4D8F4;
+
+
+.comments-container{
+    padding: 0 10px;
+    max-height: 150px;
+    overflow: auto;
+ 
+    .comments-wapper{
+        position: relative;
+        .comments-item{
+           
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            padding: 10px 0;
+         
+            .comments-img{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+
+            }
+            .comments-input {
+                
+                width:80%;
+                border: none;
+                outline: none;
+                padding: 5px;
+                border-radius: 25px;
+                
+
+            }
+            .comments-button{
+                cursor: pointer;
+                border: none;
+                outline: none;
+                padding: 5px;
+                border-radius: 10px;
+                background-color: $textColor;
+                color: $mainColor;
+                font-size: 15px;
+                &:hover{
+                    opacity: 0.7;
+                    
+                }
+            }
+
+        }
+    }
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}

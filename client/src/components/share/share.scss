@@ -5,21 +5,26 @@ $textColor : #D4D8F4;
 .share-container{
     width: 100%;
     // background-color:$mainColor;
+    margin: 0 auto;
     
     .warpper-share{
+        background-color:$mainColor;    
         height: 120px;
         width: 100%;
         border-radius: 20px;
-        background-color:$mainColor;
         display: flex;
         flex-direction: column;
-        margin: 0 auto;
+        justify-content: center;
+     
+       
         .share-items{
+            
             display: flex;
             justify-content: center;
             align-items: center;
             padding-top: 10px ;
             gap: 20px;
+           
             
             img{
                 width: 50px;height: 50px;
@@ -29,7 +34,7 @@ $textColor : #D4D8F4;
                 border: 1px solid $textColor;
             }
             .input-share{
-                width: 40%;
+                width: 80%;
                 padding: 8px;
                 border-radius: 25px;
                 border: none;

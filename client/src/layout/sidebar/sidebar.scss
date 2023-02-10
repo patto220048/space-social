@@ -190,6 +190,7 @@ $textColor : #D4D8F4;
             }
             //mobile:hover
             @media (max-width:768px){
+
                 width: 100%;
                 
                 .sidebar-item{
@@ -237,7 +238,7 @@ $textColor : #D4D8F4;
         //mobile
         @media (max-width:768px) {
             
-            width: 50%;
+            width: 40%;
 
             .sidebar-item{
               display: none;

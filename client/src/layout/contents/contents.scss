@@ -1,16 +1,16 @@
 .container-contents{
     flex: 4;
-    padding:0 20px;
-    // background-color: bisque;
+   
+   
     //mobile
     @media (max-width:768px){
 
-        flex: 4;
-        width: 100%
+        flex: 3;
+        width: 100%;
     }
     //ipad
     @media (min-width:769px) and (max-width:1280px){
-        flex:4;
+        flex:7;
         padding: 0px;
        
         
@@ -18,6 +18,10 @@
     }
 
     .wapper-contents{
+        
+
+        padding:0 20px;
+        
         //mobile
         @media (max-width:768px){
             width: 100%
