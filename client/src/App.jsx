@@ -12,8 +12,8 @@ function App() {
 
   return (   
     // <Home/>
-    // <Login/>
-    <Signup/>
+    <Login/>
+    // <Signup/>
    
   );
 }
