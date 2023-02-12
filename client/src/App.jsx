@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import './app.scss'
 
-import Navbar from './layout/navbar/Navbar'
-import Sidebar from './layout/sidebar/Sidebar'
+
 import Home from './pages/home/Home';
+import Login from './pages/login/Login';
+import Signup from './pages/signup/Signup';
 
 
 
 function App() {
 
   return (   
-    <Home/>
+    // <Home/>
+    // <Login/>
+    <Signup/>
    
   );
 }

@@ -12,11 +12,12 @@ import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 
 import Contents from "../contents/Contents";
 import { useState } from "react";
+import { fontSize } from "@mui/system";
 
 function Sidebar({setlectItem,setSetlectItem}) {
     const [active, setActive] = useState()
     const listTop = [{icon :<HomeIcon/>, span : "HOME" },
-                    { icon :<AccountCircleIcon/>, span : "PROFILE" },
+                    { icon :<AccountCircleIcon fontSize="30px"/>, span : "PROFILE" },
                     { icon :<GroupIcon/>, span : "FRIEND" },
                     { icon :<ChatIcon/>, span : "MESSAGE" },
                     { icon : <SettingsIcon/>, span : "SETTING" },
@@ -33,7 +34,7 @@ function Sidebar({setlectItem,setSetlectItem}) {
                             <img src="https://images.unsplash.com/photo-1675711018631-b6b01db685c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80" alt="" />
                         </div>
                         <div className="name">
-                            <h3 className="name-items">Alefaafx</h3>
+                            <h3 className="name-items">alex</h3>
                             <h4 className="name-status">
                             Online</h4>
                             
@@ -45,8 +46,8 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     <div className="top-side" > 
                         {listTop.map((item,index)=>
                             <div className={"top " + (active === index ? "active" : "none" )} onClick={() =>setActive(index)} >
-                                <div className="top-icon">
-                                    {item.icon}
+                                <div className="top-icon "  >
+                                    {item.icon }
                                 </div>
 
                                 <span>{item.span}</span>

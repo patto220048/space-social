@@ -4,11 +4,14 @@ $textColor : #D4D8F4;
 
 .comments-container{
     padding: 0 10px;
-    max-height: 150px;
+    max-height:240px;
     overflow: auto;
- 
+   
     .comments-wapper{
-        position: relative;
+        position: sticky;
+        top: 0;
+        background-color:$mainColor;
+        z-index: 0;
         .comments-item{
            
             width: 100%;

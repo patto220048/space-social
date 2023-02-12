@@ -1,14 +1,215 @@
+$mainColor : #424242;
+$textColor : #D4D8F4;
+
+
+
 .rightbar-container{
-    flex: 1;
-    background-color: rgb(27, 221, 221);
+    flex: 5;
     position: sticky;
     top:70px;
     height: 100%;
+    
+    .rightbar-wapper{
+        
+        
+        border-radius: 15px;
+        max-height: 200px;
+        overflow-y: auto;
+        &::-webkit-scrollbar{
+            display: none;;
+        }
+        background-color: $mainColor;
+        .suggest-name{ 
+        
+            padding: 10px;
+            font-size: 25px;
+            font-weight: 700;
+            color:$textColor;
+            position: sticky;
+            top: 0;
+            background-color: #424242;
+            z-index: 2;
+          
+        }
+       
+        .suggest-friend{
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+           
+
+            .friend-items{
+
+                
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .friend-img{
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                .friend-name{
+                    color: $textColor;
+                    font-size: 18px;
+                }
+
+            }
+            .button{
+                display: flex;
+                gap: 10px;
+                button{
+                    width: 100px;
+                    padding: 5px;
+                    border: none;
+                    outline: none;
+                    border-radius: 15px;
+                    cursor: pointer;
+                    transition: all 1s ease;
+                    
+                    &:hover{
+                        transform: scale(1.2);
+                        background-color: #D4D8F4;
+                          
+                    }
+                }
+                
+
+                
+            }
+            
+        }
+
+
+    }  
+    .notification{
+        margin-top: 10px;
+        background-color: $mainColor;
+        border-radius: 15px;
+        max-height: 200px;
+        overflow-y: auto;
+        width: 100%;
+        &::-webkit-scrollbar{
+            display: none;;
+        }
+        .notification-name{ 
+        
+            padding: 10px;
+            font-size: 25px;
+            font-weight: 700;
+            color:$textColor;
+            position: sticky;
+            top: 0;
+            background-color: #424242;
+            z-index: 2;
+          
+        }
+        .notification-items{
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            gap: 10px;
+          
+
+            .notification-img{
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                object-fit: cover;
+
+            }
+            p{
+                font-size: 16px;
+                color: $textColor;
+                font-weight: 400;
+
+            }
+            .notification-name{
+                z-index: 1;
+                font-size: 20px;
+                color: $textColor;
+                font-weight: 600;
+               
+            }
+            
+        }
+    }
+    .user-online{
+        margin-top: 10px;
+        background-color: $mainColor;
+        border-radius: 15px;
+        max-height: 460px;
+        overflow-y: auto;
+        width: 100%;
+        &::-webkit-scrollbar{
+            display: none;;
+        }
+
+        .user-online-name{
+            padding: 10px;
+            font-size: 25px;
+            font-weight: 700;
+            color:$textColor;
+            position: sticky;
+            top: 0;
+            background-color: #424242;
+            z-index: 2;
+            
+        }
+        .online-items{
+
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            gap: 10px;
+            
+            position: relative;
+            .online-img{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                padding: 3px;
+                border: 1px solid #D4D8F4;
+
+            }
+            .status{
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background-color: #78ea76;
+                top: 20px;
+                left: 45px;
+            }
+            .online-name{
+                
+                font-size: 25px;
+                color: $textColor;
+                font-weight: 600;
+                
+               
+            }
+        }
+    
+    }
+    
     @media (max-width:768px){
         display: none;    
     }
     @media (min-width:769px) and (max-width:1280px){
-        // display: none;    
+        display: none;    
+        // flex: 1;
         flex: 2;
+        .rightbar-wapper{
+
+
+        }
+
     }
+
 }
+

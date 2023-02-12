@@ -5,7 +5,7 @@ $textColor : #D4D8F4;
 
 
 .sidebar-container {
-    flex: 0.4;
+    flex: 5;
     width: 100%;
     display: flex;
     height: 100%;
@@ -16,7 +16,7 @@ $textColor : #D4D8F4;
 
     
     .sidebar{
-        width: 40%;
+        width: 60%; //
         border-top-right-radius: 23px;
         border-bottom-right-radius: 25px;
         height:calc(100vh - $height);
@@ -57,12 +57,14 @@ $textColor : #D4D8F4;
                 width: 100%;
                 
                 img{
-                    width: 35px;
-                    height: 35px;
+                    width: 45px;//
+                    height: 45px;//
                     border-radius: 50%;
                     object-fit: cover;
                     border: 1px solid $textColor;
                     padding: 2px;
+                    margin-left: 10px;//
+                    
                     
                 }
                 .name{
@@ -71,7 +73,7 @@ $textColor : #D4D8F4;
                     overflow:hidden;
                     
                     .name-items{
-                        font-size: 18px;
+                        font-size: 25px;
                         font-weight: 500;
                         
                     }
@@ -87,21 +89,21 @@ $textColor : #D4D8F4;
                 }
                 .status{
                     position: absolute;
-                    width: 10px;
-                    height: 10px;
+                    width: 15px;//
+                    height: 15px;//
                     border-radius: 50%;
-                    background-color: green;
-                    left: 30px;
-                    bottom: 15px;
+                    background-color: rgb(67, 204, 67);
+                    left: 45px;//
+                    bottom: 12px;
 
                 }
                 
                 
             }
             .line{
-                border: 1px solid $textColor;
+                border-bottom: 1px solid $textColor;
                 width: 90%;
-                opacity: 0.5;
+                opacity: 0.4;
                 margin-left: 2px;
                 margin-top: 10px;
                 
@@ -121,19 +123,23 @@ $textColor : #D4D8F4;
               
                                               
                 .top{
-                   
+                    margin: 0 10px;
                     align-items: center;
                     display: flex;
+
                     
                     .top-icon{
-                        
+                      
+                        font-size: 25px;
                         padding:0 8px;
                         padding-top: 5px;
 
                     }
                     span{
                         transition: all 0.5s ease;
-                        opacity: 0;
+                        font-size: 20px;
+                        opacity: 0.5; //
+                        
                         
                     }
                     &:hover {
@@ -195,11 +201,13 @@ $textColor : #D4D8F4;
                 
                 .sidebar-item{
                     
-                    display: flex;
+                    opacity: 1;
                     
                    
                     .avatar{
-                        .name{
+                        opacity: 1;
+
+                        .name{ 
                             display: none;
                         }
                     }
@@ -219,6 +227,7 @@ $textColor : #D4D8F4;
             // ipad : hover
             @media (min-width:769px) and (max-width:1280px){
                 width: 100%;
+                
                 .top-side {
                     .top-icon{
                       display: flex;
@@ -237,16 +246,40 @@ $textColor : #D4D8F4;
         }
         //mobile
         @media (max-width:768px) {
-            
-            width: 40%;
-
+            // flex: 3;
+            width:43%;
+            padding: 0;
+            margin: 0;
             .sidebar-item{
-              display: none;
+                    opacity: 0;
+                    // padding: 0;
+                .avatar{
+                    opacity: 0;
+                    .name{
+                        display: none;
+                        }
+                    }
+               
+                    .top-side {
+                     
+                       .top{
+                            margin: 0 auto;
+                            .top-icon{
+                            display: flex;
+                            }
+                            span{
+                                display: none;
+                            }
+                            
+                       }
+                     }
             }
         }
         //ipad
         @media (min-width:769px) and (max-width:1280px){
-            width: 40%;
+            width:37%;
+            // flex: 1;
+            // display: none;
             .avatar{
                 .name{
                     display: none;
@@ -271,7 +304,16 @@ $textColor : #D4D8F4;
 
     }
    
+    @media (max-width:768px){
+        z-index: 1;
+        transform: translateX(-10px);
 
-   
+
+    }
+    @media (min-width:769px) and (max-width:1280px){
+        transform: translateX(0px);
+        z-index: 1;
+
+    }
     
 }
