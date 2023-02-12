@@ -1,3 +1,9 @@
 .profile-container{
     display: flex;
+    padding-top: 10px;
+    .profile-warpper{
+        flex: 20;
+        .profile-item{
+        }
+    }
 }
