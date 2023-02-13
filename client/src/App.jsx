@@ -10,12 +10,13 @@ import Signup from './pages/signup/Signup';
 
 
 function App() {
+  const [openSearch, setOpenSearch] = useState(false)
 
   return (   
-    // <Home/>
+    // <Home openSearch={openSearch} setOpenSearch={setOpenSearch} />
     // <Login/>
     // <Signup/>
-    <Profile/>
+    <Profile openSearch={openSearch} setOpenSearch={setOpenSearch}/>
    
   );
 }

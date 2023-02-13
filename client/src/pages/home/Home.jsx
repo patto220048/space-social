@@ -6,9 +6,9 @@ import Sidebar from '../../layout/sidebar/Sidebar';
 
 import "./home.scss"
 
-function Home() {
+function Home({openSearch,setOpenSearch}) {
 
-    const [openSearch, setOpenSearch] = useState(false)
+    
   
     return ( 
         <>
