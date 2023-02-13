@@ -16,7 +16,7 @@ function App() {
     // <Home openSearch={openSearch} setOpenSearch={setOpenSearch} />
     // <Login/>
     // <Signup/>
-    <Profile openSearch={openSearch} setOpenSearch={setOpenSearch}/>
+    <Profile/>
    
   );
 }

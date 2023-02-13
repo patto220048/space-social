@@ -222,6 +222,7 @@ $textColor : #D4D8F4;
                     display: none;
                 }
                 .right{
+                    
                    
                     .signup-form{
                         .user-name{
@@ -257,8 +258,8 @@ $textColor : #D4D8F4;
         .signup-wapper{
             
             .signup-item{
-                width: 90%;
-                height: 70%;
+                width: 95%;
+                height: 98%;
                 // border-radius: 0;
                 .left{
 
@@ -274,7 +275,9 @@ $textColor : #D4D8F4;
                 
                 }
                 .right{
-                   
+                    h1{
+                       padding-bottom:0px ;
+                    }
                    
                     .signup-form{
                         .user-name{
