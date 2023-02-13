@@ -8,6 +8,8 @@ $textColor : #D4D8F4;
 .profile-container{
     display: flex;
     padding-top: 10px;
+    background-color: aliceblue;
+    
     // background-image: url("https://images.unsplash.com/photo-1504333638930-c8787321eee0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
     .profile-warpper{
         flex: 20;
@@ -144,20 +146,29 @@ $textColor : #D4D8F4;
 
                     }
                 }
+                .name-user{
+
+                    font-size: 30px;
+                    transform: translateY(-50%);
+                    font-weight: 800;
+                    letter-spacing: 3px;
+                 
 
 
+                }
                 .profile-mid{
                     display: flex;  
                     justify-content: space-between;
                     width: 70%;
                     margin: 0 auto;
                     gap: 10px;
-                    transform: translateY(-100%);
+                    padding: 20px;
+                    // transform: translateY(-100%);
                     p{
-                    width: 200px;
-                    text-align: center;       
-                    font-size: 20px;
-                    font-weight: 400; 
+                        width: 200px;
+                        text-align: center;       
+                        font-size: 20px;
+                        font-weight: 400; 
                     }
                     span{
                         
@@ -168,6 +179,109 @@ $textColor : #D4D8F4;
                     };
 
                 }
+            }
+            .profile-bottom{
+                width: 80%;
+                display: flex;
+                margin: 0 auto;
+                .left{
+                    position: sticky;
+                    top: 60px;
+                    flex: 1.5;
+                    height: 300px;
+                    
+                    // background-color: #D4D8F4;
+                
+                    .introduce-item{
+                        background-color: #424242;
+                        border-radius: 15px;
+
+                        .desc{
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            gap: 10px;
+                            padding: 10px;
+                            .desc-text{
+                                color: $textColor;
+                                max-height: 100px ;
+                                width: 100%;
+                                height: 40px;
+                                text-align: center;
+                                background-color: rgb(255, 255, 255);
+                                border-radius: 10px;
+                                color: #424242;
+                                
+                            }
+                            .edit{
+                                textarea{
+                                    
+                                    border: none;
+                                    outline: none;
+                                    border-radius: 15px;
+                                    padding-left: 5px;
+                                }
+                                .edit-desc{
+                                    display: flex;
+                                    gap: 5px;
+                                    justify-content: flex-end;
+                                    .cancel-btn ,.update-btn{
+                                        border: none;
+                                        outline: none;
+                                        cursor: pointer;
+                                        padding: 3px;
+                                        width: 50px;
+                                        border-radius: 15px;
+                                        &:hover{
+                                            background-color: black;
+                                            color: $textColor;
+                                        }
+                                    }
+
+                                }
+
+
+                            }
+                            
+                            .edit-btn{
+                                
+                                border: none;
+                                outline: none;
+                                cursor: pointer;
+                                padding: 3px;
+                                width: 100%;
+                                border-radius: 15px;
+                                background-color: black;
+                                color: $textColor;
+                                &:hover{
+
+                                    background-color: aliceblue;
+                                    color:black ;
+                                }
+
+
+                            }
+                        }
+                    }
+                    
+                    .info{
+                        margin-top:10px;
+                        background-color: #424242;
+                        width: 100%;
+                        height: 300px;
+
+
+                    }
+
+
+                }
+                .right{
+                
+                    flex: 3;
+                }
+
+
             }
             
             
