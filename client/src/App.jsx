@@ -15,7 +15,7 @@ function App() {
     // <Home/>
     // <Login/>
     // <Signup/>
-    <Profile/>
+    <Profile/>  
    
   );
 }

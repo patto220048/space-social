@@ -5,8 +5,6 @@ import { useEffect, useRef } from "react";
 
 function Signup() {
     const textRef = useRef()
- 
-
     useEffect(()=>{
         init(textRef.current, { 
             showCursor: true,
