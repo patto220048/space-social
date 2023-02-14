@@ -12,7 +12,7 @@ $textColor : #D4D8F4;
     
     // background-image: url("https://images.unsplash.com/photo-1504333638930-c8787321eee0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
     .profile-warpper{
-        flex: 20;
+        flex: 15;
         width: 100%;
         height: 100%;
         .profile-item{
@@ -189,7 +189,7 @@ $textColor : #D4D8F4;
                     top: 60px;
                     flex: 1.5;
                     height: 300px;
-                    
+                    padding: 10px;
                     // background-color: #D4D8F4;
                 
                     .introduce-item{
@@ -290,7 +290,131 @@ $textColor : #D4D8F4;
             
         }
 
+
+        //mobile
+        @media (max-width:767px){
+            width: 100%;
+            
+            transform: translateX(-18%);
+            .profile-item{
+                .profile-top{
+                //  background-color: #D4D8F4;  
+                 width: 100%;
+                 margin: 0;
+                 padding: 0;
+                    .background{
+                        .background-img{
+                            width: 320px;
+                            height: 200px;
+                        }
+                        button{
+                            width: 220px;
+                            height: 200px;
+
+                        }
+                    }
+                    .avatar{
+                        .avatar-img{
+                            width: 80px;
+                            height: 80px;
+
+                        }
+                        button{
+                            width: 80px;
+                            height: 80px;
+
+                        }
+                    }
+                    .name-user{
+                        font-size: 20px;
+                    }
+
+                }
+                .profile-bottom{
+                    
+                    margin: 0 auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    .left{
+                        flex: 1;
+                        display: none;
+                    }
+                    .right{
+                        width: 100%;
+                        transform: translateX(12%);
+                        
+                    }
+
+                }
+
+            }
+
+
+
+        }
+
+        //ipad
+        @media (min-width:768px) and (max-width:1280px){
+            .profile-item{
+                .profile-top{
+              
+                    .background{
+                        .background-img{
+                            width: 600px;
+                            height: 250px;
+                        }
+                        button{
+                            width: 600px;
+                            height: 250px;
+
+                        }
+                    }
+                    .avatar{
+                        .avatar-img{
+                            width: 130px;
+                            height: 130px;
+
+                        }
+                        button{
+                            width: 130px;
+                            height: 130px;
+
+                        }
+                    }
+                    .name-user{
+                        font-size: 3    0px;
+                    }
+                    .profile-mid{
+                        width: 100%;
+                        margin: 0;
+                        ;
+                    }
+
+                }
+                .profile-bottom{
+                    width: 100%;
+                    
+                    .left{
+                        padding-right: 10px;
+                     
+                    }
+                    .right{
+                        // transform: translateX(12%);
+                        // padding-right: 10px;
+
+                      
+                        
+                    }
+
+                }
+
+            }
+
+    }
+
            
 
     }
+    
 }

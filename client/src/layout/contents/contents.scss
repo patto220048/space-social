@@ -3,21 +3,20 @@
    
 
     //mobile
-    @media (max-width:768px){
-        width: 90%;
+    @media (max-width:767px){
+        width: 94%;
         // flex: 1;
-        transform: translate(-12%);
+        // padding-right:60px;padding-right
         z-index: 0;
+        transform: translateX(-12%);
+        
 
 
     }
     //ipad
     @media (min-width:769px) and (max-width:1280px){
         flex:15;
-        
         padding: 10px;
-     
-        transform: translate(-15%);
         z-index: 0;
         
     }
@@ -30,7 +29,10 @@
         //mobile
         @media (max-width:768px){
             width: 100%;
-            padding: 0 10px;
+            padding:0 10px;
+            // padding-right: 50px;            
+            // margin-left: 40px;;
+            
 
         }
         @media (min-width:769px) and (max-width:1280px){

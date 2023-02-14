@@ -3,19 +3,22 @@ $textColor : #D4D8F4;
 
 
 .share-container{
-    width: 100%;
+    
     // background-color:$mainColor;
     margin: 0 auto;
     padding-top: 10px;
     
+    
+    
     .warpper-share{
+        // transform: translateX(20px);
         background-color:$mainColor;    
-        height: 120px;
+        height: 110px;
         width: 100%;
         border-radius: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
      
        
         .share-items{
