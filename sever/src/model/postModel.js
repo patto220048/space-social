@@ -31,10 +31,7 @@ const Post = new  Schema({
         type:Array,
         default:[]
    },
-   dislike:{
-        type:Array,
-        default:[]
-   }
+ 
    
 
 

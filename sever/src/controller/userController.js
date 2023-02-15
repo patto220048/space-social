@@ -59,6 +59,7 @@ class userController {
         }
     }
     async deteleUser(req, res, next){
+        //delete user
         if(req.params.id === req.user.id || req.user.admin){
             try {
                 await User.findByIdAndDelete(req.params.id)
@@ -76,6 +77,7 @@ class userController {
     }
 
     async followUser(req, res, next){
+        //follow user
         if (req.user.id !== req.params.id){
             try {
                 const user = await User.findById(req.params.id)
@@ -99,6 +101,7 @@ class userController {
         }
     }
     async unfollowUser(req, res, next){
+        //unfollow user
         if (req.user.id !== req.params.id){
             try {
                 const user = await User.findById(req.params.id)
