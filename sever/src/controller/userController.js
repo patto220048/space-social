@@ -1,6 +1,7 @@
 const User = require('../model/userModel')
 
 const bcrypt = require('bcryptjs')
+const { query } = require('express')
 
 class userController {
 
@@ -122,6 +123,20 @@ class userController {
         }
         else {
             res.status(403).json("You can't unfollow yourself")
+        }
+    }
+
+    async searchUser(){
+        //search user
+        const query = req.query.q
+        try {
+            const userSearch = await User.find({fullName:{$regex:query, $options:'i' }}).limit(10)
+            res.status(200).json(userSearch)
+
+            
+        } catch (err) {
+            res.status(500).json(err.message)
+
         }
     }
 

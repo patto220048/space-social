@@ -11,26 +11,30 @@ const Post = new  Schema({
         type:String,
         maxlength : 100,
         require: true,
-   },
+     },
 
-   desc:{
-        type:String,
-        maxlength : 1000,
-        require: true,
-   },
+     desc:{
+          type:String,
+          maxlength : 1000,
+          require: true,
+     },
 
-   imgPost:{
-        type:String,
-   },
+     imgPost:{
+          type:String,
+     },
 
-   tag:{
-        type:Array,
-        default:[],
-   },
-   like:{
-        type:Array,
-        default:[]
-   },
+     tag:{
+          type:Array,
+          default:[],
+     },
+     like:{
+          type:Array,
+          default:[]
+     },
+     likes:{
+          type: Number,
+          default:0
+     }
  
    
 

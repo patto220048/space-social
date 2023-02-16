@@ -15,7 +15,11 @@ router.delete('/delete/:id',veryfiToken.verifyUser,userController.deteleUser)
 //follow a user
 router.put('/follow/:id',veryfiToken.verifyUser,userController.followUser)  
 //unfollow a user
-router.put('/unfollow/:id',veryfiToken.verifyUser,userController.unfollowUser)  
+router.put('/unfollow/:id',veryfiToken.verifyUser,userController.unfollowUser)
+// search user
+router.get('/search',veryfiToken.verifyUser,userController.searchUser)
+
+
 
 
 module.exports  = router

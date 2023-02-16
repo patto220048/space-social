@@ -14,9 +14,9 @@ function App() {
 
   return (   
     // <Home openSearch={openSearch} setOpenSearch={setOpenSearch} />
-    <Login/>
+    // <Login/>
     // <Signup/>
-    // <Profile/>
+    <Profile/>
    
   );
 }
