@@ -10,14 +10,15 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 
-import Contents from "../contents/Contents";
+import Contents from "../../pages/home/Home";
 import { useState } from "react";
 import { fontSize } from "@mui/system";
+import { Link } from "react-router-dom";
 
 function Sidebar({setlectItem,setSetlectItem}) {
     const [active, setActive] = useState()
-    const listTop = [{icon :<HomeIcon/>, span : "HOME" },
-                    { icon :<AccountCircleIcon fontSize="30px"/>, span : "PROFILE" },
+    const listTop = [{icon :<HomeIcon/>, span : "HOME", link: "/" },
+                    { icon :<AccountCircleIcon />, span : "PROFILE", link: "profile/afa" },
                     { icon :<GroupIcon/>, span : "FRIEND" },
                     { icon :<ChatIcon/>, span : "MESSAGE" },
                     { icon : <SettingsIcon/>, span : "SETTING" },
@@ -45,14 +46,16 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     <div className="line"></div>
                     <div className="top-side" > 
                         {listTop.map((item,index)=>
-                            <div className={"top " + (active === index ? "active" : "none" )} onClick={() =>setActive(index)} >
-                                <div className="top-icon "  >
+                          
+                           <div className={"top " + (active === index ? "active" : "none" )} onClick={() =>setActive(index)} >
+                               <Link to = {item.link}> <div className="top-icon "  >
                                     {item.icon }
                                 </div>
-
-                                <span>{item.span}</span>
-                                
+                                </Link>                  
+                                <Link to={item.link}><span>{item.span}</span>  </Link> 
                             </div>
+                            
+                            
                             
                             
                         )}

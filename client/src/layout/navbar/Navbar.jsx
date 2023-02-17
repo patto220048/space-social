@@ -6,17 +6,14 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 function Navbar({openSearch,setOpenSearch}) {
 
 
-    const handleOnpenSearch = () =>{
-        setOpenSearch(!openSearch)
-        
-    }
+   
 
     return (  
         <div className="nav-container">
             <div className="navbar">
                 <span className="logo">.SOCIAL</span>
                 <div className="search">
-                    <input className="nav-input" placeholder='Search...' type="text" onClick={handleOnpenSearch} />
+                    <input className="nav-input" placeholder='Search...' type="text" onClick={()=>setOpenSearch(!openSearch)} />
                     <div className="search-icon">
                         <SearchIcon style={{fontSize:"40px"}}/>
                     </div>

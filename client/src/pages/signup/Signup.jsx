@@ -2,6 +2,7 @@ import "./signup.scss"
 
 import { init } from 'ityped'
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 function Signup() {
     const textRef = useRef()
@@ -45,8 +46,9 @@ function Signup() {
                                 Sign up
                             </button>
                             <span className="forgot-pw">
-                
+                                <Link to="/login">
                                 <a href="#">Login</a>
+                                </Link>
                                 
                             </span>
                         </form>

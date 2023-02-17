@@ -8,7 +8,7 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import Post from '../../components/post/Post';
 import Navbar from '../../layout/navbar/Navbar';
 import Sidebar from '../../layout/sidebar/Sidebar';
-import Contents from '../../layout/contents/Contents';
+import Contents from '../home/Home';
 
 import AddIcon from '@mui/icons-material/Add';
 import './profile.scss'

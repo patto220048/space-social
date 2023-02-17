@@ -1,30 +1,38 @@
-import { useState } from 'react';
-import Contents from '../../layout/contents/Contents';
-import Navbar from '../../layout/navbar/Navbar';
-import Rightbar from '../../layout/rightbar/Rightbar';
-import Sidebar from '../../layout/sidebar/Sidebar';
-
 import "./home.scss"
+import Share from "../../components/share/Share";
+import Post from "../../components/post/Post";
 
-function Home({openSearch,setOpenSearch}) {
-
+function Home() {
     
-  
-    return ( 
-        <>
-            <Navbar openSearch={openSearch} setOpenSearch={setOpenSearch}/>
-            <div className="container-home">
-                <Sidebar/>
-                <Contents/>
-                <Rightbar/>
-
+      return (  
+          <div className="container-home">
+            <div className="wapper-home">
+                <Share/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
+           
 
             </div>
-        </>
-
-       
-    );
-
-}
-
-export default Home;
+            
+          </div>
+      );
+  
+  }
+  
+  export default Home;

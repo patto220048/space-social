@@ -16,7 +16,7 @@ $textColor : #D4D8F4;
 
     
     .sidebar{
-        width: 40%; //
+        width: 18%; //
         border-top-right-radius: 23px;
         border-bottom-right-radius: 25px;
         height:calc(100vh - $height);
@@ -130,7 +130,7 @@ $textColor : #D4D8F4;
 
                     
                     .top-icon{
-                      
+                        color: $textColor;
                         font-size: 25px;
                         padding:0 8px;
                         padding-top: 5px;
@@ -140,6 +140,8 @@ $textColor : #D4D8F4;
                         transition: all 0.5s ease;
                         font-size: 20px;
                         opacity: 0;
+                        color: $textColor;
+                        text-decoration: none;
                         
                         
                     }
@@ -175,7 +177,7 @@ $textColor : #D4D8F4;
 
         }
         &:hover{
-            width: 80%;
+            width: 60%;
             .touch{
                 background-color: $textColor;
                 opacity: 1;
@@ -190,6 +192,7 @@ $textColor : #D4D8F4;
                 .top-side {
 
                     span{
+                        
                         opacity: 1;
                     }
                 }

@@ -1,12 +1,46 @@
-$mainColor : #424242;
-
-
 .container-home{
-    display: flex;
-    background-image: url("https://images.unsplash.com/photo-1504333638930-c8787321eee0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
-    
-    background-size:contain;
+    flex: 5;
+   
 
+    //mobile
+    @media (max-width:768px){
+        width: 82%;
+        // flex: 1;
+        // padding-right:60px;padding-right
+        z-index: 0;
+      
+
+    }
+    //ipad
+    @media (min-width:769px) and (max-width:1280px){
+        flex:15;
+        padding: 10px;
+        z-index: 0;
+        
+    }
+
+    .wapper-home{
+       
+
+        padding:0 50px;
+        
+        //mobile
+        @media (max-width:768px){
+            width: 100%;
+            padding:0 10px;
+            // padding-right: 50px;            
+            // margin-left: 40px;;
+            
+
+        }
+        @media (min-width:769px) and (max-width:1280px){
+         
+            width: 100%;
+            // padding: 0 10px;
+            padding: 0;
+            
+            
     
-    // justify-content: flex-start;
+        }
+    }
 }
