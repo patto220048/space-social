@@ -13,10 +13,10 @@ function App() {
   const [openSearch, setOpenSearch] = useState(false)
 
   return (   
-    // <Home openSearch={openSearch} setOpenSearch={setOpenSearch} />
+    <Home openSearch={openSearch} setOpenSearch={setOpenSearch} />
     // <Login/>
     // <Signup/>
-    <Profile/>
+    // <Profile/>
    
   );
 }

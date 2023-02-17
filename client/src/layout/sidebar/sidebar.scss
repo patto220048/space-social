@@ -11,12 +11,12 @@ $textColor : #D4D8F4;
     height: 100%;
     position:sticky;
     top: 70px;
-    //test
+    z-index: 1;
     
 
     
     .sidebar{
-        width: 60%; //
+        width: 40%; //
         border-top-right-radius: 23px;
         border-bottom-right-radius: 25px;
         height:calc(100vh - $height);
@@ -139,7 +139,7 @@ $textColor : #D4D8F4;
                     span{
                         transition: all 0.5s ease;
                         font-size: 20px;
-                        opacity: 0.5; //
+                        opacity: 0;
                         
                         
                     }
@@ -175,7 +175,7 @@ $textColor : #D4D8F4;
 
         }
         &:hover{
-            width: 100%;
+            width: 80%;
             .touch{
                 background-color: $textColor;
                 opacity: 1;
@@ -231,10 +231,10 @@ $textColor : #D4D8F4;
                 
                 .top-side {
                     .top-icon{
-                      display: flex;
+                        opacity: 1;
                     }
                      span{
-                         display: flex;
+                        opacity: 0;
                      }
                      
                  }
@@ -251,6 +251,7 @@ $textColor : #D4D8F4;
             width:43%;
             padding: 0;
             margin: 0;
+            
             .sidebar-item{
                     opacity: 0;
                     // padding: 0;
@@ -278,7 +279,7 @@ $textColor : #D4D8F4;
         }
         //ipad
         @media (min-width:769px) and (max-width:1280px){
-            width:37%;
+            width:45%;
             // flex: 1;
             // display: none;
             .avatar{
@@ -288,12 +289,16 @@ $textColor : #D4D8F4;
                 }
            
                 .top-side {
-                    .top-icon{
-                      display: flex;
-                    }
-                     span{
-                         display: none;
-                     }
+                    .top{
+                        margin: 0 auto;
+                        .top-icon{
+                            display: flex;
+                            }
+                        span{
+                           opacity: 0;
+                        }
+                                
+                   }
                      
                  }
                 
@@ -312,7 +317,7 @@ $textColor : #D4D8F4;
 
     }
     @media (min-width:769px) and (max-width:1280px){
-        transform: translateX(0px);
+        transform: translateX(-10px);
         z-index: 1;
 
     }

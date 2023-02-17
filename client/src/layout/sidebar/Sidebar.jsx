@@ -23,7 +23,7 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     { icon : <SettingsIcon/>, span : "SETTING" },
                     { icon :<HelpIcon/> , span : "HELP" },
                     { icon : <LogoutIcon/> , span : "LOGOUT" },
-                    { icon :<NightlightRoundIcon/>, span : "LIGHTMODE" }]
+                    ]
     
     return ( 
         <div className="sidebar-container">

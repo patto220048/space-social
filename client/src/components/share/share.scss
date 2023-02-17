@@ -2,16 +2,12 @@ $mainColor : #424242;
 $textColor : #D4D8F4;
 
 
-.share-container{
-    
-    // background-color:$mainColor;
+.share-container{ 
     margin: 0 auto;
-    padding-top: 10px;
-    
-    
-    
+    transform: translateX(-12%);
+    padding-top:10px ;
     .warpper-share{
-        // transform: translateX(20px);
+        
         background-color:$mainColor;    
         height: 110px;
         width: 100%;
@@ -195,9 +191,8 @@ $textColor : #D4D8F4;
     }
 
     //mobile
-    @media (max-width:768px){
+    @media (max-width:767px){
         width: 100%;
-        
         padding-top: 10px;
         margin: 0;
         .warpper-share{
@@ -239,7 +234,7 @@ $textColor : #D4D8F4;
     }
     //ipad
     @media (min-width:769px) and (max-width:1280px){
-        width: 90%;
+        width: 100%;
        
         .warpper-share{
             width: 100%;

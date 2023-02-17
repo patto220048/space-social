@@ -1,4 +1,10 @@
 import { useState } from 'react';
+
+import EmailIcon from '@mui/icons-material/Email';
+import HouseIcon from '@mui/icons-material/House';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+
+
 import Post from '../../components/post/Post';
 import Navbar from '../../layout/navbar/Navbar';
 import Sidebar from '../../layout/sidebar/Sidebar';
@@ -35,6 +41,7 @@ function Profile({openSearch,setOpenSearch}) {
                            
                         </div>
                         <h1 className="name-user">DINH HUU PHAT</h1>
+                        
                         <div className="profile-mid">
                             <p className='post-count'><span>2 </span>following</p>
                             <p className='follow-count'><span>1000 </span>follower</p>
@@ -44,13 +51,13 @@ function Profile({openSearch,setOpenSearch}) {
                     </div>
                     <div className="profile-bottom">
                         <div className="left">
-                            <h1 className='introduce'>Introduce</h1>
                             <div className="introduce-item">
+                                <h1 className='introduce'>Introduce</h1>
                                 <div className="desc">
                                     <p className='desc-text' >hello guys</p>
                                     { openEditDesc ? 
                                     <div className="edit">
-                                        <textarea name="" id="" cols="50" rows="4"></textarea>
+                                        <textarea name="" id="" cols="30" rows="4"></textarea>
                                         <div className="edit-desc">
                                             <button className='cancel-btn' onClick={()=>setOpenEditDesc(!openEditDesc)}> Cancel</button>
                                             <button className ='update-btn'> Update</button>
@@ -64,33 +71,44 @@ function Profile({openSearch,setOpenSearch}) {
             
                             </div>
                             <div className="info">
-                                <h1 className='info-detail'>Details</h1>
+                                <h1 className='detail'>Details</h1>
 
                                 <div className="info-item">
-                                    <span>1</span>
-                                    <span>1</span>
-                                    <span>1</span>
-                                    <span>1</span>
-                                    <button className="info-btn">
+                                    <div className="info-icon">
+                                        <span><EmailIcon/></span>
+                                        <p>dinhuuphat4@gmail.com</p>
+                                    </div>
+                                    <div className="info-icon">
+                                        <span><HouseIcon/></span>
+                                        <p>VIET NAM</p>
+                                    </div>
+                                    <div className="info-icon">
+                                        <span><AccessTimeFilledIcon/></span>
+                                        <p>Join 17-2-2023</p>
+                                    </div>
                                     
+                                    
+                                    <button className="info-btn">
+                                        Edit
                                     </button>
+                                    
                                 </div>
-                                <div className="edit-info">
+                               
+                                {/* <div className="edit-info">
 
-                                    <input type="text" />
-                                    <input type="text" />
-                                    <input type="text" />
-                                    <input type="text" />
+                                    <input type="text" placeholder='email'/>
+                                    <input type="text"  placeholder='from'/>
+                                 
                                     <div className="btn-info-edit">
                                         <button className="cancel-btn">
-
+                                            Cancel
                                         </button>
                                         <button className="update-btn">
-                                            
+                                            Update
                                         </button>
 
                                     </div>
-                                </div>
+                                </div> */}
                                 
                             </div>
                             
