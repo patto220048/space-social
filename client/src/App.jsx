@@ -15,13 +15,14 @@ import Navbar from './layout/navbar/Navbar';
 import Rightbar from './layout/rightbar/Rightbar';
 import Sidebar from './layout/sidebar/Sidebar';
 import Home from './pages/home/Home';
+import { useSelector} from 'react-redux';
 
 function App() {
-  
+  const  {currentUser} = useSelector((state) => state.user)
   const [openSearch, setOpenSearch] = useState(false)
 
-  const currentUser = true
-
+ 
+  
   const Layout= () => {
     return (
       <>

@@ -85,7 +85,8 @@ $textColor : #D4D8F4;
                 place-content: center;
                 margin-right: 10px; 
                 cursor: pointer;
-               
+                border: none;
+                background-color: transparent;
                 &:hover{
                 opacity: 0.5;
                 
@@ -151,9 +152,53 @@ $textColor : #D4D8F4;
                 margin-right: 40px ;
                 gap: 50px;
                 color: $textColor;
-                span{
-                    font-size: 25px;
-                    font-weight: 500;
+                align-items: center;
+                
+                position: relative;
+                .nav-link-btn{
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                    color: $black;
+                    width: 40px;
+                    height:40px;
+                    background-color: rgb(205, 205, 205);
+                    border-radius: 50%;
+                    &:hover{
+                        background-color: rgba(205, 205, 205,0.5);
+                
+                    }
+
+                    
+                }
+                .count-right{
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position:absolute;
+                    background-color: #f60f0f;
+                    width: 16px;
+                    height: 16px;
+                    top: 0;
+                    right: -2%;
+                    font-size: 12px;
+                }
+                .count-left{
+                    font-size: 12px;
+
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position:absolute;
+                    background-color: #f60f0f;
+                    width: 16px;
+                    height: 16px;
+                    top: 0;
+                    left: 20%;
+
                 }
                 @media (max-width:768px){
                     display: none;

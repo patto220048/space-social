@@ -75,18 +75,14 @@ $textColor : #D4D8F4;
                     // padding: 50px;
                     font-size: 70px;
                     font-weight: 800;
-                    text-transform: lowercase;
-                   
-
-
-                    
-                    
+                    text-transform: lowercase;    
                    
                 }
                 h2{
                     color: red;
                     font-size: 18px;
                     font-weight: 400;
+                    padding-bottom: 20px ;
                 }
                 
                 .signup-form{
@@ -95,47 +91,63 @@ $textColor : #D4D8F4;
                     flex-direction: column;
                     gap: 20px;
                     align-items: center;
-
+                    margin-bottom: 20px;
                     .signup-input{
                         display: flex;
                         flex-direction: column;
-                        gap: 10px; 
-                        
-
+                        justify-content: center;
+                        gap: 25px; 
                        
-                            
-
                         input{
-                            
                             width: 500px;
                             padding: 15px;
                             outline: none;
                             border: none;
                             border-radius: 25px;
                             box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-                            margin-bottom: 20px;
+                         
+                            &:invalid[focused="true"] ~ span{
+                                display: block;
+                            }
+                            &:invalid[focused="true"]{
+                                border: 1px solid red;
+                            }
+                        
+                           
                         }
+                        .valid{
+                            display: none;
+                            color: red;
+                            padding-left: 20px;
+                            width: 500px;
+                        }
+                        .password{
+                            position: relative;
 
+                        
+                            .watchPass{
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                position: absolute;
+                                top: 10%;
+                                right: 2%;
+                                background-color: transparent;
+                                margin: 0 auto;
+                                cursor: pointer;
+                                padding-top:6px;
+                                &:hover{
+                                    opacity: 0.8;
+                                }
+
+                            }
+                        }
+                        
+                       
                         
 
                     }
-                    .user-name{
-                        display: flex;
-                        gap: 5px;
-                        align-items: center;     
-                        input{
-                                
-                            width: 250px;
-                            padding: 15px;
-                            outline: none;
-                            border: none;
-                            border-radius: 25px;
-                            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-                            margin-bottom: 10px;
-                            margin-top: 20px;
-                            }
-    
-                    }
+               
                     .submit{
                         transition: all 0.5s ease;
                         width:  50%;
@@ -166,8 +178,9 @@ $textColor : #D4D8F4;
 
                     }
                    
-                    
+                   
                 }
+                
                 .span{
                     font-weight: 700;
 
@@ -237,6 +250,12 @@ $textColor : #D4D8F4;
                                 width: 300px;
                                 padding: 10px;
                             }
+                            .valid{
+                                display: none;
+                                color: red;
+                                padding-left: 20px;
+                                width: 300px;
+                            }
 
                         }
                        
@@ -259,7 +278,7 @@ $textColor : #D4D8F4;
             
             .signup-item{
                 width: 95%;
-                height: 98%;
+                height: 97%;
                 // border-radius: 0;
                 .left{
 
@@ -280,17 +299,17 @@ $textColor : #D4D8F4;
                     }
                    
                     .signup-form{
-                        .user-name{
-
-                            input{
-                                width: 150px;
-                                padding: 15px;
-                            }
-                        }
+                      
                         .signup-input{
                             input{
-                                width: 300px;
+                                width: 360px;
                                 padding: 15px;
+                            }
+                            .valid{
+                                display: none;
+                                color: red;
+                                padding-left: 20px;
+                                width: 360px;
                             }
 
                         }

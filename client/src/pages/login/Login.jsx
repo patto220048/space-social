@@ -1,12 +1,44 @@
 import "./login.scss"
 
 import { init } from 'ityped'
-import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { loginFail, loginStart, loginSuccess } from "../../redux/userSlice";
+import { useDispatch } from "react-redux";
 
 function Login() {
-    const textRef = useRef()
- 
+    const textRef = useRef() // itype
+    //handle login
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [err, setErr] = useState('')
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+
+
+    const handlelogin = (e) =>{
+        e.preventDefault();
+        dispatch(loginStart())
+        const fecthLogin = async () =>{
+        try {
+            const res = await axios.post('auth/login',{email,password})
+            dispatch(loginSuccess(res.data))
+            navigate(`/`)
+            }
+            catch (err) {
+                setErr(err.response.data)
+                dispatch(loginFail("fail"))
+            }
+            }
+        fecthLogin()
+           
+
+   
+
+    }
 
     useEffect(()=>{
         init(textRef.current, { 
@@ -17,8 +49,6 @@ function Login() {
             cursorChar: "|",
 
         })
-    
-
     },[])
     return ( 
         <div className="login-container">
@@ -34,13 +64,13 @@ function Login() {
                     </div>
                     <div className="right">
                         <h1>LOGIN</h1>
-                        <h2 className="err"></h2>
+                        <h2 className="err">{err}</h2>
                         <form className="login-form" >
                             <div className="loign-input">
-                                <input type="text" className="email" placeholder="email" />
-                                <input type="text" className="password" placeholder="password"  />
+                                <input type="text" className="email" placeholder="email" onChange={(e)=>setEmail(e.target.value)} />
+                                <input type="password" className="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)} />
                             </div>
-                            <button type="submit" className="submit">
+                            <button type="submit" className="submit" onClick={handlelogin} >
                                 LOGIN
                             </button>
                             <span className="forgot-pw">

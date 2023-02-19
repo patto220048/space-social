@@ -18,14 +18,14 @@ import { Link } from "react-router-dom";
 function Sidebar({setlectItem,setSetlectItem}) {
     const [active, setActive] = useState()
     const listTop = [{icon :<HomeIcon/>, span : "HOME", link: "/" },
-                    { icon :<AccountCircleIcon />, span : "PROFILE", link: "profile/afa" },
-                    { icon :<GroupIcon/>, span : "FRIEND" },
-                    { icon :<ChatIcon/>, span : "MESSAGE" },
-                    { icon : <SettingsIcon/>, span : "SETTING" },
-                    { icon :<HelpIcon/> , span : "HELP" },
-                    { icon : <LogoutIcon/> , span : "LOGOUT" },
+                    { icon :<AccountCircleIcon />, span : "PROFILE", link: "profile/adfa" },
+                    { icon :<GroupIcon/>, span : "FRIEND" ,link: "/" },
+                    { icon :<ChatIcon/>, span : "MESSAGE",link: "/"  },
+                    { icon : <SettingsIcon/>, span : "SETTING",link: "/"  },
+                    { icon :<HelpIcon/> , span : "HELP",link: "/"  },
+                    { icon : <LogoutIcon/> , span : "LOGOUT",link: "/"  },
                     ]
-    
+ 
     return ( 
         <div className="sidebar-container">
             <div className="sidebar">
@@ -46,14 +46,15 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     <div className="line"></div>
                     <div className="top-side" > 
                         {listTop.map((item,index)=>
-                          
-                           <div className={"top " + (active === index ? "active" : "none" )} onClick={() =>setActive(index)} >
-                               <Link to = {item.link}> <div className="top-icon "  >
+                          <Link  key={index} style={{textDecoration:"none"}} to={item.link}>
+                           <div className={"top " + (active === index ? "active" : "none" )} onClick={()=>setActive(index)} >
+                               <div className="top-icon "  >
                                     {item.icon }
                                 </div>
-                                </Link>                  
-                                <Link to={item.link}><span>{item.span}</span>  </Link> 
+                                <span >{item.span}</span> 
+                 
                             </div>
+                            </Link>
                             
                             
                             
