@@ -10,23 +10,23 @@ $textColor : #D4D8F4;
     top: 0;
     z-index: 99;
     // padding-bottom: 10px;
-    
     .navbar{
-       
         width: 100%;
         background-color: $mainColor;
         height: 60px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        
-        
+        justify-content:space-between;
+        margin: 0 auto;
+        gap: 50px;
         .logo{
-            flex: 1;
+     
             font-size: 40px;
             padding-left:  20px;
             font-weight: 700;
             color: $textColor;
+            cursor: pointer;
+            
             @media (max-width:768px){
                 display: none;
                 
@@ -39,8 +39,7 @@ $textColor : #D4D8F4;
             }
         }
         .search{
-            flex: 1;
-            width: 50%;
+            width:30%;
             display: flex;
             align-items: center ;
             padding: 10px;
@@ -53,15 +52,13 @@ $textColor : #D4D8F4;
             
             }
             .nav-input{
-               
-                width: 100% ;
+                width:80% ;
                 height: 20px;
                 border: none;
                 outline: none;
                 padding-left: 15px;
                 font-size: 15px;
                 background-color: transparent;
-                margin: 0 auto;
                 //repossive
                 @media (max-width:767px){
                     width: 100%;
@@ -137,7 +134,7 @@ $textColor : #D4D8F4;
     }
        
     .nav-items{
-        flex: 1;
+        flex: 0;
         display: flex;
         gap: 3px;
         justify-content: flex-end;

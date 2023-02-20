@@ -4,11 +4,11 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const docenv = require('dotenv').config();
 const app = express()
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 8000
 const route = require('./route');
 
 const corsConfig = {
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3000',
     credentials: true,
   }
 

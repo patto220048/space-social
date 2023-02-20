@@ -3,24 +3,30 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
+import { Link } from 'react-router-dom';
 function Navbar({openSearch,setOpenSearch}) {
 
-
-   
 
     return (  
         <div className="nav-container">
             <div className="navbar">
-                <span className="logo">.SOCIAL</span>
-                <div className="search">
-                    <input className="nav-input" placeholder='Search...' type="text" onClick={()=>setOpenSearch(!openSearch)} />
+               <Link to="/" style={{textDecoration:'none'}}>
+                    <h1 className="logo">.SOCIAL</h1>
+               </Link> 
+                <div className="search" >
+                    <input 
+                        className="nav-input" 
+                        placeholder='Search' 
+                        type="text" 
+                        // onClick={()=>setOpenSearch(!openSearch)}
+                        />
                     
                     <button className="search-icon"><SearchIcon style={{fontSize:"40px"}}/></button>
                  
               { openSearch ?
                 <div className='data-result'>
                         <div className="data-items">
-                            <p>items</p>
+                            {/* <p>items</p> */}
                         </div>
                         
                 </div>

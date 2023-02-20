@@ -6,27 +6,33 @@ $textColor : #D4D8F4;
 
 
 .profile-container{
-    display: flex;
-    padding-top: 10px;
+   
+
     background-color: aliceblue;
-    
+    // padding:10px 50px;
     // background-image: url("https://images.unsplash.com/photo-1504333638930-c8787321eee0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
     .profile-warpper{
-        flex: 15;
-        width: 100%;
-        height: 100%;
-        margin-right: 5%;
+        padding-top: 10px ;
+        display: flex;
+        width: 90%;
+        height: 100%; 
+        margin: 0 auto;
+
+        
         .profile-item{
             display: flex;
             flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
             .profile-top{
+                position:relative;
                 display: flex;
                 margin: 0 auto;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width:100%;
-                height: 100%;
+           
+                
                 
                 .background{
                     z-index: 0;
@@ -39,7 +45,7 @@ $textColor : #D4D8F4;
                         border-radius: 25px;
                         height: 350px;
                         width: 780px;
-                        object-fit: fill;
+                        object-fit: cover;
                     }
                     button{
                         height: 350px;
@@ -123,8 +129,8 @@ $textColor : #D4D8F4;
                         border: 1px solid #424242;
                         padding: 2px;
                         border-radius: 50%;
-                        width: 150px;
-                        height: 150px;
+                        width: 120px;
+                        height: 120px;
                         object-fit: cover;
                     }
                     button{
@@ -149,6 +155,14 @@ $textColor : #D4D8F4;
                     transform: translateY(-50%);
                     font-weight: 800;
                     letter-spacing: 3px;
+                    display: flex;
+                    margin: 0 auto;
+                    max-width: 70%;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    
                  
 
 
@@ -178,13 +192,13 @@ $textColor : #D4D8F4;
                 }
             }
             .profile-bottom{
-                width: 80%;
+                width: 100%;
                 display: flex;
                 margin: 0 auto;
                 .left{
+                    flex: 1;
                     position: sticky;
                     top: 60px;
-                    flex: 1.5;
                     height: 300px;
                     padding: 10px;
                 
@@ -193,7 +207,7 @@ $textColor : #D4D8F4;
                     .introduce-item{
                         background-color: #424242;
                         border-radius: 15px;
-                        transform: translateX(-12%);
+                        // transform: translateX(-12%);
                         .introduce{
                             color: $textColor;
                             padding-left:10px ;
@@ -276,10 +290,11 @@ $textColor : #D4D8F4;
                         width: 100%;
                         height: 300px;
                         border-radius: 15px;
-                        transform: translateX(-12%);
+                        // transform: translateX(-12%);
                         .detail{
                             color: $textColor;
                             padding-left:10px ;
+                            text-overflow: ellipsis;
                         }
                         
                         .info-item{
@@ -305,6 +320,10 @@ $textColor : #D4D8F4;
                                 gap: 5px;
                                 padding-bottom: 10px;
                                 margin-bottom: 10px;
+                                p{
+                                    text-overflow:ellipsis;
+                                    word-wrap: break-word;
+                                }
                             }
                            
                             .info-btn{
@@ -335,12 +354,16 @@ $textColor : #D4D8F4;
 
                 }
                 .right{
-                
-                    flex: 3;
+                    flex: 2;
+                    display: flex;
+                    flex-direction: column;
+                    
                 }
+              
 
 
             }
+            
             
             
            
@@ -384,7 +407,10 @@ $textColor : #D4D8F4;
                         }
                     }
                     .name-user{
+                        padding-top: 20px ;
                         font-size: 20px;
+                        max-width: 50%;
+                        text-align: center;
                     }
 
                 }
@@ -473,11 +499,11 @@ $textColor : #D4D8F4;
                     flex-direction: column;
                     .left{
                         .introduce{
-                        transform: translateX(-12%);
+                  
 
                         }
                         position:static;
-                        transform: translateX(12%);
+                
                         // display: none;
                         .edit{
                             display: flex;

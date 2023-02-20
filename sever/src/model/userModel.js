@@ -20,6 +20,10 @@ const User = new  Schema({
         type: String,
         maxlength: 50
     },
+    decs:{
+        type: String,
+        maxlength: 50
+    },
     region:{
         type: String,
         maxlength: 50
@@ -69,6 +73,8 @@ const User = new  Schema({
         type:Boolean,
         default: false
     }
+    
+
 
 
 

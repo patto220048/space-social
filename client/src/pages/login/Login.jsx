@@ -34,7 +34,7 @@ function Login() {
         dispatch(loginStart())
         const fecthLogin = async () =>{
         try {
-            const res = await axios.post('auth/login',{email,password})
+            const res = await axios.post('/auth/login',{email,password})
             dispatch(loginSuccess(res.data))
             navigate(`/`)
             }
@@ -51,7 +51,7 @@ function Login() {
         dispatch(loginStart())
         signInWithPopup(auth, providerGG)
             .then((result)=>{
-                axios.post("http://localhost:3000/api/auth/withgg",{
+                axios.post('/auth/withgg',{
                     username: result.user.displayName,
                     email: result.user.email,
                     userImg: result.user.photoURL,

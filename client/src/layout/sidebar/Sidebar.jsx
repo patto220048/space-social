@@ -23,7 +23,7 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     { icon :<AccountCircleIcon />, span : "PROFILE", link: "profile/adfa" },
                     { icon :<GroupIcon/>, span : "FRIEND" ,link: "/" },
                     { icon :<ChatIcon/>, span : "MESSAGE",link: "/"  },
-                    { icon : <SettingsIcon/>, span : "SETTING",link: "/"  },
+                    { icon : <SettingsIcon/>, span : "SETTING",link: "/setting"  },
                     { icon :<HelpIcon/> , span : "HELP",link: "/"  },
                     { icon : <LogoutIcon /> , span : "LOGOUT",link: "/"  },
                     ]
