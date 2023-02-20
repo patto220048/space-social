@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.3",
+    "firebase": "^9.17.1",
     "ityped": "^1.0.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
@@ -49,5 +50,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://127.0.0.1:3000/api/"
+  "proxy": "http://127.0.0.1:3000/api"
 }

@@ -2,7 +2,11 @@ import "./signup.scss"
 
 import { init } from 'ityped'
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
+import { loginFail, loginStart, loginSuccess } from "../../redux/userSlice";
 
 //icon
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
@@ -12,10 +16,40 @@ function Signup() {
     //itype
     const textRef = useRef()
     //handle signup
-    // const [fullname, setFullname] = useState('')
-    // const [email, setEmail] = useState('')
-    // const [password, setPassword] = useState('')
-    // const [err, setErr] = useState('')
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [err, setErr] = useState('')
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleSignup= (e) => {
+        e.preventDefault();
+        dispatch(loginStart())
+        try {
+                const fecthSignup = async() => {
+                try {
+                    const res = await axios.post('/auth/signup',{username,email,password})
+                    dispatch(loginSuccess(res.data))
+                    navigate(`/`)
+                    
+                } catch (er) {
+                    setErr("Error")
+                    dispatch(loginFail())
+                }
+                
+                
+            }  
+            fecthSignup()
+        }
+        catch(err){}
+       
+    }
+
+   
+
+
 
 
     //valid 
@@ -49,7 +83,7 @@ function Signup() {
                     </div>
                     <div className="right">
                         <h1>signup</h1>
-                        <h2 className="err"></h2>
+                        <h2 className="err">{err}</h2>
                         <form className="signup-form" >
                             <div className="signup-input">
                                 <div className="username">
@@ -57,11 +91,13 @@ function Signup() {
                                     type="text" 
                                     name="username" 
                                     placeholder="username" 
-                                    required pattern="^[A-Za-z]*$" 
+                                    required
+                                    pattern="" 
                                     minLength={3} 
                                     maxLength={16}
                                     onBlur ={()=>setFocused1(true)}
                                     focused = {focused1.toString()} 
+                                    onChange={(e)=>{setUsername(e.target.value)}}
                                     />  
                                     <span className="valid">Username not valid ( min "3" characters ,"A", "a")</span> 
                                 </div>                     
@@ -74,6 +110,8 @@ function Signup() {
                                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
                                     onBlur ={()=>setFocused2(true)}
                                     focused = {focused2.toString()}
+                                    onChange={(e)=>{setEmail(e.target.value)}}
+
                                     
                                     />                     
                                     <span className="valid">Email not valid ( @,"." )</span> 
@@ -87,6 +125,8 @@ function Signup() {
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                     onBlur ={()=>setFocused3(true)}
                                     focused = {focused3.toString()}
+                                    onChange={(e)=>{setPassword(e.target.value)}}
+
 
                                     />
                                     <span className="valid">Password not valid ( min "8" characters or number, and one "A" and one "a" )</span>  
@@ -98,7 +138,7 @@ function Signup() {
                                                     
 
                             </div>
-                            <button type="submit" className="submit">
+                            <button type="submit" className="submit" onClick={handleSignup}>
                                 Sign up
                             </button>
                             <span className="forgot-pw">
@@ -107,16 +147,6 @@ function Signup() {
                                 </Link>
                             </span>
                         </form>
-                        <span>&</span>
-                        <div className="signup-social">
-                            <button className="google">
-                                <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="" />
-                                Google
-                            </button>
-                            {/* <button className="facebook">
-                                Facebook
-                            </button> */}
-                        </div>
                         <div className="other">
                             <span></span>
                         </div>

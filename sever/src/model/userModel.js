@@ -14,7 +14,8 @@ const User = new  Schema({
         type: String,
         required: true,
     },
-    fullName : {
+    username : {
+        required: true,
         unique: true,
         type: String,
         maxlength: 50
@@ -57,6 +58,16 @@ const User = new  Schema({
     followUser:{
         type:Number,
         default: 0,
+    }
+    ,
+    fromGoogle:{
+        type:Boolean,
+        default: false
+
+    },
+    emailVerified :{
+        type:Boolean,
+        default: false
     }
 
 

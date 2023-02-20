@@ -1,4 +1,3 @@
-import "./login.scss"
 
 import { init } from 'ityped'
 import { useEffect, useRef, useState } from "react";
@@ -6,6 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { loginFail, loginStart, loginSuccess } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
+import {signInWithPopup} from "firebase/auth";
+import { auth,providerGG } from "../../firebase/firebase";
+
+import "./login.scss"
+//icon
+import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+
+
 
 function Login() {
     const textRef = useRef() // itype
@@ -16,6 +24,8 @@ function Login() {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    //watch password
+    const [watchPassword, setWatchPassword] = useState(false)
 
 
 
@@ -28,16 +38,42 @@ function Login() {
             dispatch(loginSuccess(res.data))
             navigate(`/`)
             }
-            catch (err) {
+        catch (err) {
                 setErr(err.response.data)
                 dispatch(loginFail("fail"))
             }
-            }
+        }
         fecthLogin()
-           
-
-   
-
+      
+             
+    }
+    const handleloginwithGG = () => {
+        dispatch(loginStart())
+        signInWithPopup(auth, providerGG)
+            .then((result)=>{
+                axios.post("http://localhost:3000/api/auth/withgg",{
+                    username: result.user.displayName,
+                    email: result.user.email,
+                    userImg: result.user.photoURL,
+                    emailVerified : result.user.emailVerified,
+                    password : result.user.email,
+                })
+                .then((res)=>{
+                   dispatch(loginSuccess(res.data))
+                   navigate('/')
+                })
+                .catch(err => {
+                    setErr("error from api")
+                    console.log(err)
+                    dispatch(loginFail())
+                }) 
+             
+            })  
+            
+            .catch (err => {
+                setErr("error from google")
+                console.log(err)
+            })
     }
 
     useEffect(()=>{
@@ -67,8 +103,25 @@ function Login() {
                         <h2 className="err">{err}</h2>
                         <form className="login-form" >
                             <div className="loign-input">
-                                <input type="text" className="email" placeholder="email" onChange={(e)=>setEmail(e.target.value)} />
-                                <input type="password" className="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)} />
+                                <div className="email">
+                                    <input 
+                                    type="text" 
+                                    className="email" 
+                                    placeholder="email" 
+                                    onChange={(e)=>setEmail(e.target.value)} />
+                                </div>
+                                <div className="pass">
+                                    <input 
+                                    type={watchPassword ? "text":"password"} 
+                                    className="password" 
+                                    placeholder="password" 
+                                    onChange={(e)=>setPassword(e.target.value)} 
+                                   
+                                    />
+                                    <div className="watchPass" onClick= {()=>setWatchPassword(!watchPassword)}>
+                                   { watchPassword ?<RemoveRedEyeRoundedIcon/>:<VisibilityOffRoundedIcon/>}
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" className="submit" onClick={handlelogin} >
                                 LOGIN
@@ -84,7 +137,7 @@ function Login() {
                         </form>
                         <span>&</span>
                         <div className="login-social">
-                            <button className="google">
+                            <button className="google" onClick={handleloginwithGG}>
                                 <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="" />
                                 Google
                             </button>

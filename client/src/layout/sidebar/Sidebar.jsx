@@ -16,6 +16,8 @@ import { fontSize } from "@mui/system";
 import { Link } from "react-router-dom";
 
 function Sidebar({setlectItem,setSetlectItem}) {
+
+
     const [active, setActive] = useState()
     const listTop = [{icon :<HomeIcon/>, span : "HOME", link: "/" },
                     { icon :<AccountCircleIcon />, span : "PROFILE", link: "profile/adfa" },
@@ -23,9 +25,9 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     { icon :<ChatIcon/>, span : "MESSAGE",link: "/"  },
                     { icon : <SettingsIcon/>, span : "SETTING",link: "/"  },
                     { icon :<HelpIcon/> , span : "HELP",link: "/"  },
-                    { icon : <LogoutIcon/> , span : "LOGOUT",link: "/"  },
+                    { icon : <LogoutIcon /> , span : "LOGOUT",link: "/"  },
                     ]
- 
+   
     return ( 
         <div className="sidebar-container">
             <div className="sidebar">
@@ -47,7 +49,7 @@ function Sidebar({setlectItem,setSetlectItem}) {
                     <div className="top-side" > 
                         {listTop.map((item,index)=>
                           <Link  key={index} style={{textDecoration:"none"}} to={item.link}>
-                           <div className={"top " + (active === index ? "active" : "none" )} onClick={()=>setActive(index)} >
+                           <div className={"top " + (active === index ? "active" : "none" )} onClick={()=> setActive(index)} >
                                <div className="top-icon "  >
                                     {item.icon }
                                 </div>

@@ -72,6 +72,55 @@ class loginController{
 
        
     }
+
+    async withGoogle(req,res,next){
+        try {
+
+            const user = await User.findOne({email:req.body.email})
+            
+            if(user){
+                const token = jwt.sign(
+                    {id:user._id}
+                    ,process.env.JWT_PW,
+                    { expiresIn: '1d' })
+                
+                const cookie = res.cookie('access_token', token,{
+                    httpOnly: true,
+                    path: '/',
+
+                })
+                res.status(200).json(user._doc)
+
+            }
+            else{
+                const newUser = new User({...req.body, fromGoogle:true})
+                const savedUser = await newUser.save()
+                const token = jwt.sign(
+                    {id:savedUser._id}
+                    ,process.env.JWT_PW,
+                    { expiresIn: '1d' })
+                
+                const cookie = res.cookie('access_token', token,{
+                    httpOnly: true,
+                    path: '/',
+
+                })
+                res.status(200).json(savedUser._doc)
+
+            }
+            
+        } catch (err) {
+            next(err)
+            
+        }
+  
+       
+    }
+
+    async signout (req, res ,next){
+        res.clearCookie('access_token')
+        res.status(200).json('Clear cookies successfully!!')
+    }
     
 }
 

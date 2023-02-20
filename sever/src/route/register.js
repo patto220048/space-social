@@ -10,6 +10,8 @@ const registerController = require('../controller/registerController')
 
 router.post('/login', registerController.login)
 router.post('/signup', registerController.signup)
+router.post('/withgg', registerController.withGoogle)
+router.get('/signout', registerController.signout)
 
 
 

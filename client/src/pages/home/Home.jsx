@@ -1,13 +1,20 @@
 import "./home.scss"
 import Share from "../../components/share/Share";
 import Post from "../../components/post/Post";
+import Upload from "../../components/upload/upload";
+import { useState } from "react";
 
 function Home() {
+
+    const [openUpload, setOpenUpload] = useState(false)
+
+
     
       return (  
-          <div className="container-home">
+        <div className="container-home">
+            <Upload openUpload={openUpload} setOpenUpload={setOpenUpload} />
             <div className="wapper-home">
-                <Share/>
+                <Share openUpload={openUpload} setOpenUpload={setOpenUpload}/>
                 <Post/>
                 <Post/>
                 <Post/>
@@ -26,11 +33,11 @@ function Home() {
                 <Post/>
                 <Post/>
                 <Post/>
-           
+            
 
             </div>
             
-          </div>
+        </div>
       );
   
   }

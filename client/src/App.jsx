@@ -21,7 +21,7 @@ function App() {
   const  {currentUser} = useSelector((state) => state.user)
   const [openSearch, setOpenSearch] = useState(false)
 
- 
+  console.log(currentUser)
   
   const Layout= () => {
     return (
