@@ -10,7 +10,7 @@ const Post = new  Schema({
     title:{
         type:String,
         maxlength : 100,
-        require: true,
+
      },
 
      desc:{

@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   createBrowserRouter,
   Navigate,
   Outlet,
   RouterProvider,
 } from "react-router-dom";
+import { useSelector} from 'react-redux';
+import axios from 'axios';
 
 
 import Login from './pages/login/Login';
@@ -15,13 +17,13 @@ import Navbar from './layout/navbar/Navbar';
 import Rightbar from './layout/rightbar/Rightbar';
 import Sidebar from './layout/sidebar/Sidebar';
 import Home from './pages/home/Home';
-import { useSelector} from 'react-redux';
 
 
 function App() {
   const  {currentUser} = useSelector((state) => state.user)
   const [openSearch, setOpenSearch] = useState(true)
   const [openUpload, setOpenUpload] = useState(false)
+
   
   
   const Layout= () => {
@@ -32,7 +34,7 @@ function App() {
         display:"flex",
         backgroundColor:"aliceblue",
         gap:'30px',
-        paddingTop: '10px',
+        // paddingTop: '10px',
         }}>
         <Sidebar/>
           <Outlet/>
@@ -58,11 +60,11 @@ function App() {
       children:[
         {
           path:"/",
-          element: <Home openUpload={openUpload} setOpenUpload={setOpenUpload}/>
+          element: <Home openUpload={openUpload} setOpenUpload={setOpenUpload} type="random"/>
         },
         {
-          path:"/profile/:id",
-          element: <Profile openUpload={openUpload} setOpenUpload={setOpenUpload}/>
+          path:"/profile/:userId",
+          element: <Profile openUpload={openUpload} setOpenUpload={setOpenUpload} />
         },
         {
           path:"/setting",

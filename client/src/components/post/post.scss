@@ -37,6 +37,11 @@ $textColor : #D4D8F4;
                     gap :10px;
                     .name{
                         font-size: 18px;
+                        cursor: pointer;
+                        span{
+                            text-decoration: none;
+                            color: #D4D8F4;
+                        }
                         .time{
                             font-size: 14px;
                             opacity: 0.8;

@@ -141,16 +141,16 @@ class PostController {
         }
 
     }
-    //mypost
+    //get user all post
     async myPost(req, res, next) {
-        try {
-            const myPost = await Post.find({userId: req.user.id}).sort({
+        try {           
+            const myPost = await Post.find({userId: req.params.id}).sort({
                 createdAt : -1
             })
             res.status(200).json(myPost)
             
         } catch (err) {
-            res.status(500).json(err, err.message)
+            res.status(500).json(err.message)
             
         }
 

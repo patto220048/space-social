@@ -1,18 +1,21 @@
 import "./share.scss"
 import CloseIcon from '@mui/icons-material/Close';
+import { useSelector } from "react-redux";
 
 
 
 
 function Share({openUpload,setOpenUpload}) {
 
+    const  {currentUser} = useSelector((state) => state.user)
+    const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
 
     return (
         <>
             <div className="share-container">
                 <div className="warpper-share">
                     <div className="share-items">
-                        <img src="https://images.unsplash.com/photo-1675372339768-14ed0300cd37?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" />
+                        <img src={currentUser.userImg || noAvatar} alt="avatar" />
                         <button className="input-share" onClick={()=>{setOpenUpload(true)}}>What do you think about day ?</button>
                     
                     </div>

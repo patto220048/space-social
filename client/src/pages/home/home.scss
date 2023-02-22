@@ -1,5 +1,8 @@
 .container-home{
-    flex: 2;
+    flex: 4 ;
+
+
+
     //mobile
     @media (max-width:768px){
         width: 82%;
@@ -18,7 +21,8 @@
     }
 
     .wapper-home{
-       
+        width: 70%;
+        margin: 0 auto;
         //mobile
         @media (max-width:768px){
             width: 100%;

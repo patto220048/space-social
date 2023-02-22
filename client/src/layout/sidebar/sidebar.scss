@@ -12,6 +12,7 @@ $textColor : #D4D8F4;
     position:sticky;
     top: 70px;
     z-index: 1;
+    padding-top: 10px;
     
     
     
@@ -28,7 +29,6 @@ $textColor : #D4D8F4;
         padding-top: 10px;
         padding-bottom: 10px;
         cursor: pointer;
-
         overflow-y: scroll;
         &::-webkit-scrollbar{
             display: none;
@@ -46,6 +46,7 @@ $textColor : #D4D8F4;
             padding-left: 3px;
             margin: 0 auto;
             transition: all 1s ease;
+            
             .avatar{
                 display: flex;
                 align-items: center;
@@ -70,12 +71,15 @@ $textColor : #D4D8F4;
                 .name{
                     display: flex;
                     flex-direction: column;
-                    overflow:hidden;
-                    opacity: 0;
-                    
+                    display: none;
+                    word-break: keep-all;
+                    text-overflow: ellipsis;
+                    width: 100%;
+               
                     .name-items{
-                        font-size: 25px;
+                        font-size: 20px;
                         font-weight: 500;
+                      
                         
                     }
                     .name-status{
@@ -119,6 +123,7 @@ $textColor : #D4D8F4;
                 display: flex;
                 flex-direction: column;
                 gap: 30px;
+               
             
               
                 
@@ -129,9 +134,11 @@ $textColor : #D4D8F4;
                     margin: 0 10px;
                     align-items: center;
                     display: flex;
-
+                    margin: 0 auto;
+                    justify-content: flex-start;
                     
                     .top-icon{
+                        margin-left: 40px;
                         color: $textColor;
                         font-size: 25px;
                         padding:0 8px;
@@ -188,7 +195,8 @@ $textColor : #D4D8F4;
             .sidebar-item{
                 .avatar {
                     .name{
-                        opacity: 1;
+                        display: none;
+                        text-overflow: ellipsis;
                     }
                 }
                 .top-side {

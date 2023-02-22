@@ -1,18 +1,48 @@
 import "./post.scss"
+import { format } from 'timeago.js';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
+
 import CloseIcon from '@mui/icons-material/Close';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import Comments from "../comments/Comments";
-function Post() {
+
+
+function Post({post}) {
+    const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
+    
+    const [user, setUser] = useState([])
+
+    // console.log(user)
+    useEffect(()=>{
+        const fecthUser = async()=>{
+            try{
+                const res = await axios.get(`/user/find/${post.userId}`)
+                setUser(res.data)
+            }
+            catch(err){
+                console.log(err.message);
+            }
+        }
+        fecthUser()
+
+    },[post.userId])
+    
+
+
+
     return ( 
         <div className="post-container">
             <div className="post-wapper">
                 <div className="post-items">
                     <div className="user-info">
                         <div className="user">
-                            <img className="user-img" src="https://images.unsplash.com/photo-1675372339768-14ed0300cd37?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" />
+                        <Link to={`profile/${user._id}`}> <img className="user-img" src={user.userImg || noAvatar} alt="" /></Link>
                             <div className="name">
-                                <span>PHAT</span>
-                                <div className="time">6 hour ago</div>
+                                <Link to={`profile/${user._id}`} style={{textDecoration:"none"}}><span>{user.username}</span></Link>
+                                <div className="time">{format(post.createdAt)}</div>
                             </div>
                         </div>
                         <div className="option">
@@ -22,15 +52,13 @@ function Post() {
                         </div>
                     </div>
                     <div className="line"></div>
-                    <span className="desc">
-                        Có lần tôi cũng nghĩ đến chuyện lai chim bán hàng trên tóp tóp kiếm thêm thu nhập cho gia đình. Sau đó tôi chợt nhận ra các thượng đế của mình có thể sẽ phải nghe những âm thanh như là…
-                        Có lần tôi cũng nghĩ đến chuyện lai chim bán hàng trên tóp tóp kiếm thêm thu nhập cho gia đình. Sau đó tôi chợt nhận ra các thượng đế của mình có thể sẽ phải nghe những âm thanh như là…
+                    <span className="desc">{post.desc}
                     </span>
                     <div className="post-img">
-                        <img src="https://images.unsplash.com/photo-1675750317991-26b1183e87fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="" />
+                        {post.imgPost ? <img src={post.imgPost} alt="" /> : <></>}
                     </div>
                     <div className="post-info">
-                      <span className="like-count">123 like</span>
+                      <span className="like-count">{post.likes} like</span>
                       <span className="comment-count">14 comments</span>
                       <span className="share-count">3 share</span>
 

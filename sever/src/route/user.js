@@ -7,7 +7,7 @@ const veryfiToken  = require('../controller/veryfiToken')
 // find all users
 router.get('/find', userController.getUser)
 // find a user 
-router.get('/find/:id', userController.getOneUser)
+router.get('/find/:id',veryfiToken.verifyUser, userController.getOneUser)
 // put a user
 router.put('/edit/:id',veryfiToken.verifyUser,userController.editUser)
 //detele a user

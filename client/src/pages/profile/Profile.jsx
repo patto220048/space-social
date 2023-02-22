@@ -1,32 +1,51 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import './profile.scss'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import axios from 'axios';
 
 import EmailIcon from '@mui/icons-material/Email';
 import HouseIcon from '@mui/icons-material/House';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
-
-
-import Navbar from '../../layout/navbar/Navbar';
-import Sidebar from '../../layout/sidebar/Sidebar';
-import Home from '../home/Home';
-import Upload from "../../components/upload/Upload";
-
-
+import Upload from "../../components/upload/Upload"
 import AddIcon from '@mui/icons-material/Add';
-import './profile.scss'
-import { useSelector } from 'react-redux';
-import Share from '../../components/share/Share';
-import Post from '../../components/post/Post';
+
+import Feed from '../../components/feed/Feed';
 
 
-function Profile({openUpload,setOpenUpload}) {
+
+function Profile({openUpload,setOpenUpload, posts}) {
     const  {currentUser} = useSelector((state) => state.user)
-
-    console.log(currentUser)
+    
+    const paramId = useParams()
+    console.log(paramId.userId)
+    // console.log(currentUser)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const noBg = process.env.REACT_APP_PUBLIC_FOLDER + "no_bg2.png" 
 
     const [openEditDesc,setOpenEditDesc] = useState(false)
+
+    const [user, setUser] = useState([])
+    console.log(user.email)
+  
+    useEffect(()=>{
+        const fecthUser = async()=>{
+            try{
+                const res = await axios.get(`/user/find/${paramId.userId}`)
+                setUser(res.data)
+            }
+            catch(err){
+                console.log(err.message);
+            }
+        }
+        fecthUser()
+
+    },[paramId.userId])
+    
+
+
+
 
     return ( 
         <>
@@ -36,7 +55,7 @@ function Profile({openUpload,setOpenUpload}) {
                     <div className="profile-item">
                         <div className="profile-top">
                             <div className="background">
-                                <img className='background-img' src={ currentUser.userCoverImg || noBg} alt={currentUser.userCoverImg} />
+                                <img className='background-img' src={user.userCoverImg || noBg} alt={user.userCoverImg} />
                                 <button><AddIcon fontSize='large'  className='add-icon'/></button>
                             </div>
                             {/* <div className="btn-fl">
@@ -44,17 +63,17 @@ function Profile({openUpload,setOpenUpload}) {
                                 <button className='follow2'>Follow</button>  
                             </div> */}
                             <div className="avatar">
-                                <img className='avatar-img' src={ currentUser.userImg ||noAvatar} alt={currentUser.userImg} />
+                                <img className='avatar-img' src={ user.userImg || noAvatar} alt={user.userImg} />
                                 <button className='avatar-add-icon'>
                                     <AddIcon fontSize='large' className='add-icon'/>
                                 </button>
                             
                             </div>
-                            <h1 className="name-user">{currentUser.username}</h1>
+                            <h1 className="name-user">{user.username}</h1>
                             
                             <div className="profile-mid">
-                                <p className='following-count'><span>{currentUser.followUser}</span>following</p>
-                                <p className='follower-count'><span>{currentUser.follower.lenght} </span>follower</p>
+                                <p className='following-count'><span>{user.followUser}</span>following</p>
+                                <p className='follower-count'><span>{user.follower} </span>follower</p>
                                 <p className='post-count'><span>1 </span>post</p>
 
                             </div>
@@ -64,7 +83,7 @@ function Profile({openUpload,setOpenUpload}) {
                                 <div className="introduce-item">
                                     <h1 className='introduce'>Introduce</h1>
                                     <div className="desc">
-                                        <p className='desc-text' >{currentUser.decs}</p>
+                                        <p className='desc-text' >{user.decs || "Write something about you !!!"}</p>
                                         { openEditDesc ? 
                                         <div className="edit">
                                             <textarea name="" id="" cols="30" rows="4"></textarea>
@@ -86,15 +105,15 @@ function Profile({openUpload,setOpenUpload}) {
                                     <div className="info-item">
                                         <div className="info-icon">
                                             <span><EmailIcon/></span>
-                                            <p>{currentUser.email}</p>
+                                            <p>{user.email}</p>
                                         </div>
                                         <div className="info-icon">
                                             <span><HouseIcon/></span>
-                                            <p>{currentUser.region}</p>
+                                            <p>{user.region}</p>
                                         </div>
                                         <div className="info-icon">
                                             <span><AccessTimeFilledIcon/></span>
-                                            <p>Join {currentUser.updatedAt}</p>
+                                            <p>Join {user.createdAt}</p>
                                         </div>
                                         
                                         
@@ -122,16 +141,9 @@ function Profile({openUpload,setOpenUpload}) {
                                     
                                 </div>
                                 
-                            </div>
+                            </div>  
                             <div className="right">
-                            <Share openUpload={openUpload} setOpenUpload={setOpenUpload}/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
-                            <Post/>
+                                <Feed paramId={paramId.userId}/>
                             
                             </div>
 
