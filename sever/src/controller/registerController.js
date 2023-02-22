@@ -82,7 +82,7 @@ class loginController{
                 const token = jwt.sign(
                     {id:user._id}
                     ,process.env.JWT_PW,
-                    { expiresIn: '1d' })
+                    { expiresIn: '3h' })
                 
                 const cookie = res.cookie('access_token', token,{
                     httpOnly: true,
@@ -98,7 +98,7 @@ class loginController{
                 const token = jwt.sign(
                     {id:savedUser._id}
                     ,process.env.JWT_PW,
-                    { expiresIn: '1d' })
+                    { expiresIn: '3h' })
                 
                 const cookie = res.cookie('access_token', token,{
                     httpOnly: true,

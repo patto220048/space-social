@@ -19,6 +19,7 @@ class userController {
         
     }
     async getOneUser(req, res, next){
+        
         try {
 
             const user  = await User.findById(req.params.id)
