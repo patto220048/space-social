@@ -73,6 +73,11 @@ const User = new  Schema({
         type:Boolean,
         default: false
     }
+    ,
+    postCount:{
+        type:Number,
+        default: 0
+    }
     
 
 

@@ -53,7 +53,7 @@ function Profile({openUpload,setOpenUpload, posts}) {
                 <Upload openUpload={openUpload} setOpenUpload={setOpenUpload}/>
                 <div className="profile-warpper">
                     <div className="profile-item">
-                        <div className="profile-top">
+                        <div className="profile-top">   
                             <div className="background">
                                 <img className='background-img' src={user.userCoverImg || noBg} alt={user.userCoverImg} />
                                 <button><AddIcon fontSize='large'  className='add-icon'/></button>
@@ -73,8 +73,8 @@ function Profile({openUpload,setOpenUpload, posts}) {
                             
                             <div className="profile-mid">
                                 <p className='following-count'><span>{user.followUser}</span>following</p>
-                                <p className='follower-count'><span>{user.follower} </span>follower</p>
-                                <p className='post-count'><span>1 </span>post</p>
+                                <p className='follower-count'><span>{user.follower?.length} </span>follower</p>
+                                <p className='post-count'><span>{user.postCount} </span>post</p>
 
                             </div>
                         </div>
@@ -83,7 +83,7 @@ function Profile({openUpload,setOpenUpload, posts}) {
                                 <div className="introduce-item">
                                     <h1 className='introduce'>Introduce</h1>
                                     <div className="desc">
-                                        <p className='desc-text' >{user.decs || "Write something about you !!!"}</p>
+                                         <p className='desc-text' >{user?.decs || "Write something about you !!!"}</p>
                                         { openEditDesc ? 
                                         <div className="edit">
                                             <textarea name="" id="" cols="30" rows="4"></textarea>
@@ -94,7 +94,12 @@ function Profile({openUpload,setOpenUpload, posts}) {
 
                                         </div>
                                         :
-                                        <button className ='edit-btn' onClick={()=>setOpenEditDesc(!openEditDesc)}> Edit</button>
+                                        <>
+                                           {currentUser._id === paramId.userId 
+                                            ? <button className ='edit-btn' onClick={()=>setOpenEditDesc(!openEditDesc)}> Edit</button>
+                                            : <></>
+                                            }
+                                        </>
                                         }                                   
                                     </div>              
                 
@@ -122,28 +127,14 @@ function Profile({openUpload,setOpenUpload, posts}) {
                                         </button>
                                         
                                     </div>
-                                
-                                    {/* <div className="edit-info">
-
-                                        <input type="text" placeholder='email'/>
-                                        <input type="text"  placeholder='from'/>
-                                    
-                                        <div className="btn-info-edit">
-                                            <button className="cancel-btn">
-                                                Cancel
-                                            </button>
-                                            <button className="update-btn">
-                                                Update
-                                            </button>
-
-                                        </div>
-                                    </div> */}
-                                    
+                               
                                 </div>
                                 
                             </div>  
                             <div className="right">
-                                <Feed paramId={paramId.userId}/>
+                                <Feed paramId={paramId.userId} setOpenUpload={setOpenUpload}/>
+                                
+
                             
                             </div>
 

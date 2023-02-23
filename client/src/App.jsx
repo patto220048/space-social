@@ -48,7 +48,7 @@ function App() {
 
   const ProtectRoute = ({children}) =>{
     if(!currentUser){
-      return <Navigate to ="/login"/>
+      return <Navigate to ="/login"/>   
     }
     return children
   }
@@ -60,11 +60,11 @@ function App() {
       children:[
         {
           path:"/",
-          element: <Home openUpload={openUpload} setOpenUpload={setOpenUpload} type="random"/>
+          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="random"/>
         },
         {
           path:"/profile/:userId",
-          element: <Profile openUpload={openUpload} setOpenUpload={setOpenUpload} />
+          element: <Profile openUpload = {openUpload} setOpenUpload={setOpenUpload}/>
         },
         {
           path:"/setting",

@@ -8,25 +8,18 @@ import Post from "../../components/post/Post";
 import Upload from "../../components/upload/Upload";
 import Feed from "../../components/feed/Feed";
 
-function Home({openUpload,setOpenUpload}) {
-    
-   
-    
+function Home({type,openUpload,setOpenUpload}) {
+
       return (  
-        <div className="container-home">
-            <Upload openUpload={openUpload} setOpenUpload={setOpenUpload} />
-            <div className="wapper-home">
-                <Feed/>
-                {/* <Share openUpload={openUpload} setOpenUpload={setOpenUpload}/>
-                {posts.map((post,index)=>(
-                    <Post post={post} key={index}/>
-
-                ))}
-             */}
-
+        <>
+            <div className="container-home">
+                <Upload openUpload={openUpload} setOpenUpload={setOpenUpload}/>
+                <div className="wapper-home">
+                    <Feed type = {type} openUpload={openUpload} setOpenUpload={setOpenUpload} />
+                </div>
+                
             </div>
-            
-        </div>
+        </>
       );
   
   }

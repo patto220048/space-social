@@ -6,8 +6,10 @@ class PostController {
     async createPost(req, res, next) {
         const post = req.body
         const newPost = new Post({...post, userId:req.user.id})
+        const user = await User.findById(req.user.id)
         try{
-            newPost.save()
+            await newPost.save()
+            await user.updateOne({$inc:{postCount : 1}})
             res.status(200).json(newPost)   
         }
         catch (err){
@@ -69,15 +71,18 @@ class PostController {
     }
     //delete post
     async deletePost(req, res, next){
+        const user = await User.findById(req.user.id)
+
+        const post = await Post.findById(req.params.id)
         try {
-            const post =  await Post.findById(req.params.id)
             if(!post) return res.status(403).json("Post not found")
             else{
-                if(req.user.id === post.userId || req.user.admin)
+                if( req.user.id === post.userId || req.user.admin)
                 {
+                    await user.updateOne({$inc:{postCount : -1}})
                     await Post.findByIdAndDelete(req.params.id)
                     return res.status(200).json('Detele is complete')
-                }
+                }   
                 else {
                     return res.status(401).json('You just detele only your post')
                 }

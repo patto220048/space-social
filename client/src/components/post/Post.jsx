@@ -1,8 +1,10 @@
 import "./post.scss"
 import { format } from 'timeago.js';
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getStorage, ref ,deleteObject } from "firebase/storage";
+
 
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,11 +13,12 @@ import Comments from "../comments/Comments";
 
 
 function Post({post}) {
+ 
+    const navigate = useNavigate()
+    ////// user ///////////
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
-    
     const [user, setUser] = useState([])
-
-    // console.log(user)
+    
     useEffect(()=>{
         const fecthUser = async()=>{
             try{
@@ -29,10 +32,43 @@ function Post({post}) {
         fecthUser()
 
     },[post.userId])
+    ////////////////////////
+    /////////Post///////////
+    //open menu post 
     
+    const [postDetele, setPostDetele ] = useState('')
+    const [openMenuPost, setOpenMenuPost] = useState(false)
+    const handleDelete = ()=>{
+        const fectchDelete = async()=>{
+            try {
+                const res = await axios.delete(`/post/delete/${post._id}`)
+                handleDeleteImgFormFirebase(post?.imgPost)
+                setPostDetele(alert("Post deleted successfully!!"))
+                window.location.reload(true);
+            } catch (error) {
+                setOpenMenuPost(false);
+                setPostDetele(alert("Opps! You just deleted only your post"))
+
+            }
+        }
+        fectchDelete()
+        
+    }
+    const handleDeleteImgFormFirebase = (img)=>{
+           ///imgfile
+        const storage = getStorage()
+        const httpsReference = ref(storage,img)
+        const desertRef = ref(storage, httpsReference);
+        deleteObject(desertRef)
+        .then(() => {
+            console.log("Img deleted successfully")
+          }).catch((error) => {
+            console.log("Error", error)
+          });
 
 
-
+    }
+    ////////////////////////
     return ( 
         <div className="post-container">
             <div className="post-wapper">
@@ -46,16 +82,27 @@ function Post({post}) {
                             </div>
                         </div>
                         <div className="option">
-                            <CloseIcon/>
-                            <DragIndicatorIcon/>
-
+                           
+                           <button 
+                            onClick={()=>setOpenMenuPost(!openMenuPost)}
+                            // onBlur ={()=>setOpenMenuPost(false)}
+                            
+                            >
+                               {openMenuPost ? <CloseIcon/> :<DragIndicatorIcon fontSize="large"/>}
+                             </button>
+                           { openMenuPost &&
+                           <div className="option-menu">
+                               <span onClick={handleDelete} >Delete </span>
+                                <span>Edit</span>
+                                <span>Report</span>
+                            </div>}
                         </div>
                     </div>
                     <div className="line"></div>
-                    <span className="desc">{post.desc}
+                    <span className="desc">{post?.desc}
                     </span>
                     <div className="post-img">
-                        {post.imgPost ? <img src={post.imgPost} alt="" /> : <></>}
+                        {post.imgPost ? <img src={post.imgPost} alt={post.imgPost} /> : <></>}
                     </div>
                     <div className="post-info">
                       <span className="like-count">{post.likes} like</span>

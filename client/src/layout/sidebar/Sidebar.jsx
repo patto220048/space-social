@@ -11,28 +11,35 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 
 import Contents from "../../pages/home/Home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fontSize } from "@mui/system";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { logout } from "../../redux/userSlice";
 
 function Sidebar({setlectItem,setSetlectItem}) {
     const  {currentUser} = useSelector((state) => state.user)
-
+    const dispatch = useDispatch()
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
- 
-
     const [active, setActive] = useState()
-    const listTop = [{icon :<HomeIcon/>, span : "HOME", link: "/" },
-                    { icon :<AccountCircleIcon />, span : "PROFILE", link: `/profile/${currentUser._id}` },
+
+
+    const handleLogout = async () => {
+        const res = await axios.get('/auth/signout')
+        dispatch(logout("Logged out successfully"))
+    }
+
+    const listTop = [{icon :<HomeIcon/>, span : <span>HOME</span>, link: "/" },
+                    { icon :<AccountCircleIcon />, span : <span>PROFILE</span>, link: `/profile/${currentUser._id}` },
             
-                    { icon :<GroupIcon/>, span : "FRIEND" ,link: "/" },
-                    { icon :<ChatIcon/>, span : "MESSAGE",link: "/"  },
-                    { icon : <SettingsIcon/>, span : "SETTING",link: "/setting"  },
-                    { icon :<HelpIcon/> , span : "HELP",link: "/"  },
-                    { icon : <LogoutIcon /> , span : "LOGOUT",link: "/" },
+                    { icon :<GroupIcon/>, span :<span>FRIEND</span>,link: "/" },
+                    { icon :<ChatIcon/>, span : <span>MESSAGE</span>,link: "/"  },
+                    { icon : <SettingsIcon/>, span :<span>SETTING</span>,link: "/setting"  },
+                    { icon :<HelpIcon/> , span : <span>HELP</span>,link: "/"  },
+                    { icon : <LogoutIcon onClick={handleLogout}/> , span :<span onClick={handleLogout}>LOGOUT</span>},
                     ]
-   
+                    
     return ( 
         <div className="sidebar-container">
             <div className="sidebar">
@@ -42,7 +49,7 @@ function Sidebar({setlectItem,setSetlectItem}) {
                             <img src={currentUser.userImg || noAvatar} alt="avatar"/>
                         </div>
                         <div className="name">
-                            <h3 className="name-items">{currentUser.email}</h3>
+                            <h3 className="name-items">{'@'+currentUser.username}</h3>
                             <h4 className="name-status">
                             Online</h4>
                             
@@ -58,17 +65,13 @@ function Sidebar({setlectItem,setSetlectItem}) {
                           
                                 <div className="top-icon "  >
                                         {item.icon }
-                                    </div>
-                                    <span >{item.span}</span> 
-                    
                                 </div>
-                            </Link>
-                            
-                            
-                            
-                            
+                                {item.span}
+                    
+                            </div>
+                            </Link>                                                                 
                         )}
-                   
+                      
                     
                     </div>
                    

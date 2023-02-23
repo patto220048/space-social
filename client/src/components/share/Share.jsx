@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 
 
 
-function Share({openUpload,setOpenUpload}) {
-
+function Share({setOpenUpload}) {
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
+ 
 
     return (
         <>
@@ -16,7 +16,7 @@ function Share({openUpload,setOpenUpload}) {
                 <div className="warpper-share">
                     <div className="share-items">
                         <img src={currentUser.userImg || noAvatar} alt="avatar" />
-                        <button className="input-share" onClick={()=>{setOpenUpload(true)}}>What do you think about day ?</button>
+                        <button className="input-share" onClick={()=>setOpenUpload(true)}>What do you think about day ?</button>
                     
                     </div>
                     {/* <div className="line"></div> */}

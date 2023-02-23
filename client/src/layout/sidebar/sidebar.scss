@@ -12,7 +12,7 @@ $textColor : #D4D8F4;
     position:sticky;
     top: 70px;
     z-index: 1;
-    padding-top: 10px;
+    // padding-top: 10px;
     
     
     
@@ -69,16 +69,20 @@ $textColor : #D4D8F4;
                     
                 }
                 .name{
+                    transition: all 1s ease;
                     display: flex;
                     flex-direction: column;
-                    display: none;
                     word-break: keep-all;
-                    text-overflow: ellipsis;
-                    width: 100%;
+                    text-align: left;
+                    opacity: 0;
                
                     .name-items{
+                        max-width: 250px;
                         font-size: 20px;
                         font-weight: 500;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
                       
                         
                     }
@@ -155,12 +159,13 @@ $textColor : #D4D8F4;
                         
                     }
                     &:hover {
+                        transform: scale(1.1);
+                        margin-left:15px;
                         border-radius: 10px;
                         background-color: white;
                         
                     }
                     &.active{
-                        
                         background-color: rgb(240, 240, 240);
                         border-radius: 10px;
                     }  
@@ -195,8 +200,7 @@ $textColor : #D4D8F4;
             .sidebar-item{
                 .avatar {
                     .name{
-                        display: none;
-                        text-overflow: ellipsis;
+                       opacity: 1;
                     }
                 }
                 .top-side {
