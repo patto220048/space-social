@@ -63,6 +63,18 @@ function App() {
           element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="random"/>
         },
         {
+          path:"/newpost",
+          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="newpost"/>
+        },
+        {
+          path:"/random",
+          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="random"/>
+        },
+        {
+          path:"/followed",
+          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="folowed"/>
+        },
+        {
           path:"/profile/:userId",
           element: <Profile openUpload = {openUpload} setOpenUpload={setOpenUpload}/>
         },

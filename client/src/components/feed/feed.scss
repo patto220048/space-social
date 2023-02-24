@@ -1,0 +1,37 @@
+$mainColor : #424242;
+$textColor : #D4D8F4;
+
+
+.feed-container {
+    .feed-wapper{
+        .tab-btn{
+            display: flex;
+            padding-top: 10px;
+            gap: 20px;
+            flex-wrap: wrap;
+            transition: all 0.5s ease;
+            .tab-btn{
+           
+                background-color: $mainColor;
+                color: $textColor;
+                cursor: pointer;
+                font-size: 20px;
+                font-weight: 600;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 10px;
+                &:hover{
+                    transform: scale(1.2);
+                }
+               
+
+            }
+            &.active{
+                background-color:aliceblue;
+                color: black;
+                border:1px solid #424242;
+            }
+
+        }
+    }
+}

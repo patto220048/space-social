@@ -10,17 +10,17 @@ $textColor : #D4D8F4;
     height: 100%;
     display: flex;
     position:sticky;
-    top: 70px;
+    top: 60px;
     z-index: 1;
-    // padding-top: 10px;
+    padding-top: 10px;
     
     
     
     .sidebar{
         width: 50%; //
         height:calc(100vh - $height);
-        border-top-right-radius: 23px;
-        border-bottom-right-radius: 25px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
         background-color: $mainColor;
         color: $textColor;
         display: flex;
@@ -166,8 +166,16 @@ $textColor : #D4D8F4;
                         
                     }
                     &.active{
-                        background-color: rgb(240, 240, 240);
+                        background-color:aliceblue;
+                       
+                        border:1px solid #424242;
                         border-radius: 10px;
+                        .top-icon{
+                            color: black;
+                        }
+                        span{
+                            color: black;
+                        }
                     }  
                 }
             }

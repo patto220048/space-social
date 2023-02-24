@@ -4,9 +4,9 @@ $textColor : #D4D8F4;
 
 .comments-container{
     padding: 0 10px;
-    max-height:240px;
-    overflow: auto;
-   
+    max-height: 250px;
+    overflow-y: auto;
+    resize: vertical;
     .comments-wapper{
         position: sticky;
         top: 0;

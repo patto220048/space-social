@@ -11,7 +11,7 @@ function Navbar({openSearch,setOpenSearch}) {
         <div className="nav-container">
             <div className="navbar">
                <Link to="/" style={{textDecoration:'none'}}>
-                    <h1 className="logo">.SOCIAL</h1>
+                    <h1 className="logo">.SPACE</h1>
                </Link> 
                 <div className="search" >
                     <input 

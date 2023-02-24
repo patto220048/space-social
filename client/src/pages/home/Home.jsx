@@ -15,6 +15,7 @@ function Home({type,openUpload,setOpenUpload}) {
             <div className="container-home">
                 <Upload openUpload={openUpload} setOpenUpload={setOpenUpload}/>
                 <div className="wapper-home">
+                    
                     <Feed type = {type} openUpload={openUpload} setOpenUpload={setOpenUpload} />
                 </div>
                 

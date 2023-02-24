@@ -75,9 +75,9 @@ function Post({post}) {
                 <div className="post-items">
                     <div className="user-info">
                         <div className="user">
-                        <Link to={`profile/${user._id}`}> <img className="user-img" src={user.userImg || noAvatar} alt="" /></Link>
+                        <Link to={`/profile/${user._id}`}> <img className="user-img" src={user.userImg || noAvatar} alt="" /></Link>
                             <div className="name">
-                                <Link to={`profile/${user._id}`} style={{textDecoration:"none"}}><span>{user.username}</span></Link>
+                                <Link to={`/profile/${user._id}`} style={{textDecoration:"none"}}><span>{user.username}</span></Link>
                                 <div className="time">{format(post.createdAt)}</div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ function Post({post}) {
                         </div>
                     </div>
                     <div className="line"></div>
-                    <Comments/>
+                    <Comments post={post}/>
 
 
                 </div>
