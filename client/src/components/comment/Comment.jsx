@@ -1,17 +1,17 @@
 
 import "./comment.scss"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {format} from "timeago.js"
-
+import {io} from 'socket.io-client'
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useSelector } from "react-redux"
 
 function Comment({comment}) {
-    const [openDelCmt, setOpenDelCmt] = useState(false)
-    const [notiCmt, setNotiCmt] = useState()
-    const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
 
+    const [openDelCmt, setOpenDelCmt] = useState(false)
+    const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [user ,setUser] = useState([])
     useEffect(()=>{
         const fecthUser = async()=>{
@@ -27,16 +27,21 @@ function Comment({comment}) {
 
     },[comment.userId])
 
+
+
+
+
     const  handleDelCmt = () =>{
+        
         const fetchDelCmt = async()=>{
            try {
             setOpenDelCmt(false)
             const res = await axios.delete(`/comment/${comment._id}/delete`)
-            setNotiCmt(alert('Comment deleted successfully!!'))
+            alert('Comment deleted successfully!!')
             window.location.reload(true);
 
            } catch (error) {
-            setNotiCmt(alert("Opps!! You just deleted your comment. "))
+            alert("Opps!! You just deleted your comment. ")
             setOpenDelCmt(false)
            }
         }
@@ -51,7 +56,7 @@ function Comment({comment}) {
                         <span className="comment-name">
                            {user.username}
                             <span className="time">{format(comment.createdAt)}</span>
-                            <button className="btn" onClick={()=>setOpenDelCmt(!openDelCmt)} onFocus={false}>
+                            <button className="btn" onClick={()=>setOpenDelCmt(!openDelCmt)} >
                                 <MoreHorizIcon fontSize="large"/>
                                 </button>
                             <div className="option"> 
@@ -62,6 +67,7 @@ function Comment({comment}) {
 
                         <p className="comment-text">
                             {comment.comment}
+                           
                         </p>
                     </div>
 

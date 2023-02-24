@@ -1,8 +1,9 @@
 
 import "./comments.scss"
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import {io} from 'socket.io-client'
 
 
 
@@ -16,7 +17,39 @@ function Comments({post}) {
     const [comments, setComments] = useState([])
     const [desc , setDesc] = useState('')
     const [isloading, setIsLoading] = useState(true)
-    console.log(isloading)
+    const [decsSk, setDecsSk] = useState(null)
+    const socket = useRef()
+    const [cmtSk, setcmtSk] = useState({})
+    console.log(cmtSk)
+    // console.log(isloading)
+    ///socketio handle
+    useEffect(()=>{
+        socket.current = io('ws://localhost:8000')
+        socket.current.on('getDecs', data=>{
+            setDecsSk({
+                userId: data.user,
+                decs : data.decs,
+                postId : data.postId,
+                createdAt: Date.now()
+            })
+            })
+    },[])
+
+    useEffect(()=>{
+        decsSk && setcmtSk(decsSk)
+    },[decsSk]) 
+
+    useEffect(()=>{
+        socket.current.emit('addUser',currentUser._id)
+        socket.current.on('getUsers' , user => {
+            console.log(user)
+        })
+       
+    },[currentUser])
+    ///////
+
+
+
     useEffect(()=>{
         const fectchComment = async()=>{
             setIsLoading(true)
@@ -36,12 +69,13 @@ function Comments({post}) {
     const handleCreateComment = (e) => {
         e.preventDefault()
         const createComment = async() => {
+            //soket io 
+            socket.current.emit('getCmt',{userId : currentUser._id , decs: desc , postId: post._id  })
             try {
                 const res = await axios.post(`comment/create`,{
-                    postId : post._id,
-                    comment: desc
+                    postId : post._id ,
+                    comment: desc   
                 })
-                console.log(res.data)
                 setDesc('')
             
             } catch (error) {
@@ -82,11 +116,10 @@ function Comments({post}) {
                 
             </div>
             <div className="comment">
-                
                 { 
                 comments.map((comment,index)=>(
-
-                    <Comment comment={comment} key={index}/>
+                    
+                    <Comment  comment={comment} key={index}/>
                 ))}
 
               
