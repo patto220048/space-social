@@ -74,8 +74,7 @@ function Upload({openUpload,setOpenUpload}) {
         const fectchPost = async() => {
             try {
                 const res = await axios.post('/post/create',{...inputs})
-                console.log(res.data)
-               
+                window.location.reload(true);
 
             } catch (error) {
                 console.log('api error: ' + error)

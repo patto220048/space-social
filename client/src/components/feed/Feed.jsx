@@ -26,7 +26,7 @@ function Feed({type,paramId ,setOpenUpload}) {
           try {
               const res = paramId 
               ? await axios.get(`/post/profile/${paramId}`)
-              : await axios.get(`/post/${type}`)
+              : await axios.get(`/post/${type }`)
               setPosts(res.data)
               
           } catch (err) {

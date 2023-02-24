@@ -18,7 +18,7 @@ const Comment = new  Schema({
     reply:{
           type:String,
     }
-
+    
     
    
     

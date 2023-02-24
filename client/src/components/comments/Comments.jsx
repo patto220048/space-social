@@ -8,7 +8,7 @@ import axios from "axios";
 
 import Comment from "../comment/Comment";
 import ReactLoading from 'react-loading';
-
+import SendIcon from '@mui/icons-material/Send';
 
 function Comments({post}) {
     const  {currentUser} = useSelector((state) => state.user)
@@ -41,6 +41,8 @@ function Comments({post}) {
                     postId : post._id,
                     comment: desc
                 })
+                console.log(res.data)
+                setDesc('')
             
             } catch (error) {
                 console.log(error.message)
@@ -48,8 +50,9 @@ function Comments({post}) {
             }
         }
         createComment()
+        
 
-        setDesc('')
+       
 
     }
 
@@ -58,19 +61,19 @@ function Comments({post}) {
             <div className="comments-wapper">
                 <div className="comments-item">
                     <img className="comments-img" src={currentUser.userImg || noAvatar} alt={currentUser.userImg} />
-                    <input 
+                    <textarea 
                         className="comments-input"
                         type="text" 
-                        placeholder="comments"
+                        placeholder="Enter your comment here..."
                       
                         onChange={(e)=>setDesc(e.target.value)}
                     />
                  
-                   {!desc ? <button type="submit" disabled className="comments-button" onClick={handleCreateComment}>
-                        Comment
+                   {!desc ? <button type="submit" disabled className="comments-button1 active" onClick={handleCreateComment}>
+                        Enter<SendIcon/>
                     </button>:
                    <button type="submit" className="comments-button" onClick={handleCreateComment}>
-                        Comment
+                        Enter<SendIcon/>
                     </button>
                     }
                   

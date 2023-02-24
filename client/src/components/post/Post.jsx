@@ -106,7 +106,7 @@ function Post({post}) {
                     </div>
                     <div className="post-info">
                       <span className="like-count">{post.likes} like</span>
-                      <span className="comment-count">14 comments</span>
+                      <span className="comment-count">{post.commentCount} comment</span>
                       <span className="share-count">3 share</span>
 
                     </div>

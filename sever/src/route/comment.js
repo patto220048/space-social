@@ -8,7 +8,7 @@ router.post('/create',veryfiToken.verifyUser,commentController.createComment)
 //get comment
 router.get('/:postId/find',veryfiToken.verifyUser,commentController.getComment)
 //delete comment
-router.delete('/:idcmt/delete',veryfiToken.verifyUser,commentController.deleteComment)
+router.delete('/:idCmt/delete',veryfiToken.verifyUser,commentController.deleteComment)
 
 
 

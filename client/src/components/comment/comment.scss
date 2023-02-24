@@ -8,7 +8,6 @@
             display: flex;
             align-items:flex-start;
             margin: 10px 0;
-            
             .comment-user-img{
                 width: 35px;
                 height: 35px;
@@ -17,13 +16,60 @@
             }
             .comment{
                 padding-left: 10px;
-                border-radius: 15px;
+                border-radius: 10px;
+       
                 width: 100%;
                 background-color: rgb(204, 204, 204);
                 .comment-name{
                     font-size: 20px;
                     font-weight: 500;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: relative;
+                    z-index: 0;
+                    .time{
+                        flex: 3;
+                        padding-left: 8px;
+                        font-size: 15px;
+                    }
+                    .comment-text{
+                        font-size: 18px;
+                        padding: 5px;
+                    }
+                    .btn{
+                        margin-right: 5px;
+                        border: none;
+                        outline: none;
+                        background-color: transparent;
+                        cursor: pointer;
+                        &:hover{
+                            opacity: 0.7;
+                        }
+                        
+                    }
+                    .option{
+                        position: absolute;
+                        right: 15px;
+                        top: 26px;
+                        button{
+                            font-size: 18px;
+                            border: none;
+                            outline: none;
+                            background-color: white;
+                            cursor: pointer;
+                            border-radius: 5px;
+                            &:hover{
+                                background-color: rgb(255, 0, 0);
+                                transform: scale(1.2);
+                                
+                            }
+                        }
+                     
+                    }
                 }
+              
+                
             }
         }
     }

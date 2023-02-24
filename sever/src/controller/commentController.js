@@ -5,13 +5,16 @@ const Comment = require('../model/commentModel')
 class CommentController{
     //create commnet
     async createComment(req, res, next){
+        const postId = req.body.postId
+        const newComment = await Comment({userId: req.user.id, postId, ...req.body})
 
-        const newComment = await Comment({userId: req.user.id, ...req.body})
-
+        const post = await Post.findById( postId )
+        console.log(post)
         try {
             const savedComment = await newComment.save()
+            await post.updateOne({$inc:{commentCount : 1}})
             res.status(200).json(savedComment)     
-
+            
         } catch (err) {
             res.status(500).json(err.message)
             
@@ -35,9 +38,10 @@ class CommentController{
     //delete comment
     async deleteComment(req, res, next) {
         try {
-            const comment = await Comment.findById(req.params.idcmt)
+            const comment = await Comment.findById(req.params.idCmt)
+            
             if(req.user.id === comment.userId || req.user.admin ){
-                await Comment.findByIdAndDelete(req.params.idcmt)
+                await Comment.findByIdAndDelete(req.params.idCmt)
                 return res.status(200).json('Comment deleted')
             }
             else {
