@@ -31,11 +31,13 @@ io.on("connection", (socket) => {
    // get comment from client
    socket.on("getCmt" , ({userId, decs ,postId})=>{
         const user = getUser(userId)
+        //respon data for client
         io.emit("getDecs", {
             user, decs ,postId
         })
 
    })
+   ///
 
 
 

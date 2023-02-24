@@ -17,28 +17,31 @@ function Comments({post}) {
     const [comments, setComments] = useState([])
     const [desc , setDesc] = useState('')
     const [isloading, setIsLoading] = useState(true)
-    const [decsSk, setDecsSk] = useState(null)
+    const [decsSocket, setDecsSocket ] = useState(null) // *
     const socket = useRef()
-    const [cmtSk, setcmtSk] = useState({})
-    console.log(cmtSk)
-    // console.log(isloading)
+
     ///socketio handle
     useEffect(()=>{
+
+        //default
         socket.current = io('ws://localhost:8000')
+
+        // take data from sever
         socket.current.on('getDecs', data=>{
-            setDecsSk({
-                userId: data.user,
-                decs : data.decs,
+            setDecsSocket({
+                userId: data.user.userId,
+                comment : data.decs,
                 postId : data.postId,
                 createdAt: Date.now()
             })
-            })
+        })
     },[])
 
     useEffect(()=>{
-        decsSk && setcmtSk(decsSk)
-    },[decsSk]) 
+        decsSocket && setComments((prev)=>[...prev, decsSocket])
+    },[decsSocket])
 
+ 
     useEffect(()=>{
         socket.current.emit('addUser',currentUser._id)
         socket.current.on('getUsers' , user => {
@@ -56,6 +59,7 @@ function Comments({post}) {
           try{
             const res = await axios.get(`/comment/${post._id}/find`)
             setComments(res.data)
+        
           }
           catch(err){
             console.log(err.message)
@@ -69,21 +73,21 @@ function Comments({post}) {
     const handleCreateComment = (e) => {
         e.preventDefault()
         const createComment = async() => {
-            //soket io 
+            //soket io send data to server
             socket.current.emit('getCmt',{userId : currentUser._id , decs: desc , postId: post._id  })
             try {
                 const res = await axios.post(`comment/create`,{
                     postId : post._id ,
                     comment: desc   
                 })
-                setDesc('')
-            
+                
             } catch (error) {
                 console.log(error.message)
-
+                
             }
         }
         createComment()
+        setDesc(' ')
         
 
        
