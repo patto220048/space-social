@@ -87,4 +87,9 @@ $textColor : #D4D8F4;
     &::-webkit-scrollbar{
         display: none;
     }
+
+    .comment{
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }

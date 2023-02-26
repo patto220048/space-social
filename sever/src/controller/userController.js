@@ -85,11 +85,11 @@ class userController {
                 const user = await User.findById(req.params.id)
                 const currentUser = await User.findById(req.user.id)
                 if (!user.follower.includes(req.user.id)){
-                    await user.updateOne({$push:{follower: req.user.id}, $inc:{followUser : 1}})
-                    await currentUser.updateOne({$push:{flowing: req.params.id}})
+                    await user.updateOne({$push:{follower: req.user.id}})
+                    await currentUser.updateOne({$push:{flowing: req.params.id},$inc:{followUser : 1}})
                     res.status(200).json('Follow is successful')
                 }
-                else {
+                else {  
                     res.status(403).json('You already follow this user')
                 }
 
@@ -109,8 +109,8 @@ class userController {
                 const user = await User.findById(req.params.id)
                 const currentUser = await User.findById(req.user.id)
                 if (user.follower.includes(req.user.id)){
-                    await user.updateOne({$pull:{follower: req.user.id}, $inc:{followUser : -1}})
-                    await currentUser.updateOne({$pull:{flowing: req.params.id}})
+                    await user.updateOne({$pull:{follower: req.user.id}, })
+                    await currentUser.updateOne({$pull:{flowing: req.params.id},$inc:{followUser : -1}})
                     res.status(200).json('Unfollow is successful')
                 }
                 else {

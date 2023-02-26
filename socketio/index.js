@@ -26,21 +26,17 @@ io.on("connection", (socket) => {
         addUser(userId, socket.id)
         io.emit('getUsers', users)
    })
-   //handle comment
+
 
    // get comment from client
-   socket.on("getCmt" , ({userId, decs ,postId})=>{
+   socket.on("getCmt" , ({userId, decs ,postId, cmtId})=>{
         const user = getUser(userId)
         //respon data for client
         io.emit("getDecs", {
-            user, decs ,postId
+            user, decs ,postId,cmtId
         })
 
    })
-   ///
-
-
-
     ///disconnect
    socket.on('disconnect',()=>{
         console.log('some body disconn')

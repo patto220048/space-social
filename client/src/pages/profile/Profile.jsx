@@ -1,34 +1,31 @@
 import { useEffect, useState } from 'react';
 import './profile.scss'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import axios from 'axios';
 
 import EmailIcon from '@mui/icons-material/Email';
 import HouseIcon from '@mui/icons-material/House';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-
+import CheckIcon from '@mui/icons-material/Check';
 import Upload from "../../components/upload/Upload"
 import AddIcon from '@mui/icons-material/Add';
-
 import Feed from '../../components/feed/Feed';
 
+import {follow } from "../../redux/userSlice";
 
 
 function Profile({openUpload,setOpenUpload, posts}) {
     const  {currentUser} = useSelector((state) => state.user)
-    
+    const dispatch = useDispatch()
     const paramId = useParams()
-    console.log(paramId.userId)
-    // console.log(currentUser)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const noBg = process.env.REACT_APP_PUBLIC_FOLDER + "no_bg2.png" 
 
     const [openEditDesc,setOpenEditDesc] = useState(false)
 
     const [user, setUser] = useState([])
-    console.log(user.email)
-  
+
     useEffect(()=>{
         const fecthUser = async()=>{
             try{
@@ -43,9 +40,21 @@ function Profile({openUpload,setOpenUpload, posts}) {
 
     },[paramId.userId])
     
-
-
-
+    const handleFollow = () =>{
+        const fecthFollow = async()=>{
+           try {
+                currentUser.flowing?.includes(paramId.userId)
+                ?
+                await axios.put(`/user/unfollow/${paramId.userId}`)
+                :
+                await axios.put(`/user/follow/${paramId.userId}`)
+                dispatch(follow(paramId.userId))
+           } catch (error) {
+               console.log(error.message)
+           }
+        }
+        fecthFollow()
+    }
 
     return ( 
         <>
@@ -58,10 +67,15 @@ function Profile({openUpload,setOpenUpload, posts}) {
                                 <img className='background-img' src={user.userCoverImg || noBg} alt={user.userCoverImg} />
                                 <button><AddIcon fontSize='large'  className='add-icon'/></button>
                             </div>
-                            {/* <div className="btn-fl">
-                                <button className='follow1'>Follow</button>
-                                <button className='follow2'>Follow</button>  
-                            </div> */}
+                            <div className="btn-fl">
+                                {/* <button className='follow1'> <AddIcon/>Follow</button> */}
+                                {currentUser._id === paramId.userId 
+                                ? <></>:
+                                <button className='follow2' onClick={handleFollow} >
+                                    {currentUser.flowing?.includes(paramId.userId) ? <span><CheckIcon/>Unfollow</span> :<span> <AddIcon/>Follow</span>}
+                                </button> 
+                                } 
+                            </div>
                             <div className="avatar">
                                 <img className='avatar-img' src={ user.userImg || noAvatar} alt={user.userImg} />
                                 <button className='avatar-add-icon'>

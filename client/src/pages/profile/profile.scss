@@ -25,6 +25,7 @@ $textColor : #D4D8F4;
             flex-direction: column;
             align-items: center;
             margin: 0 auto;
+            width: 90%;
             .profile-top{
                 position:relative;
                 display: flex;
@@ -77,10 +78,12 @@ $textColor : #D4D8F4;
                     position: relative;
                     display: flex;
                     .follow1{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         position: absolute;
-                        left: 15%;
+                        left: 0;
                         bottom: -60px;
-
                         padding: 5px;
                         width: 150px;
                         height: 35px;
@@ -91,19 +94,18 @@ $textColor : #D4D8F4;
                         font-weight: 500;
                         cursor: pointer;
                         
-                        &:hover{
-
-                        }
+                       
                         
 
                     }
                     .follow2{
-                        
-
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         position: absolute;
-                        right: 15%;
+                        // right: 15%;
+                        right: 0;
                         bottom: -60px;
-                        
                         padding: 5px;
                         width: 150px;
                         height: 35px;
@@ -113,7 +115,19 @@ $textColor : #D4D8F4;
                         border-radius: 10px;
                         font-weight: 500;
                         cursor: pointer;
-
+                        transition: all 0.5s ease-in-out;
+                        span{
+                            font-size: 15px;
+                            display: flex;
+                            align-items: center;
+                        }
+                        &:hover{
+                            background-color:aliceblue;
+                            color: black;
+                            border: 1px solid black;
+                            transform: scale(1.1);  
+                            
+                        }
 
                     }
                     

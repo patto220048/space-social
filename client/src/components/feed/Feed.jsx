@@ -26,7 +26,7 @@ function Feed({type,paramId ,setOpenUpload}) {
           try {
               const res = paramId 
               ? await axios.get(`/post/profile/${paramId}`)
-              : await axios.get(`/post/${type }`)
+              : await axios.get(`/post/${type}`)
               setPosts(res.data)
               
           } catch (err) {
@@ -53,8 +53,8 @@ function Feed({type,paramId ,setOpenUpload}) {
                     </Link>
                     ))}
                 </div>}
-                {posts=== null ? 
-                <p>not found</p>
+                {!posts ? 
+                <h1>not found</h1>
                 :
                 posts.map((post,index)=>(
                     <Post post={post} key={index}/>

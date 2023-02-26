@@ -26,7 +26,7 @@ class CommentController{
     async getComment(req, res, next) {
         try {
 
-            const comments = await Comment.find({postId : req.params.postId}).sort({_id:-1})
+            const comments = await Comment.find({postId : req.params.postId}).sort({_id:1})
             res.status(200).json(comments)
             
         } catch (err) {
@@ -37,11 +37,16 @@ class CommentController{
     }
     //delete comment
     async deleteComment(req, res, next) {
+
         try {
-            const comment = await Comment.findById(req.params.idCmt)
             
+            const comment = await Comment.findById(req.params.idCmt)
+            const postid = comment.postId
+            const post = await Post.findById( postid )
             if(req.user.id === comment.userId || req.user.admin ){
                 await Comment.findByIdAndDelete(req.params.idCmt)
+                await post.updateOne({$inc:{commentCount : -1}})
+
                 return res.status(200).json('Comment deleted')
             }
             else {

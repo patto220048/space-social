@@ -15,8 +15,8 @@ function Comments({post}) {
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [comments, setComments] = useState([])
-    const [desc , setDesc] = useState('')
-    const [isloading, setIsLoading] = useState(true)
+    const [desc , setDesc] = useState("")
+    const [isloading, setIsLoading] = useState(false)
     const [decsSocket, setDecsSocket ] = useState(null) // *
     const socket = useRef()
 
@@ -32,7 +32,7 @@ function Comments({post}) {
                 userId: data.user.userId,
                 comment : data.decs,
                 postId : data.postId,
-                createdAt: Date.now()
+                createdAt: Date.now(),
             })
         })
     },[])
@@ -45,21 +45,21 @@ function Comments({post}) {
     useEffect(()=>{
         socket.current.emit('addUser',currentUser._id)
         socket.current.on('getUsers' , user => {
-            console.log(user)
+            // console.log(user)
         })
        
     },[currentUser])
-    ///////
-
-
-
+    
     useEffect(()=>{
+
         const fectchComment = async()=>{
             setIsLoading(true)
+            
           try{
             const res = await axios.get(`/comment/${post._id}/find`)
             setComments(res.data)
-        
+            setIsLoading(false)
+
           }
           catch(err){
             console.log(err.message)
@@ -67,31 +67,27 @@ function Comments({post}) {
         }
         }
     fectchComment()
-    setIsLoading(false)
     },[post._id])
 
     const handleCreateComment = (e) => {
         e.preventDefault()
         const createComment = async() => {
             //soket io send data to server
-            socket.current.emit('getCmt',{userId : currentUser._id , decs: desc , postId: post._id  })
+            socket.current.emit('getCmt',{userId : currentUser._id , decs: desc , postId: post._id })
             try {
                 const res = await axios.post(`comment/create`,{
                     postId : post._id ,
                     comment: desc   
                 })
-                
+                setDesc('') 
+
+              
             } catch (error) {
                 console.log(error.message)
                 
             }
         }
         createComment()
-        setDesc(' ')
-        
-
-       
-
     }
 
     return ( 
@@ -114,17 +110,18 @@ function Comments({post}) {
                         Enter<SendIcon/>
                     </button>
                     }
-                  
-
+                
                 </div>
                 
             </div>
             <div className="comment">
-                { 
+                { isloading ?
+                 <ReactLoading type={"cylon"}/> :
                 comments.map((comment,index)=>(
                     
                     <Comment  comment={comment} key={index}/>
-                ))}
+                ))
+                }
 
               
 

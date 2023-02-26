@@ -4,12 +4,17 @@ import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 import {format} from "timeago.js"
 import {io} from 'socket.io-client'
+import { Link, useNavigate } from "react-router-dom";
+
+
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useSelector } from "react-redux"
 
 function Comment({comment}) {
 
+    const navigate = useNavigate()
+    const srcollRef = useRef()
     const [openDelCmt, setOpenDelCmt] = useState(false)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [user ,setUser] = useState([])
@@ -26,10 +31,9 @@ function Comment({comment}) {
         fecthUser()
 
     },[comment.userId])
-
-
-
-
+        // useEffect(()=>{
+        //     srcollRef.current?.scrollIntoView({ block: "start" })   
+        // },[comment.comment])
 
     const  handleDelCmt = () =>{
         
@@ -39,7 +43,8 @@ function Comment({comment}) {
             const res = await axios.delete(`/comment/${comment._id}/delete`)
             alert('Comment deleted successfully!!')
             window.location.reload(true);
-
+            navigate('/')   
+            
            } catch (error) {
             alert("Opps!! You just deleted your comment. ")
             setOpenDelCmt(false)
@@ -51,10 +56,13 @@ function Comment({comment}) {
         <div className="comment-container">
             <div className="comment-wapper">
                 <div className="comment-items">
-                    <img src={user.userImg || noAvatar} alt={user.userImg} className="comment-user-img" />
-                    <div className="comment">
+                   <Link to={`/profile/${comment.userId}`} style={{textDecoration:'none'}} > <img src={user.userImg || noAvatar} alt={user.userImg} className="comment-user-img" /></Link>
+                    <div className="comment" ref={srcollRef} >
+                        <p className="comment-text" >
+                            {comment.comment}
+                        </p>
                         <span className="comment-name">
-                           {user.username}
+                        <Link to={`/profile/${comment.userId}`} style={{textDecoration:'none'}} > <span>{user.username}</span> </Link>  
                             <span className="time">{format(comment.createdAt)}</span>
                             <button className="btn" onClick={()=>setOpenDelCmt(!openDelCmt)} >
                                 <MoreHorizIcon fontSize="large"/>
@@ -65,10 +73,7 @@ function Comment({comment}) {
                         </span>
                        
 
-                        <p className="comment-text">
-                            {comment.comment}
-                           
-                        </p>
+                        
                     </div>
 
 

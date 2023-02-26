@@ -24,10 +24,21 @@ export const userSlice = createSlice({
         },
         logout:(state)=>{
             return initialState
+        },
+        follow:(state, action)=>{
+            if(state.currentUser.flowing.includes(action.payload)){
+                state.currentUser.flowing.splice(
+                    state.currentUser.flowing.findIndex(
+                        pagramId => pagramId === action.payload),1)
+            }
+            else{
+                state.currentUser.flowing.push(action.payload)
+            }
+
         }
     }
 })
 
-export const {loginStart, loginSuccess, loginFail, logout} = userSlice.actions
+export const {loginStart, loginSuccess, loginFail, logout, follow} = userSlice.actions
 
 export default userSlice.reducer
