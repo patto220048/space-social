@@ -84,7 +84,7 @@ function Comments({post,socket}) {
                         className="comments-input"
                         type="text" 
                         placeholder="Enter your comment here..."
-                      
+                        value={desc}
                         onChange={(e)=>setDesc(e.target.value)}
                     />
                  

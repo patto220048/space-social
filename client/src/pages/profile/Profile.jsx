@@ -67,6 +67,7 @@ function Profile({posts}) {
                 console.log(res.data)
                 setOpenEditDesc(false)
                 window.location.reload()
+                setDescProfile('')
             } catch (err) {
                 console.log(err.message)
                 
@@ -120,7 +121,7 @@ function Profile({posts}) {
                                          <p className='desc-text' >{user.descProfile ? user.descProfile : "Write somethings about you"}</p>
                                         { openEditDesc ? 
                                         <div className="edit">
-                                            <textarea name="" id="" cols="30" rows="4" onChange={(e)=>setDescProfile(e.target.value)}/>
+                                            <textarea name="" id="" cols="30" rows="4" value={descProfile} onChange={(e)=>setDescProfile(e.target.value)}/>
                                             <div className="edit-desc">
                                                 <button className='cancel-btn' onClick={()=>setOpenEditDesc(!openEditDesc)}> Cancel</button>
                                                 <button className ='update-btn' onClick={handleUpdateDesc}> Update</button>

@@ -131,8 +131,9 @@ class userController {
         //search user
         const query = req.query.q
         try {
-            const userSearch = await User.find({fullName:{$regex:query, $options:'i' }}).limit(10)
-            res.status(200).json(userSearch)
+            const userSearch = await User.find({username:{$regex:query, $options:'i' }}).limit(10)
+            const user = userSearch.map((user) => user)
+            res.status(200).json(user)
 
             
         } catch (err) {

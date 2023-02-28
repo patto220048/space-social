@@ -1,0 +1,146 @@
+$mainColor : #424242;
+$textColor : #D4D8F4;
+
+.search{
+    width:30%;
+    display: flex;
+    align-items: center ;
+    padding: 10px;
+    border-radius: 25px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    @media (max-width:768px){
+        margin-left: 40px;
+        flex: 2;    
+    
+    }
+    .nav-input{
+        width:80% ;
+        height: 20px;
+        border: none;
+        outline: none;
+        padding-left: 15px;
+        font-size: 15px;
+        background-color: transparent;
+        //repossive
+        @media (max-width:767px){
+            width: 100%;
+            margin: 0 auto;
+
+            
+            
+        }
+        @media (min-width:768px) and (max-width:1268px) {
+            width: 400px;
+        }
+
+
+    }
+    
+    .search-icon{
+        right: 0;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        cursor: pointer;
+        border: none;
+        background-color: rgb(192, 186, 186);
+        margin-right: 5px;
+        border-radius: 50%;
+        padding: 5px;
+        color: black;
+        &:hover{
+        opacity: 0.8;
+        }
+    
+    }
+    .close-icon{
+        padding: 5px;
+        color: black;
+        background-color: rgb(192, 186, 186);
+        margin-right: 10px;
+        flex: 3;
+        right: 0;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        &:hover{
+        opacity: 0.8;   
+            
+        }
+    }
+    .data-result{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top:100%;
+        right: -1px ;
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: 200px;
+        min-height: 0;
+        border-radius: 10px;
+           
+        &::-webkit-scrollbar{
+            display: none;
+        } 
+        .data-items{
+            background-color:$mainColor;
+            border: 1px solid aliceblue;
+            color: aliceblue;
+            cursor: pointer;   
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            .notFound{
+               span{
+                font-weight: 300;
+                padding: 10px;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+               }
+            }
+            .items{ 
+                border-radius: 10px;
+                gap: 10px;      
+                align-items: center;
+                display: flex;
+                padding: 5px 15px;
+                width: 98%;
+                margin: 0 auto;
+                
+            
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                span{   
+                    width: 100%;
+                    height: 50px;
+                    font-size: 20px;
+                    padding-top: 10px;
+                    color: aliceblue;
+                
+            
+                }
+              
+                &:hover{
+                    background-color: rgba($color: #e6e6e6, $alpha: 0.1);
+
+                    
+                }
+           
+           }
+        }
+
+    }
+
+}
