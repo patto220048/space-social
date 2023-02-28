@@ -19,7 +19,8 @@ router.get('/profile/:id',veryfiToken.verifyUser, postController.myPost)
 //delete post
 router.delete('/delete/:id',veryfiToken.verifyUser, postController.deletePost)
 //like / dislike
-router.put('/:id/like',veryfiToken.verifyUser, postController.likePost)
+router.put('/like',veryfiToken.verifyUser, postController.likePost)
+router.put('/dislike',veryfiToken.verifyUser, postController.dislikePost)
 //update post
 router.put('/update/:id',veryfiToken.verifyUser, postController.updatePost)
 

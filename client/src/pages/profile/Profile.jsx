@@ -15,19 +15,22 @@ import Feed from '../../components/feed/Feed';
 import {follow } from "../../redux/userSlice";
 
 
-function Profile({openUpload,setOpenUpload, posts}) {
+function Profile({posts}) {
+    const [openUpload, setOpenUpload] = useState(false)
     const  {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const paramId = useParams()
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const noBg = process.env.REACT_APP_PUBLIC_FOLDER + "no_bg2.png" 
 
+    const [descProfile,setDescProfile] = useState('')
+
     const [openEditDesc,setOpenEditDesc] = useState(false)
 
     const [user, setUser] = useState([])
-
     useEffect(()=>{
         const fecthUser = async()=>{
+            
             try{
                 const res = await axios.get(`/user/find/${paramId.userId}`)
                 setUser(res.data)
@@ -55,11 +58,28 @@ function Profile({openUpload,setOpenUpload, posts}) {
         }
         fecthFollow()
     }
+    const handleUpdateDesc = () =>{
+        const fecthUser = async()=>{
+            try {  
+                const res = await axios.put(`/user/edit/${paramId.userId}`,{
+                    descProfile : descProfile
+                })
+                console.log(res.data)
+                setOpenEditDesc(false)
+                window.location.reload()
+            } catch (err) {
+                console.log(err.message)
+                
+            }
+        }
+        fecthUser()
+    }
 
     return ( 
         <>
             <div className="profile-container">
                 <Upload openUpload={openUpload} setOpenUpload={setOpenUpload}/>
+
                 <div className="profile-warpper">
                     <div className="profile-item">
                         <div className="profile-top">   
@@ -75,7 +95,7 @@ function Profile({openUpload,setOpenUpload, posts}) {
                                     {currentUser.flowing?.includes(paramId.userId) ? <span><CheckIcon/>Unfollow</span> :<span> <AddIcon/>Follow</span>}
                                 </button> 
                                 } 
-                            </div>
+                            </div>  
                             <div className="avatar">
                                 <img className='avatar-img' src={ user.userImg || noAvatar} alt={user.userImg} />
                                 <button className='avatar-add-icon'>
@@ -97,13 +117,13 @@ function Profile({openUpload,setOpenUpload, posts}) {
                                 <div className="introduce-item">
                                     <h1 className='introduce'>Introduce</h1>
                                     <div className="desc">
-                                         <p className='desc-text' >{user?.decs || "Write something about you !!!"}</p>
+                                         <p className='desc-text' >{user.descProfile ? user.descProfile : "Write somethings about you"}</p>
                                         { openEditDesc ? 
                                         <div className="edit">
-                                            <textarea name="" id="" cols="30" rows="4"></textarea>
+                                            <textarea name="" id="" cols="30" rows="4" onChange={(e)=>setDescProfile(e.target.value)}/>
                                             <div className="edit-desc">
                                                 <button className='cancel-btn' onClick={()=>setOpenEditDesc(!openEditDesc)}> Cancel</button>
-                                                <button className ='update-btn'> Update</button>
+                                                <button className ='update-btn' onClick={handleUpdateDesc}> Update</button>
                                             </div>
 
                                         </div>
@@ -115,10 +135,8 @@ function Profile({openUpload,setOpenUpload, posts}) {
                                             }
                                         </>
                                         }                                   
-                                    </div>              
-                
-                                </div>
-                                <div className="info">
+                                    </div>   
+                                    <div className="info">
                                     <h1 className='detail'>Details</h1>
 
                                     <div className="info-item">
@@ -142,14 +160,14 @@ function Profile({openUpload,setOpenUpload, posts}) {
                                         
                                     </div>
                                
+                                </div>           
+                
                                 </div>
+                               
                                 
                             </div>  
                             <div className="right">
-                                <Feed paramId={paramId.userId} setOpenUpload={setOpenUpload}/>
-                                
-
-                            
+                                <Feed setOpenUpload={setOpenUpload} paramId={paramId.userId}/>
                             </div>
 
                         

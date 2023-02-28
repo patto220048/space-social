@@ -4,8 +4,12 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 import { Link } from 'react-router-dom';
-function Navbar({openSearch,setOpenSearch}) {
+import { useState } from 'react';
 
+
+function Navbar() {
+
+    const [openSearch, setOpenSearch] = useState(false)
 
     return (  
         <div className="nav-container">
@@ -13,12 +17,11 @@ function Navbar({openSearch,setOpenSearch}) {
                <Link to="/" style={{textDecoration:'none'}}>
                     <h1 className="logo">.SPACE</h1>
                </Link> 
-                <div className="search" >
+                <div className="search" onClick={()=>setOpenSearch(!openSearch)} >
                     <input 
                         className="nav-input" 
                         placeholder='Search' 
                         type="text" 
-                        // onClick={()=>setOpenSearch(!openSearch)}
                         />
                     
                     <button className="search-icon"><SearchIcon style={{fontSize:"40px"}}/></button>
@@ -26,7 +29,8 @@ function Navbar({openSearch,setOpenSearch}) {
               { openSearch ?
                 <div className='data-result'>
                         <div className="data-items">
-                            {/* <p>items</p> */}
+                            <img src="https://images.unsplash.com/photo-1677508259126-aaa7e0ab008d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="" />
+                            <span>name</span>
                         </div>
                         
                 </div>

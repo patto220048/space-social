@@ -5,11 +5,11 @@ const userController = require('../controller/userController');
 const veryfiToken  = require('../controller/veryfiToken')
 
 // find all users
-router.get('/find', userController.getUser)
+router.get('/find',veryfiToken.verifyUser, userController.getUser)
 // find a user 
 router.get('/find/:id',veryfiToken.verifyUser, userController.getOneUser)
 // put a user
-router.put('/edit/:id',veryfiToken.verifyUser,userController.editUser)
+router.put('/edit/:id',veryfiToken.verifyUser, userController.editUser)
 //detele a user
 router.delete('/delete/:id',veryfiToken.verifyUser,userController.deteleUser)
 //follow a user

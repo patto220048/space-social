@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { useSelector} from 'react-redux';
 import axios from 'axios';
+import {io} from 'socket.io-client'
 
 
 import Login from './pages/login/Login';
@@ -21,15 +22,25 @@ import Home from './pages/home/Home';
 
 function App() {
   const  {currentUser} = useSelector((state) => state.user)
-  const [openSearch, setOpenSearch] = useState(true)
-  const [openUpload, setOpenUpload] = useState(false)
-
   
+  const [socket, setSocket] = useState(null)
+
+  useEffect(()=>{
+    setSocket(io('ws://localhost:8000'))
+  },[])
+   
+  useEffect(()=>{
+    socket?.emit('addUser',currentUser._id)
+    socket?.on('getUsers' , user => {
+        // console.log(user)
+})
+   
+},[currentUser])
   
   const Layout= () => {
     return (
       <>
-      <Navbar openSearch={openSearch} setOpenSearch={setOpenSearch}/>
+      <Navbar socket={socket}/>
       <div style={{
         display:"flex",
         backgroundColor:"aliceblue",
@@ -60,23 +71,23 @@ function App() {
       children:[
         {
           path:"/",
-          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="random"/>
+          element: <Home  type="random" socket={socket}/>
         },
         {
           path:"/newpost",
-          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="newpost"/>
+          element: <Home  type="newpost"/>
         },
         {
           path:"/random",
-          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="random"/>
+          element: <Home  type="random"/>
         },
         {
           path:"/followed",
-          element: <Home openUpload = {openUpload} setOpenUpload={setOpenUpload} type="folowed"/>
+          element: <Home  type="folowed"/>
         },
         {
           path:"/profile/:userId",
-          element: <Profile openUpload = {openUpload} setOpenUpload={setOpenUpload}/>
+          element: <Profile />
         },
         {
           path:"/setting",

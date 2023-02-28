@@ -3,31 +3,23 @@ import "./comments.scss"
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import {io} from 'socket.io-client'
-
-
 
 import Comment from "../comment/Comment";
 import ReactLoading from 'react-loading';
 import SendIcon from '@mui/icons-material/Send';
 
-function Comments({post}) {
+function Comments({post,socket}) {
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [comments, setComments] = useState([])
     const [desc , setDesc] = useState("")
     const [isloading, setIsLoading] = useState(false)
     const [decsSocket, setDecsSocket ] = useState(null) // *
-    const socket = useRef()
 
     ///socketio handle
     useEffect(()=>{
-
-        //default
-        socket.current = io('ws://localhost:8000')
-
         // take data from sever
-        socket.current.on('getDecs', data=>{
+        socket?.on('getDecs', data=>{
             setDecsSocket({
                 userId: data.user.userId,
                 comment : data.decs,
@@ -41,14 +33,7 @@ function Comments({post}) {
         decsSocket && setComments((prev)=>[...prev, decsSocket])
     },[decsSocket])
 
- 
-    useEffect(()=>{
-        socket.current.emit('addUser',currentUser._id)
-        socket.current.on('getUsers' , user => {
-            // console.log(user)
-        })
-       
-    },[currentUser])
+
     
     useEffect(()=>{
 
@@ -73,9 +58,9 @@ function Comments({post}) {
         e.preventDefault()
         const createComment = async() => {
             //soket io send data to server
-            socket.current.emit('getCmt',{userId : currentUser._id , decs: desc , postId: post._id })
+            socket?.emit('getCmt',{userId : currentUser._id , decs: desc , postId: post._id })
             try {
-                const res = await axios.post(`comment/create`,{
+                const res = await axios.post(`/comment/create`,{
                     postId : post._id ,
                     comment: desc   
                 })

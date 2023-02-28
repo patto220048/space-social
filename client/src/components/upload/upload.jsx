@@ -8,7 +8,7 @@ import axios from "axios";
 
 import ReactLoading from 'react-loading';
 import CloseIcon from '@mui/icons-material/Close';
-function Upload({openUpload,setOpenUpload}) {
+function Upload({openUpload, setOpenUpload}) {
     //
     const navigate = useNavigate()
     //
@@ -81,13 +81,14 @@ function Upload({openUpload,setOpenUpload}) {
         }
         fectchPost()
         setOpenUpload(false)
-
     }
 
+    
+    
 
     return ( 
         <>
-            {openUpload &&
+            { openUpload &&
             <div className="upload-tiem">
                
                 <div className="upload-wapper">
@@ -133,7 +134,8 @@ function Upload({openUpload,setOpenUpload}) {
                     {inputs.desc
                     ? 
                     <button type='submit' className="sub-btn" onClick={handlePost}>POST</button>
-                    : <button type='submit' disabled className="sub-btn" onClick={handlePost}>POST</button>}
+                    : 
+                    <button type='submit' disabled className="sub-btn" onClick={handlePost}>POST</button>}
                 </div>
 
             </div>}

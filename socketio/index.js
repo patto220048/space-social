@@ -35,8 +35,10 @@ io.on("connection", (socket) => {
         io.emit("getDecs", {
             user, decs ,postId,cmtId
         })
-
    })
+   //
+    
+
     ///disconnect
    socket.on('disconnect',()=>{
         console.log('some body disconn')

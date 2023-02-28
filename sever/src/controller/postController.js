@@ -95,21 +95,33 @@ class PostController {
     }
     //like post
     async likePost(req, res, next){
-
+        const postId = req.query.q
         try {
-            const post =  await Post.findById(req.params.id)
-            if(!post.like.includes(req.user.id)){
-                await Post.updateOne({$push:{like: req.user.id},$inc:{likes: 1}})
-                res.status(200).json('Like')
+            const post =  await Post.findById(postId)
+            if(!post.like.includes(req.user.id)){   
+                await post.updateOne({$push:{like: req.user.id},$inc:{likes: 1}})
+                res.status(200).json('like')
 
             }
-            else{
-                await Post.updateOne({$pull:{like: req.user.id},$inc:{likes: -1}})
-                res.status(200).json('Dislike')
-            }
-   
         } catch (err) {
             res.status(500).json("CAN'T LIKE POST SEVER IS ERROR", err)
+            
+        }
+
+    }
+    // dislike
+    async dislikePost(req, res, next){
+        const postId = req.query.q
+        try {
+            const post =  await Post.findById(postId)
+            if(post.like.includes(req.user.id)){   
+                await post.updateOne({$pull:{like: req.user.id},$inc:{likes: -1}})
+                res.status(200).json('Dislike')
+
+            }
+          
+        } catch (err) {
+            res.status(500).json("CAN'T DiLIKE POST SEVER IS ERROR", err)
             
         }
 

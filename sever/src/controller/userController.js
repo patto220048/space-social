@@ -127,7 +127,7 @@ class userController {
         }
     }
 
-    async searchUser(){
+    async searchUser(req, res, next){
         //search user
         const query = req.query.q
         try {
@@ -140,7 +140,6 @@ class userController {
 
         }
     }
-
 
 }
 

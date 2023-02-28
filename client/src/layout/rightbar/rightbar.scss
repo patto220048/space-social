@@ -12,7 +12,7 @@ $textColor : #D4D8F4;
     .rightbar-wapper{
         
         
-        border-radius: 15px;
+        border-radius: 5px;
         max-height: 200px;
         overflow-y: auto;
         &::-webkit-scrollbar{
@@ -62,7 +62,7 @@ $textColor : #D4D8F4;
                 display: flex;
                 gap: 10px;
                 button{
-                    width: 100px;
+                    width: 60px;
                     padding: 5px;
                     border: none;
                     outline: none;
@@ -88,7 +88,7 @@ $textColor : #D4D8F4;
     .notification{
         margin-top: 10px;
         background-color: $mainColor;
-        border-radius: 15px;
+        border-radius: 5px;
         max-height: 200px;
         overflow-y: auto;
         width: 100%;
@@ -140,7 +140,7 @@ $textColor : #D4D8F4;
     .user-online{
         margin-top: 10px;
         background-color: $mainColor;
-        border-radius: 15px;
+        border-radius: 5px;
         max-height: 460px;
         overflow-y: auto;
         width: 100%;

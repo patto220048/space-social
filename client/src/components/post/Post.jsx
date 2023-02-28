@@ -1,29 +1,43 @@
 import "./post.scss"
 import { format } from 'timeago.js';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getStorage, ref ,deleteObject } from "firebase/storage";
 
 
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import Comments from "../comments/Comments";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ChatIcon from '@mui/icons-material/Chat';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ReplyIcon from '@mui/icons-material/Reply';
+import {useDispatch, useSelector ,} from "react-redux";
+import { postFail, postStart, postSuccess, likes} from "../../redux/postSlice";
 
 
-function Post({post}) {
- 
+function Post({post, socket}) {
+    const  {currentUser} = useSelector((state) => state.user)
+    const  {currentPost} = useSelector((state) => state.post)
+    const dispatch = useDispatch()
+  
     const navigate = useNavigate()
     ////// user ///////////
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [user, setUser] = useState([])
-    
+    const [onePost, setOnePost] = useState({})  
+    const [like, setLike] = useState(0)
+
     useEffect(()=>{
         const fecthUser = async()=>{
+        
             try{
                 const res = await axios.get(`/user/find/${post.userId}`)
+                const onePost = await axios.get(`/post/find/v1/${post._id}`)
                 setUser(res.data)
+                setOnePost(onePost.data)
             }
             catch(err){
                 console.log(err.message);
@@ -31,20 +45,21 @@ function Post({post}) {
         }
         fecthUser()
 
-    },[post.userId])
+    },[post.userId,post._id])
     ////////////////////////
     /////////Post///////////
     //open menu post 
     
     const [postDetele, setPostDetele ] = useState('')
     const [openMenuPost, setOpenMenuPost] = useState(false)
+    //detele post
     const handleDelete = ()=>{
         const fectchDelete = async()=>{
             try {
                 const res = await axios.delete(`/post/delete/${post._id}`)
                 handleDeleteImgFormFirebase(post?.imgPost)
                 setPostDetele(alert("Post deleted successfully!!"))
-                window.location.reload(true);
+                window.location.reload();
             } catch (error) {
                 setOpenMenuPost(false);
                 setPostDetele(alert("Opps! You just deleted only your post"))
@@ -68,7 +83,36 @@ function Post({post}) {
 
 
     }
-    ////////////////////////
+
+    //like post
+    const handleLike=()=>{
+        const fetchLikePost = async () =>{
+            
+            try {
+                
+                currentPost.map(async(post, index)=>{
+                    if(post._id === onePost._id){
+                        if(post.like.includes(currentUser._id)){
+                            await axios.put(`/post/dislike?q=${onePost._id}`)
+                            setLike(like-1)
+                        }
+                        else{
+                            await axios.put(`/post/like?q=${onePost._id}`)
+                            setLike(like+1)
+                        }
+                    }
+                    
+                })
+                dispatch(likes({userId:currentUser._id, postId:onePost._id}))
+            } catch (err) {
+                console.log("Error", err)
+                
+            }
+        }
+        
+        fetchLikePost()
+    }
+
     return ( 
         <div className="post-container">
             <div className="post-wapper">
@@ -105,30 +149,41 @@ function Post({post}) {
                         {post.imgPost ? <img src={post.imgPost} alt={post.imgPost} /> : <></>}
                     </div>
                     <div className="post-info">
-                      <span className="like-count">{post.likes} like</span>
-                      <span className="comment-count">{post.commentCount} comment</span>
-                      <span className="share-count">3 share</span>
+                        {!currentPost.some(post => post._id=== onePost._id && post.like.includes(currentUser._id))
+                        ?
+                        <span className="like-count">{post.likes + like} like</span>
+                        :  
+                        <span className="like-count">{post.likes+like} like and you </span>
+                        }
+                        <span className="comment-count">{post.commentCount} comment</span>
+                        <span className="share-count">3 share</span>
 
                     </div>
                     <div className="line"></div>
                     <div className="post-action">
                         <div className="action-btn">
+                                <button className="likeBtn" onClick={handleLike}>
+                                    
+                                   {currentPost.some(post => post._id=== onePost._id && post.like.includes(currentUser._id)) 
+                                   ? 
+                                   <span style={{backgroundColor:'rgb(238, 78, 142',color:"white"}}><FavoriteIcon/>Liked?</span>
+                                   :
+                                   <span><FavoriteBorderIcon/>Like</span>}
+                                </button>
+                                
+                                    
+                          
                             <button className="likeBtn">
-                                <img src="https://cdn-icons-png.flaticon.com/512/8359/8359645.png" alt="" />
-                                <span>Like</span>
+                                
+                                <span><ChatBubbleOutlineIcon/>Comment</span>
                             </button>
-                            <button className="likeBtn">
-                                <img src="https://cdn-icons-png.flaticon.com/512/4470/4470922.png" alt="" />
-                                <span>Comment</span>
-                            </button>
-                            <button className="likeBtn">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2936/2936774.png" alt="" />
-                                <span>Share</span>
+                            <button className="likeBtn">    
+                                <span><ReplyIcon  />Share</span>
                             </button>
                         </div>
                     </div>
                     <div className="line"></div>
-                    <Comments post={post}/>
+                    <Comments post={post} socket={socket}/>
 
 
                 </div>
