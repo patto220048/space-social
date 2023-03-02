@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useSelector } from "react-redux"
 
-function Comment({comment}) {
+function Comment({comment,socket}) {
 
     const navigate = useNavigate()
     const srcollRef = useRef()
@@ -38,9 +38,18 @@ function Comment({comment}) {
     const  handleDelCmt = () =>{
         
         const fetchDelCmt = async()=>{
+           
+
            try {
             setOpenDelCmt(false)
             const res = await axios.delete(`/comment/${comment._id}/delete`)
+              
+                // socket.current.emit('getCmt',{
+                //     userId : comment.userId , 
+                //     decs: comment.comment,
+                //     postId: comment.postId,
+                //     cmtId : comment._id
+                // })
             alert('Comment deleted successfully!!')
             window.location.reload(true);
             navigate('/')   

@@ -17,12 +17,13 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import {useDispatch, useSelector ,} from "react-redux";
 import { postFail, postStart, postSuccess, likes} from "../../redux/postSlice";
 
+import {io} from 'socket.io-client'
 
-function Post({post, socket}) {
+function Post({post,socket}) {
+
     const  {currentUser} = useSelector((state) => state.user)
     const  {currentPost} = useSelector((state) => state.post)
     const dispatch = useDispatch()
-  
     const navigate = useNavigate()
     ////// user ///////////
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
@@ -85,13 +86,21 @@ function Post({post, socket}) {
     }
 
     //like post
-    const handleLike=()=>{
+    const handleLike=(type)=>{
         const fetchLikePost = async () =>{
-            
+            socket.current.emit('sendNotification',{
+                senderId: currentUser._id,
+                receiverId: post.userId,
+                senderName: currentUser.username,
+                senderImg:currentUser.userImg,
+                type:type
+            })
             try {
-                
                 currentPost.map(async(post, index)=>{
+                    //socket handle like
+                 
                     if(post._id === onePost._id){
+                      
                         if(post.like.includes(currentUser._id)){
                             await axios.put(`/post/dislike?q=${onePost._id}`)
                             setLike(like-1)
@@ -151,7 +160,7 @@ function Post({post, socket}) {
                     <div className="post-info">
                         {!currentPost.some(post => post._id=== onePost._id && post.like.includes(currentUser._id))
                         ?
-                        <span className="like-count">{post.likes + like} like</span>
+                        <span className="like-count">{post.likes + like} like </span>
                         :  
                         <span className="like-count">{post.likes+like} like and you </span>
                         }
@@ -162,7 +171,7 @@ function Post({post, socket}) {
                     <div className="line"></div>
                     <div className="post-action">
                         <div className="action-btn">
-                                <button className="likeBtn" onClick={handleLike}>
+                                <button className="likeBtn" onClick={()=>handleLike(1)}>
                                     
                                    {currentPost.some(post => post._id=== onePost._id && post.like.includes(currentUser._id)) 
                                    ? 
@@ -173,7 +182,7 @@ function Post({post, socket}) {
                                 
                                     
                           
-                            <button className="likeBtn">
+                            <button className="likeBtn" onClick={()=>handleLike(2)}>
                                 
                                 <span><ChatBubbleOutlineIcon/>Comment</span>
                             </button>

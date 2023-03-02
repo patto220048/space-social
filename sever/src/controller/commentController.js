@@ -44,10 +44,10 @@ class CommentController{
             const postid = comment.postId
             const post = await Post.findById( postid )
             if(req.user.id === comment.userId || req.user.admin ){
-                await Comment.findByIdAndDelete(req.params.idCmt)
+              const resCmt =  await Comment.findByIdAndDelete(req.params.idCmt)
                 await post.updateOne({$inc:{commentCount : -1}})
 
-                return res.status(200).json('Comment deleted')
+                return res.status(200).json(resCmt)
             }
             else {
                 return res.status(403).json("You can delete only your comment")    

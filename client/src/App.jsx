@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   createBrowserRouter,
   Navigate,
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import { useSelector} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {io} from 'socket.io-client'
-
+import { socketSuccess } from './redux/socket';
 
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
@@ -20,22 +20,22 @@ import Sidebar from './layout/sidebar/Sidebar';
 import Home from './pages/home/Home';
 
 
+
+
 function App() {
   const  {currentUser} = useSelector((state) => state.user)
-  
-  const [socket, setSocket] = useState(null)
+  const socket = useRef(io('ws://localhost:8000'))
 
   useEffect(()=>{
-    setSocket(io('ws://localhost:8000'))
-  },[])
-   
-  useEffect(()=>{
-    socket?.emit('addUser',currentUser._id)
-    socket?.on('getUsers' , user => {
+      socket.current.on('connect', () => {
+      socket.current.emit('addUser',currentUser._id)
+      socket.current.on('getUsers' , user => {
         // console.log(user)
-})
-   
-},[currentUser])
+    })
+
+    })
+    
+   },[currentUser._id]) 
   
   const Layout= () => {
     return (
@@ -49,7 +49,7 @@ function App() {
         }}>
         <Sidebar/>
           <Outlet/>
-        <Rightbar/>
+        {/* <Rightbar/> */}
 
       </div>
 
@@ -71,7 +71,7 @@ function App() {
       children:[
         {
           path:"/",
-          element: <Home  type="random" socket={socket}/>
+          element: <Home socket={socket}  type="random"  />
         },
         {
           path:"/newpost",

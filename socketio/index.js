@@ -1,3 +1,5 @@
+
+
 const io = require('socket.io')(8000,{
     cors: { 
         origin:"http://localhost:3000",
@@ -5,7 +7,7 @@ const io = require('socket.io')(8000,{
 
 })
 
-let users = []
+let users=[]
 const addUser = (userId, socketId)=>{
     !users.some((user)=> user.userId === userId) && 
     users.push({userId,socketId})
@@ -20,23 +22,34 @@ const getUser = (userId) =>{
 }
 io.on("connection", (socket) => {
     ///connect
-   console.log('user connected')
+   console.log('user connected '+ socket.id)
     // take currentUserId and soketid
    socket.on('addUser', userId =>{
+
         addUser(userId, socket.id)
         io.emit('getUsers', users)
    })
 
 
    // get comment from client
-   socket.on("getCmt" , ({userId, decs ,postId, cmtId})=>{
+   socket.on('getCmt', ({userId, decs ,postId, cmtId})=>{
         const user = getUser(userId)
-        //respon data for client
+        //respon cmt data for client
         io.emit("getDecs", {
             user, decs ,postId,cmtId
         })
    })
-   //
+   //like handle
+   socket.on('sendNotification',({senderId,receiverId,senderName,senderImg,type})=>{
+        const receiver = getUser(receiverId)
+            io.to(receiver?.socketId).emit("getNotification",{
+                senderId,
+                senderName,
+                senderImg,
+                type,
+    
+            }) 
+   })
     
 
     ///disconnect
@@ -48,4 +61,4 @@ io.on("connection", (socket) => {
     })
 
 
-  });
+});   

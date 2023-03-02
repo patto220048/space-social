@@ -110,45 +110,72 @@ $textColor : #D4D8F4;
                 }
             }
 
-            img{
-                width: 36px;
-                height: 36px;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-            .menu-icon{
-                padding-top: 3px;
-                padding-right: 10px;
-                cursor: pointer;
-                color: $white;
-                &:hover{
-                    
-                    opacity: 0.8;
-                }
-            }
             @media (max-width:768px){
                 flex: 1;
                 justify-content: flex-end;
             }
             //menu
-            .menu-options {
-                position: absolute;
-                right: 5px;
-                top: 90%;
-                left: 90%;
-                background-color: antiquewhite;
-                padding-left: 10px;
+            .notifi-options {
+                
+                position: absolute;     
+                right:0px;
+                top: 90%;   
+                background-color: rgb(240, 240, 240);
+                left: 80%;
                 border-radius: 15px;
-                display: none;
+                // display: none;
 
-                .menu-items{
+                .notifi-items{
+                   
+                    padding: 10px;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 25px;
-                    font-weight: 500;
-                    cursor: pointer;
+                    gap: 10px       ;
+                    .items{
+                        padding-left: 10px;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        gap: 10px;
+                        img{
+                            cursor: pointer;
+                            width: 36px;
+                            height: 36px;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        }
+                        p{
+                            display: flex;
+                            gap: 10px;
+                            align-items: center;
+                            font-size: 15px
+                        }
+                        span{
+                            cursor: pointer;
+                            font-size: 20px;
+                            font-weight: 500;
+                          
+                        }
+
+                    }
+                    .close-btn{
+                        width: 80%;
+                        display: flex;
+                        margin: 0 auto;
+                        justify-content: center;
+                        border: none;
+                        outline: none;
+                        background-color: $mainColor;
+                        color: #D4D8F4;
+                        padding: 5px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: all 0.5 ease;
+                        &:hover{
+                            background-color: rgba($color: $mainColor, $alpha: 0.7);
+                            
+                        }
+                    }
                 }
                 @media (max-width:768px){
                     left: 80%;

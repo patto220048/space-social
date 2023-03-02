@@ -130,7 +130,7 @@ function Login() {
                                 <a href="#">I forget my password?</a>
                                 <br />
                                 <Link to='/signup'>
-                                <a href="#">Sign up</a>
+                                <span>Sign up</span>
                                 </Link>
                                 
                             </span>

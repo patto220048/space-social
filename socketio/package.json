@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "nodemon": "^2.0.20",
     "socket.io": "^4.6.1"
   }

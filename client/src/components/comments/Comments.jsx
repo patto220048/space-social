@@ -7,8 +7,10 @@ import axios from "axios";
 import Comment from "../comment/Comment";
 import ReactLoading from 'react-loading';
 import SendIcon from '@mui/icons-material/Send';
+import {io} from 'socket.io-client'
 
-function Comments({post,socket}) {
+function Comments({post}) {
+    const socket = useRef(io('ws://localhost:8000'))
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [comments, setComments] = useState([])
@@ -19,12 +21,13 @@ function Comments({post,socket}) {
     ///socketio handle
     useEffect(()=>{
         // take data from sever
-        socket?.on('getDecs', data=>{
+        socket.current.on('getDecs', data=>{
             setDecsSocket({
                 userId: data.user.userId,
                 comment : data.decs,
                 postId : data.postId,
                 createdAt: Date.now(),
+                _id: data.cmtId
             })
         })
     },[])
@@ -58,7 +61,11 @@ function Comments({post,socket}) {
         e.preventDefault()
         const createComment = async() => {
             //soket io send data to server
-            socket?.emit('getCmt',{userId : currentUser._id , decs: desc , postId: post._id })
+            socket.current.emit('getCmt',{
+                userId : currentUser._id , 
+                decs: desc ,
+                postId: post._id 
+            })
             try {
                 const res = await axios.post(`/comment/create`,{
                     postId : post._id ,

@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Feed from '../../components/feed/Feed';
 
 import {follow } from "../../redux/userSlice";
+import Rightbar from '../../layout/rightbar/Rightbar';
 
 
 function Profile({posts}) {
@@ -181,6 +182,7 @@ function Profile({posts}) {
                     </div>
                 </div>
             </div>
+            <Rightbar/>
         </>
      );
 }

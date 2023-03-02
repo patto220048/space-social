@@ -5,6 +5,7 @@ import axios from "axios"
 
 import Upload from "../../components/upload/Upload";
 import Feed from "../../components/feed/Feed";
+import Rightbar from "../../layout/rightbar/Rightbar";
 
 function Home({type,socket}) {
     const [openUpload, setOpenUpload] = useState(false)
@@ -17,6 +18,7 @@ function Home({type,socket}) {
                 </div>
                 
             </div>
+            <Rightbar/>
         </>
       );
   

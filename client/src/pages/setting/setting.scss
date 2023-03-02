@@ -1,7 +1,120 @@
 .container-setting {
     flex: 5.2 ;
+   
+    span{
+
+        font-size: 70px;
+        font-weight: 900;
+        margin: 0 auto;
+        
+    }
     .wapper-setting{
-        background-color: aqua;
+        display: flex;
+        padding-top:10px ;
+        
+       .left{
+            display: flex;
+            flex: 1;
+            padding-top: 50px;
+            padding-left: 50px;
+            .left-items{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+               
+                img{
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                  }
+                span{
+                    font-size: 30px;
+                    font-weight: 600;
+                    word-spacing: none;
+                    text-overflow: ellipsis;
+                  
+
+                  }
+                  
+
+            }
+          
+
+        }
+       .right{
+            flex: 3;
+            padding-top: 50px;
+            .right-items{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .fullname{
+                    width: 70%;
+                    padding-bottom: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    margin: 0 auto;
+                    justify-content: center;
+                    .name{
+                        font-size: 20px;
+                        font-weight: 700;
+                        
+                    } 
+                    .name-items{
+                        padding-top: 10px;
+                        display: flex;
+                        width:  100%;
+                        position: relative;
+                        align-items: center;
+                        .name-input{
+                            width: 100%;
+                            padding: 10px;
+                            border: none;
+                            outline: none;
+                            border-radius: 10px;
+                        }
+                        .btn{
+                            position: absolute;
+                            right: 0;
+                            border: none; 
+                            outline: none;
+                            border-radius: 10px;
+                            padding: 5px;
+                            cursor: pointer;
+                            background-color: black;
+                            color: aliceblue;
+                            margin-right: 5px;
+                            &:hover{
+                                background-color: rgba($color: #000000, $alpha: 0.7);
+                            }
+                   
+                        }
+                   }
+                }
+                .del-acc{
+                    width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    margin: 0 auto;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-size: 15px;
+                    font-weight: 700;
+                    background-color: #000000;
+                    color: aliceblue;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: rgb(237, 46, 46);
+                    }
+                  }
+                
+            }
+            
+       }
     }
     
 }

@@ -23,7 +23,7 @@ function Search() {
                 console.log(err.message)
             }
         }
-        if( query.length === 0 ||query.length > 2){
+        if( query.length === 2 ||query.length > 2){
             fecthUser() 
         }
         setUsers([])
@@ -59,8 +59,8 @@ function Search() {
                             :
                             <div  className="data-items">
                                     { users?.map((user,index)=>(
-                                        <Link to={`/profile/${user._id}`} style={{textDecoration:'none'}} onClick={handleClose}>
-                                       <div className="items" key={index}>
+                                        <Link key={index} to={`/profile/${user._id}`} style={{textDecoration:'none'}} onClick={handleClose}>
+                                       <div className="items" >
                                             <img src={user.userImg || noAvatar } alt="" />
                                             <span>@{user.username}</span>
                                         </div>
