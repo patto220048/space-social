@@ -11,13 +11,16 @@ import CheckIcon from '@mui/icons-material/Check';
 import Upload from "../../components/upload/Upload"
 import AddIcon from '@mui/icons-material/Add';
 import Feed from '../../components/feed/Feed';
-
+import DoneIcon from '@mui/icons-material/Done';
 import {follow } from "../../redux/userSlice";
 import Rightbar from '../../layout/rightbar/Rightbar';
+import { Link } from 'react-router-dom';
+
 
 
 function Profile({posts}) {
     const [openUpload, setOpenUpload] = useState(false)
+
     const  {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const paramId = useParams()
@@ -77,17 +80,21 @@ function Profile({posts}) {
         fecthUser()
     }
 
+
+
     return ( 
         <>
             <div className="profile-container">
-                <Upload openUpload={openUpload} setOpenUpload={setOpenUpload}/>
+                <Upload openUpload={openUpload} setOpenUpload={setOpenUpload} />
 
                 <div className="profile-warpper">
                     <div className="profile-item">
                         <div className="profile-top">   
                             <div className="background">
                                 <img className='background-img' src={user.userCoverImg || noBg} alt={user.userCoverImg} />
-                                <button><AddIcon fontSize='large'  className='add-icon'/></button>
+                                <button >
+                                    <AddIcon fontSize='large'className='add-icon' />
+                                </button>
                             </div>
                             <div className="btn-fl">
                                 {/* <button className='follow1'> <AddIcon/>Follow</button> */}
@@ -101,7 +108,8 @@ function Profile({posts}) {
                             <div className="avatar">
                                 <img className='avatar-img' src={ user.userImg || noAvatar} alt={user.userImg} />
                                 <button className='avatar-add-icon'>
-                                    <AddIcon fontSize='large' className='add-icon'/>
+                                    <AddIcon fontSize='large' style={{cursor:'pointer'}} className='add-icon' />
+                                    
                                 </button>
                             
                             </div>
@@ -122,7 +130,7 @@ function Profile({posts}) {
                                          <p className='desc-text' >{user.descProfile ? user.descProfile : "Write somethings about you"}</p>
                                         { openEditDesc ? 
                                         <div className="edit">
-                                            <textarea name="" id="" cols="30" rows="4" value={descProfile} onChange={(e)=>setDescProfile(e.target.value)}/>
+                                            <textarea name="" id="" cols="30" rows="4" value={descProfile} onChange={(e)=>setDescProfile(e.target.value)} maxLength={100} placeholder="Max 100 characters"/>
                                             <div className="edit-desc">
                                                 <button className='cancel-btn' onClick={()=>setOpenEditDesc(!openEditDesc)}> Cancel</button>
                                                 <button className ='update-btn' onClick={handleUpdateDesc}> Update</button>
@@ -144,21 +152,35 @@ function Profile({posts}) {
                                     <div className="info-item">
                                         <div className="info-icon">
                                             <span><EmailIcon/></span>
-                                            <p>{user.email}</p>
+                                            <div className="veryfire">
+                                                <p>{user.email}</p>
+                                               {user.emailVerified ?
+                                                <span  style={{color:'rgb(18, 207, 62)'}}><DoneIcon fontSize='small'/></span>
+                                                :
+                                               <></>
+                                            }
+                                            </div>
                                         </div>
+                                        {user.region &&
                                         <div className="info-icon">
                                             <span><HouseIcon/></span>
                                             <p>{user.region}</p>
-                                        </div>
+                                        </div>}
+                                       {user.age &&
+                                        <div className="info-icon">
+                                            <span><AccessTimeFilledIcon/></span>
+                                            <p>Age {user.age}</p>
+                                        </div>}
                                         <div className="info-icon">
                                             <span><AccessTimeFilledIcon/></span>
                                             <p>Join {user.createdAt}</p>
                                         </div>
                                         
-                                        
+                                        <Link to= {`/setting`} style={{textDecoration:'none'}}>
                                         <button className="info-btn">
-                                            Edit
+                                            SETTING
                                         </button>
+                                        </Link>
                                         
                                     </div>
                                

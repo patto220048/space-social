@@ -1,4 +1,6 @@
 const User = require('../model/userModel')
+const Post = require('../model/postModel')
+const Comment = require('../model/commentModel')
 
 const bcrypt = require('bcryptjs')
 const { query } = require('express')
@@ -62,9 +64,14 @@ class userController {
     }
     async deteleUser(req, res, next){
         //delete user
+
+        const post = await Post.find({userId: req.params.id})
+        const comment = await Comment.find({postId:post._id})
         if(req.params.id === req.user.id || req.user.admin){
             try {
                 await User.findByIdAndDelete(req.params.id)
+                await Post.deleteMany(post._id)
+                await Comment.deleteMany(comment._id)
                 res.status(200).json("delete is successful")
             }
             catch (err) {

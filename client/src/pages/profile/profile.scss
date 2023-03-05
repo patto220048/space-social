@@ -1,14 +1,10 @@
-
-$mainColor : #424242;
-$textColor : #D4D8F4;
-
-
+@import '../../gobal';
 
 
 .profile-container{
    
     flex: 4;
-    background-color: aliceblue;
+    background-color: $bgColor;
     // overflow: hidden;
     
     .profile-warpper{
@@ -157,9 +153,23 @@ $textColor : #D4D8F4;
                         opacity: 0;
                         cursor: pointer;
                         transition: all 0.7s ease;
+                        // position: relative;
                         &:hover{
                             opacity: 0.4;
                             color: #424242;
+                        }
+                        .input-avatar{
+                            cursor: pointer;
+                            width: 100px;
+                            height: 200px;
+                            overflow: hidden;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            opacity: 0;
+                            
+
+
                         }
 
                     }
@@ -226,7 +236,7 @@ $textColor : #D4D8F4;
                     .introduce-item{
                         top: 70px;
                         position: sticky ;
-                        background-color: #424242;
+                        background-color: $mainColor;
                         border-radius: 5px;
                         .introduce{
                             color: $textColor;
@@ -246,7 +256,7 @@ $textColor : #D4D8F4;
                                 height: 90px;
                                 text-align: center;
                                 background-color: rgb(255, 255, 255);
-                                border-radius: 10px;
+                                border-radius: 5px;
                                 color: #424242;
                                 
                             }
@@ -258,24 +268,28 @@ $textColor : #D4D8F4;
                                     padding-left: 10px;
                                     border: none;
                                     outline: none;
-                                    border-radius: 15px;
+                                    border-radius: 5px;
                                     margin-bottom: 5px;
                                     resize: none;
                                 }
                                 .edit-desc{
                                     display: flex;
-                                    gap: 5px;
-                                    justify-content: flex-end;
+                                    gap: 10px;
+                                    justify-content: center;
+                                    align-items: center;
                                     .cancel-btn ,.update-btn{
+                                        margin-top: 10px;
                                         border: none;
                                         outline: none;
                                         cursor: pointer;
-                                        padding: 3px;
-                                        width: 50px;
-                                        border-radius: 15px;
+                                        
+                                        padding: 5px 10px;
+                                        border-radius: 5px;
+                                        color: $textColor;
+                                        background-color: black;
                                         &:hover{
-                                            background-color: black;
-                                            color: $textColor;
+                                            background-color :aliceblue;
+                                            color:black;
                                         }
                                     }
 
@@ -285,13 +299,12 @@ $textColor : #D4D8F4;
                             }
                             
                             .edit-btn{
-                                
                                 border: none;
                                 outline: none;
                                 cursor: pointer;
                                 padding: 3px;
                                 width: 100%;
-                                border-radius: 15px;
+                                border-radius: 5px;
                                 background-color: black;
                                 color: $textColor;
                                 &:hover{
@@ -304,7 +317,7 @@ $textColor : #D4D8F4;
                             }
                         }
                         .info{
-                            background-color: #424242;
+                            background-color: $mainColor;
                             width: 100%;
                             margin-top:10px;
                             padding-bottom: 10px;
@@ -320,7 +333,7 @@ $textColor : #D4D8F4;
                                 height: max-content;
                                 width: 93%;
                                 margin: 0 auto;
-                                border-radius: 15px;
+                                border-radius: 5px;
                                 background-color:white;
                                 display: flex;
                                 flex-direction: column;
@@ -332,7 +345,6 @@ $textColor : #D4D8F4;
                                 // align-items: center;
                                
                                 .info-icon{
-                                    
                                     display: flex;
                                     align-items: flex-start;
                                     justify-content: center;
@@ -343,19 +355,29 @@ $textColor : #D4D8F4;
                                         text-overflow:ellipsis;
                                         word-wrap: break-word;
                                     }
+                                    .veryfire{
+                                         position: relative;
+                                        width: 100%;
+                                        span{
+                                            position: absolute;
+                                            top: 0;
+                                            right: -30px;
+                                            color: rgb(11, 11, 11);
+                                            border-radius: 50%;
+                                            
+                                            
+                                        }
+                                    }
                                 }
                                
                                 .info-btn{
-                        
-                                    width: 50%;
+                                  
                                     display: flex;
-                                    justify-content: center;
-                                    margin: 0 auto;
                                     border: none;
                                     outline: none;
                                     cursor: pointer;
-                                    padding: 5px;
-                                    border-radius: 15px;
+                                    padding: 5px 10px;
+                                    border-radius: 5px;
                                     background-color: black;
                                     color: $textColor;
                                     &:hover{

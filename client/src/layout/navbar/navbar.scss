@@ -1,7 +1,4 @@
-$white: #ffff;
-$black: #000000;
-$mainColor : #424242;
-$textColor : #D4D8F4;
+@import '../../gobal';
 
 
 .nav-container{
@@ -9,8 +6,8 @@ $textColor : #D4D8F4;
     position: sticky;
     top: 0;
     z-index: 99;
-    // padding-bottom: 10px;
     .navbar{
+      
         width: 100%;
         background-color: $mainColor;
         height: 60px;
@@ -19,13 +16,25 @@ $textColor : #D4D8F4;
         justify-content:space-between;
         margin: 0 auto;
         gap: 50px;
+        
         .logo{
-     
+            display: flex;
+            align-items: center;
+            gap: 5px;
             font-size: 40px;
             padding-left:  20px;
             font-weight: 700;
+            white-space: nowrap;
+            letter-spacing: 5px;
             color: $textColor;
             cursor: pointer;
+            img{
+                width: 50px;
+                height: 50px; 
+                border-radius: 50%; 
+                object-fit: cover;
+
+            }
             
             @media (max-width:768px){
                 display: none;

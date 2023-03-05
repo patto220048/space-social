@@ -62,7 +62,7 @@ function Signup() {
     useEffect(()=>{
         init(textRef.current, { 
             showCursor: true,
-            strings: ['.SOCIAL','.PROJECT','.APPLICATION',],
+            strings: ['.SPACE','.PROJECT','.APPLICATION',],
             backDelay:1500,
             typeSpeed:  150,
             cursorChar: "|",

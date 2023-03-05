@@ -1,8 +1,6 @@
 
 $height : 80px;
-$mainColor : #424242;
-$textColor : #D4D8F4;
-
+@import '../../gobal';
 
 .sidebar-container {
     flex: 1;
@@ -10,10 +8,10 @@ $textColor : #D4D8F4;
     height: 100%;
     display: flex;
     position:sticky;
-    top: 60px;
+    top: 70px;
+    padding-bottom: 10px;
     z-index: 1;
-    padding-top: 10px;
-    
+    // padding-top: 10px;
     
     
     .sidebar{
@@ -162,19 +160,19 @@ $textColor : #D4D8F4;
                         transform: scale(1.1);
                         margin-left:15px;
                         border-radius: 10px;
-                        background-color: white;
+                        background-color: $softColor;
                         
                     }
                     &.active{
-                        background-color:aliceblue;
+                        background-color:$softColor;
                        
                         border:1px solid #424242;
                         border-radius: 10px;
                         .top-icon{
-                            color: black;
+                            color: $textColor;
                         }
                         span{
-                            color: black;
+                            color: $textColor;
                         }
                     }  
                 }

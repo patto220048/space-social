@@ -1,8 +1,6 @@
-$mainColor : #242526;
-$textColor : #D4D8F4;
+@import '../../gobal';
 $iceColor : aliceblue;
 $black : #000000;
-$alpha: 0.4;
 
 
 .upload-tiem{
@@ -16,7 +14,7 @@ $alpha: 0.4;
     position: fixed;
     .upload-wapper{
         display: flex;
-        background-color: $mainColor;
+        background-color: $softColor;
         width: 500px;
         height: 600px;
         margin: 0 auto;

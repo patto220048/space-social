@@ -88,7 +88,7 @@ function Post({post,socket}) {
     //like post
     const handleLike=(type)=>{
         const fetchLikePost = async () =>{
-            socket.current.emit('sendNotification',{
+            socket?.emit('sendNotification',{
                 senderId: currentUser._id,
                 receiverId: post.userId,
                 senderName: currentUser.username,

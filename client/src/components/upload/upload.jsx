@@ -8,7 +8,7 @@ import axios from "axios";
 
 import ReactLoading from 'react-loading';
 import CloseIcon from '@mui/icons-material/Close';
-function Upload({openUpload, setOpenUpload}) {
+function Upload({openUpload, setOpenUpload,avatar}) {
     //
     const navigate = useNavigate()
     //
@@ -16,7 +16,7 @@ function Upload({openUpload, setOpenUpload}) {
     const [img, setImg] = useState(undefined)
     const [inputs ,setIputs] = useState({})
     const [imgPercent, setImgPercent] = useState(0)
-    
+    console.log(inputs)
   
     //get input 
     const handleChange= (e) => {
@@ -66,6 +66,9 @@ function Upload({openUpload, setOpenUpload}) {
     useEffect(()=>{
         img && uploadFile(img,'imgPost')
     },[img])
+    useEffect(()=>{
+        avatar && uploadFile(avatar,'userImg')
+    },[avatar])
 
     // handle post
 
@@ -82,7 +85,6 @@ function Upload({openUpload, setOpenUpload}) {
         fectchPost()
         setOpenUpload(false)
     }
-
     
     
 

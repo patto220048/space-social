@@ -1,5 +1,6 @@
 const Post = require('../model/postModel')
 const User = require('../model/userModel')
+const Comment = require('../model/commentModel')
 
 class PostController {
     //create
@@ -72,8 +73,8 @@ class PostController {
     //delete post
     async deletePost(req, res, next){
         const user = await User.findById(req.user.id)
-
         const post = await Post.findById(req.params.id)
+        const comment = await Comment.find({postId:req.params.id})
         try {
             if(!post) return res.status(403).json("Post not found")
             else{
@@ -81,6 +82,7 @@ class PostController {
                 {
                     await user.updateOne({$inc:{postCount : -1}})
                     await Post.findByIdAndDelete(req.params.id)
+                    await Comment.deleteMany(comment._id)
                     return res.status(200).json('Detele is complete')
                 }   
                 else {

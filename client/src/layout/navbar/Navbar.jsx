@@ -16,6 +16,8 @@ function Navbar({socket}) {
     const [openNotifi, setNotifi] = useState(false)
     const [notifications, setNotifications] = useState([])
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
+    const logo = process.env.REACT_APP_PUBLIC_FOLDER + "logo.png" 
+
     // console.log(notifications)
     // useEffect(() => {
     //     const fectchNotifi = async()=>{
@@ -29,7 +31,7 @@ function Navbar({socket}) {
     //     fectchNotifi()
     // },[])
     useEffect(()=>{
-        socket.current.on('getNotification',data=>
+        socket?.on('getNotification',data=>
             setNotifications(prev=>[...prev, data]) 
         )
     },[socket])
@@ -59,7 +61,8 @@ function Navbar({socket}) {
         <div className="nav-container">
             <div className="navbar">
                 <Link to="/" style={{textDecoration:'none'}}>
-                    <h1 className="logo">.SPACE</h1>
+                    
+                    <h1 className="logo"><img src={logo} alt="" />SPACE</h1>
                 </Link> 
                 <Search/>
                 <div className="nav-items">

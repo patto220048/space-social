@@ -1,3 +1,6 @@
+
+import './app.scss'
+
 import { useEffect, useRef, useState } from 'react';
 import {
   createBrowserRouter,
@@ -8,7 +11,7 @@ import {
 import { useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {io} from 'socket.io-client'
-import { socketSuccess } from './redux/socket';
+
 
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
@@ -23,33 +26,45 @@ import Home from './pages/home/Home';
 
 
 function App() {
+  const [socket, setSocket] = useState(null)
   const  {currentUser} = useSelector((state) => state.user)
-  const socket = useRef(io('ws://localhost:8000'))
+
+  useEffect(()=> {
+    setSocket(io('ws://localhost:8000',{
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+    }))
+  },[])
 
   useEffect(()=>{
-      socket.current.on('connect', () => {
-      socket.current.emit('addUser',currentUser._id)
-      socket.current.on('getUsers' , user => {
-        // console.log(user)
-    })
 
+    socket?.on('connect',()=>{
+      console.log('Connected to server!');
     })
     
-   },[currentUser._id]) 
+  },[])
+  useEffect(()=>{
+    socket?.emit('addUser',currentUser._id)
+ },[]) 
+
+  useEffect(()=>{
+    socket?.emit('addUser',currentUser._id)
+    socket?.on('getUsers' , user => {
+      console.log(user)
+      })
   
+ },[]) 
+
   const Layout= () => {
     return (
       <>
-      <Navbar socket={socket}/>
-      <div style={{
-        display:"flex",
-        backgroundColor:"aliceblue",
-        gap:'30px',
-        // paddingTop: '10px',
-        }}>
-        <Sidebar/>
-          <Outlet/>
-        {/* <Rightbar/> */}
+        <Navbar socket={socket}/>
+        <div className='main'>
+          <Sidebar/>
+            <Outlet/>
+          {/* <Rightbar/> */}
 
       </div>
 

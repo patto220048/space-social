@@ -7,27 +7,23 @@ import axios from "axios";
 import Comment from "../comment/Comment";
 import ReactLoading from 'react-loading';
 import SendIcon from '@mui/icons-material/Send';
-import {io} from 'socket.io-client'
 
-function Comments({post}) {
-    const socket = useRef(io('ws://localhost:8000'))
+function Comments({post,socket}) {
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [comments, setComments] = useState([])
     const [desc , setDesc] = useState("")
     const [isloading, setIsLoading] = useState(false)
     const [decsSocket, setDecsSocket ] = useState(null) // *
-
     ///socketio handle
     useEffect(()=>{
         // take data from sever
-        socket.current.on('getDecs', data=>{
+        socket?.on('getDecs', data=>{
             setDecsSocket({
                 userId: data.user.userId,
                 comment : data.decs,
                 postId : data.postId,
                 createdAt: Date.now(),
-                _id: data.cmtId
             })
         })
     },[])
@@ -61,10 +57,10 @@ function Comments({post}) {
         e.preventDefault()
         const createComment = async() => {
             //soket io send data to server
-            socket.current.emit('getCmt',{
-                userId : currentUser._id , 
-                decs: desc ,
-                postId: post._id 
+            socket?.emit('getCmt',{
+                userId : currentUser._id, 
+                decs: desc,
+                postId: post._id ,
             })
             try {
                 const res = await axios.post(`/comment/create`,{
@@ -109,7 +105,7 @@ function Comments({post}) {
             <div className="comment">
                 { isloading ?
                  <ReactLoading type={"cylon"}/> :
-                comments.map((comment,index)=>(
+                    comments.map((comment,index)=>(
                     
                     <Comment  comment={comment} key={index}/>
                 ))

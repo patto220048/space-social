@@ -8,6 +8,7 @@ const io = require('socket.io')(8000,{
 })
 
 let users=[]
+let notification = []
 const addUser = (userId, socketId)=>{
     !users.some((user)=> user.userId === userId) && 
     users.push({userId,socketId})
@@ -25,19 +26,20 @@ io.on("connection", (socket) => {
    console.log('user connected '+ socket.id)
     // take currentUserId and soketid
    socket.on('addUser', userId =>{
-
         addUser(userId, socket.id)
         io.emit('getUsers', users)
+        
    })
 
 
    // get comment from client
-   socket.on('getCmt', ({userId, decs ,postId, cmtId})=>{
+   socket.on('getCmt', ({userId, decs ,postId})=>{
         const user = getUser(userId)
         //respon cmt data for client
         io.emit("getDecs", {
-            user, decs ,postId,cmtId
+            user, decs ,postId
         })
+        
    })
    //like handle
    socket.on('sendNotification',({senderId,receiverId,senderName,senderImg,type})=>{
@@ -50,8 +52,7 @@ io.on("connection", (socket) => {
     
             }) 
    })
-    
-
+   
     ///disconnect
    socket.on('disconnect',()=>{
         console.log('some body disconn')
@@ -60,5 +61,11 @@ io.on("connection", (socket) => {
 
     })
 
+    
+   
+
+   
+
 
 });   
+

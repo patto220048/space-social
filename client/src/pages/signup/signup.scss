@@ -1,12 +1,9 @@
-
-$mainColor : #424242;
-$textColor : #D4D8F4;
-
+@import '../../gobal';
 
 .signup-container{
     width: 100%;
     position: relative;
-    background-color: #424242;
+    background-color:  $softColor;
     .signup-wapper{
         
         width: 100%;
@@ -15,7 +12,7 @@ $textColor : #D4D8F4;
         align-items: center;
         .signup-item{
             box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-            background-color: aliceblue;
+            background-color: $bgColor;
 
             border-radius: 15px;
             width: 84%;
@@ -42,7 +39,7 @@ $textColor : #D4D8F4;
                 }
                 .text{
                     position: absolute;
-                    color: #D4D8F4; 
+                    color: $textColor; 
                     font-size: 50px;
                     font-weight: 600;
                     left: 20%;
