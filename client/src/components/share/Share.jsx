@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 
 
 function Share({setOpenUpload}) {
-    const  {currentUser} = useSelector((state) => state.user)
+    const  {currentUser} = useSelector((state) => state.user)   
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
  
 
-    return (
+    return (    
         <>
             <div className="share-container">
                 <div className="warpper-share">

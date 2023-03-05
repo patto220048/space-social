@@ -5,12 +5,15 @@ import { Link } from "react-router-dom";
 
 
 import CloseIcon from '@mui/icons-material/Close';
+import { useSelector } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
 
 
 function Search() {
+    const  {currentUser} = useSelector((state) => state.user)
 
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
+    const [focus, setFocus] = useState(false)
 
     const [users, setUsers] = useState([])
     const [query, setQuery] = useState('')
@@ -36,16 +39,17 @@ function Search() {
     
     return (
         <div className="search"  >
-                    <input 
+                <input 
                         value={query}
                         className="nav-input" 
                         placeholder='Search' 
                         type="text" 
                         onChange={(e)=>setQuery(e.target.value)}
-                    />
+                       
+                 />
                     
                    { !query ?   
-                    <button className="search-icon" ><SearchIcon fontSize='medium'/></button>
+                    <button className="search-icon"  onClick = {()=> setFocus(true)}><SearchIcon fontSize='medium'/></button>
                    :
                     <button className='close-icon' onClick={handleClose}><CloseIcon fontSize='medium' /></button>}
                     { query ?
@@ -60,9 +64,11 @@ function Search() {
                             <div  className="data-items">
                                     { users?.map((user,index)=>(
                                         <Link key={index} to={`/profile/${user._id}`} style={{textDecoration:'none'}} onClick={handleClose}>
-                                       <div className="items" >
+                                        <div className="items" >
                                             <img src={user.userImg || noAvatar } alt="" />
-                                            <span>@{user.username}</span>
+                                            <span>
+                                                @{user.username + (user.username === currentUser.username ? '  (you)' : '')}</span>
+                                            
                                         </div>
                                         </Link>
 
@@ -70,7 +76,9 @@ function Search() {
                                     }   
                                     
 
-                            </div>}
+                            </div>
+                            
+                            }
                                
                         </div>
                         :

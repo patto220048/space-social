@@ -66,10 +66,6 @@ function Upload({openUpload, setOpenUpload,avatar}) {
     useEffect(()=>{
         img && uploadFile(img,'imgPost')
     },[img])
-    useEffect(()=>{
-        avatar && uploadFile(avatar,'userImg')
-    },[avatar])
-
     // handle post
 
     const handlePost = (e) =>{

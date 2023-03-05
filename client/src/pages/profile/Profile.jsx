@@ -12,15 +12,16 @@ import Upload from "../../components/upload/Upload"
 import AddIcon from '@mui/icons-material/Add';
 import Feed from '../../components/feed/Feed';
 import DoneIcon from '@mui/icons-material/Done';
-import {follow } from "../../redux/userSlice";
+import {follow, loginSuccess } from "../../redux/userSlice";
 import Rightbar from '../../layout/rightbar/Rightbar';
 import { Link } from 'react-router-dom';
+import UploadAvt from '../../components/uploadAvatar/UploadAvt';
 
 
 
 function Profile({posts}) {
     const [openUpload, setOpenUpload] = useState(false)
-
+    const [openUploadAvt, setOpenUploadAvt] = useState(false)
     const  {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const paramId = useParams()
@@ -68,9 +69,8 @@ function Profile({posts}) {
                 const res = await axios.put(`/user/edit/${paramId.userId}`,{
                     descProfile : descProfile
                 })
-                console.log(res.data)
+                dispatch(loginSuccess(res.data))
                 setOpenEditDesc(false)
-                window.location.reload()
                 setDescProfile('')
             } catch (err) {
                 console.log(err.message)
@@ -86,13 +86,13 @@ function Profile({posts}) {
         <>
             <div className="profile-container">
                 <Upload openUpload={openUpload} setOpenUpload={setOpenUpload} />
-
+                <UploadAvt openUploadAvt={openUploadAvt} setOpenUploadAvt={setOpenUploadAvt}/>
                 <div className="profile-warpper">
                     <div className="profile-item">
                         <div className="profile-top">   
                             <div className="background">
                                 <img className='background-img' src={user.userCoverImg || noBg} alt={user.userCoverImg} />
-                                <button >
+                                <button onClick={()=>setOpenUploadAvt(true)}>
                                     <AddIcon fontSize='large'className='add-icon' />
                                 </button>
                             </div>
@@ -107,7 +107,7 @@ function Profile({posts}) {
                             </div>  
                             <div className="avatar">
                                 <img className='avatar-img' src={ user.userImg || noAvatar} alt={user.userImg} />
-                                <button className='avatar-add-icon'>
+                                <button className='avatar-add-icon' onClick={()=>setOpenUploadAvt(true)}>
                                     <AddIcon fontSize='large' style={{cursor:'pointer'}} className='add-icon' />
                                     
                                 </button>

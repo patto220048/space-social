@@ -1,0 +1,161 @@
+@import '../../gobal';
+
+.upload-avt{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba($color: $mainColor, $alpha: 0.6) ;
+    z-index: 99;
+    left: 0;
+    padding-top: 100px;
+    position: fixed;
+    .upload-avt-wapper{
+        display: flex;
+        background-color: $softColor;
+        width: 500px;
+        height: 650px;
+        margin: 0 auto;
+        flex-direction: column;
+        border-radius: 15px;
+        justify-content: space-around;
+        position: relative;
+        .close{
+            display: flex;
+            justify-content: flex-end;
+            .close-btn{
+                border: none;
+                outline: none;
+                background-color: transparent;
+                cursor: pointer;
+                width: 35px;
+                height: 35px;
+                color: $textColor;
+                &:hover{
+                    
+                    opacity: 0.7;
+                }
+            }
+           
+        }
+        .items{
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            .title{
+                font-size: 20px;
+                font-weight: 700;
+                color: $textColor;
+                padding-bottom: 10px;
+            }
+            .line{
+                width: 100%;
+                border-bottom: 1px solid rgba($color: $textColor, $alpha: 0.4);
+            }   
+            .wapper-items{
+                display: flex;
+                flex-direction: column;
+                // align-items: center;
+                // padding-top: 10px;
+                .background{
+                    .background-img{
+                        width: 500px;
+                        height: 150px;
+                        object-fit: cover;
+
+                    }
+                    
+                }
+                .avatar{
+                    display: flex;
+                    margin: 0 auto;
+                    transform: translateY(-50%);
+                    .avatar-img {
+                        width: 150px;
+                        height: 150px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                        border: 1px solid $softColor;
+                    }
+                }
+                .input{
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 50px;
+                    // margin: 0 auto;
+                    gap: 20px;
+                   
+                    .input-avt{
+                        display: flex;
+                        flex-direction: column;
+                        padding-bottom: 10px;
+
+                        .name{
+                            color: $textColor;
+                            font-size: 25px;
+                            font-weight:500;
+                       
+                        }
+                        input{
+                            cursor: pointer;
+                            width: 0.1px;
+                            height: 0.1px;
+                            opacity: 0;
+
+
+                        }
+                        label{
+                            width: 90%;
+                            font-weight: 500px;
+                            cursor: pointer;
+                            font-size: 15px;
+                            color: $textColor;
+                            background-color: $black;
+                            padding: 5px;
+                            border-radius: 5px;
+                            transition:  all 0.5s ease-in ;
+                            &:hover{
+                                background-color: $bgColor;
+                                color: $black;
+
+                            }
+
+                        }
+                        span{
+                            color: $textColor;
+                        }
+                    }
+                    
+                    
+                }
+               
+            }
+
+            
+
+            
+        }
+        .sub-btn{
+            width: 50%;
+            margin: 0 auto;
+            padding: 5px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background-color:$textColor;
+            color: $black;
+            font-size: 15px;
+            transition: all 1s ease;
+
+            &:hover{
+                background-color: $black;
+                color: $textColor;
+            }
+
+             
+         }
+        
+    }
+}
