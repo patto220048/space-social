@@ -1,0 +1,63 @@
+@import '../../gobal';
+
+.warning-post{
+    position: absolute;
+    background-color:rgba($color: $mainColor, $alpha: 0.7);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    .warning-post-items{
+        width: 300px;
+        position: relative;
+        background-color: #ffffff;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 10px;
+        
+        .head-items-post{
+
+            span{
+                margin-top: 10px;
+                font-size: 20px;
+                font-weight: 500;
+
+            }
+            .icon{
+                margin-top: 5px;
+                margin-right: 5px;
+                position: absolute;
+                top: 0px;
+                right: 0;
+                cursor: pointer;
+                :hover{
+                    color: rgba($color: #000000, $alpha: 0.7);
+                }
+            }
+
+        }
+        .body-items{
+            margin-bottom: 10px;
+            display: flex;
+            gap: 30px;
+            button{
+                cursor: pointer;
+                border: none; 
+                outline: none;
+                border-radius: 10px;
+                padding:  10px 20px;
+                background-color: black;
+                color: aliceblue;
+                &:hover{
+                    background-color: rgba($color: #000000, $alpha: 0.7);
+                }   
+            }
+            
+        }
+    }
+}

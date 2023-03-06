@@ -106,10 +106,10 @@ function UploadAvt({openUploadAvt,setOpenUploadAvt}) {
                     <span className="line"></span>
                     <div className="wapper-items">
                         <div className="background">
-                            <img className="background-img" src={inputs.userCoverImg ||noBg} alt="" />
+                            <img className="background-img" src={inputs.userCoverImg ? inputs.userCoverImg : (currentUser.userCoverImg ||noBg)} alt="" />
                         </div>
                         <div className="avatar">
-                            <img className="avatar-img" src={inputs.userImg || noAvatar} alt="" />
+                            <img className="avatar-img" src={inputs.userImg ? inputs.userImg : (currentUser.userImg || noAvatar)} alt="" />
                         </div>
                         <div className="input">
                                 <div className="input-avt">

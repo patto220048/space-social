@@ -22,7 +22,7 @@ function Comments({post,socket}) {
             setDecsSocket({
                 userId: data.user.userId,
                 comment : data.decs,
-                postId : data.postId,
+                postId : data?.postId,
                 createdAt: Date.now(),
             })
         })
@@ -51,7 +51,7 @@ function Comments({post,socket}) {
         }
         }
     fectchComment()
-    },[post._id])
+    },[post?._id])
 
     const handleCreateComment = (e) => {
         e.preventDefault()
@@ -60,11 +60,11 @@ function Comments({post,socket}) {
             socket?.emit('getCmt',{
                 userId : currentUser._id, 
                 decs: desc,
-                postId: post._id ,
+                postId: post?._id ,
             })
             try {
                 const res = await axios.post(`/comment/create`,{
-                    postId : post._id ,
+                    postId : post?._id ,
                     comment: desc   
                 })
                 setDesc('') 

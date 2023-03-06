@@ -224,15 +224,13 @@
                 height: 100%;
 
                 .left{
-                    flex: 1;
+                    flex: 1.2;
                     
                     padding: 10px;
                     
                     display: flex;
                     flex-direction: column;
                     
-                    
-                   
                     .introduce-item{
                         top: 70px;
                         position: sticky ;

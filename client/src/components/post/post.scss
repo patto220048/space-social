@@ -4,12 +4,10 @@
     width: 100%;
     height: 100%;
     margin-top: 10px;
-
-   
+    position: relative;
     .post-wapper{
         margin: 0 auto;
         
-       
         .post-items{
             display: flex;
             flex-direction: column;

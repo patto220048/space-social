@@ -2,30 +2,33 @@
 
 
 .container-setting {
-    flex: 5.2 ;
-    
+    flex: 5.2;
+    padding-left: 40px;
+
     span{
 
         font-size: 70px;
         font-weight: 900;
+        padding-left:30px ;
         margin: 0 auto;
         
     }
     .wapper-setting{
         display: flex;
-        padding-top:20px ;
         position: relative;
+
 
         
        .left{
             display: flex;
             flex: 1;
             padding-top: 40px;
-            padding-left: 40px;
+            padding-left: 100px;      
             .left-items{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                margin: 0 auto;
                 gap: 10px;
                
                 img{
@@ -35,10 +38,13 @@
                     object-fit: cover;
                   }
                 span{
+                    text-align: center;
                     font-size: 30px;
-                    font-weight: 600;
+                    font-weight: 700;
                     word-spacing: none;
                     text-overflow: ellipsis;
+                    padding: 0;
+                    
                   
 
                   }
@@ -145,65 +151,4 @@
     }
    
     
-}
-.warning{
-    width: 100%;
-    position: absolute;
-    background-color:rgba($color: $mainColor, $alpha: 0.7);
-    height: calc(100vh - 60px);
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .warning-items{
-        width: 300px;
-        position: relative;
-        background-color: #ffffff;
-        height: 200px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        border-radius: 10px;
-        
-        .head-items{
-
-            span{
-                margin-top: 10px;
-                font-size: 20px;
-                font-weight: 500;
-
-            }
-            .icon{
-                margin-top: 5px;
-                margin-right: 5px;
-                position: absolute;
-                top: 0px;
-                right: 0;
-                cursor: pointer;
-                :hover{
-                    color: rgba($color: #000000, $alpha: 0.7);
-                }
-            }
-
-        }
-        .body-items{
-            margin-bottom: 10px;
-            display: flex;
-            gap: 30px;
-            button{
-                cursor: pointer;
-                border: none; 
-                outline: none;
-                border-radius: 10px;
-                padding:  10px 20px;
-                background-color: black;
-                color: aliceblue;
-                &:hover{
-                    background-color: rgba($color: #000000, $alpha: 0.7);
-                }   
-            }
-            
-        }
-    }
 }

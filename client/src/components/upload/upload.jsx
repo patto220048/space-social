@@ -8,19 +8,25 @@ import axios from "axios";
 
 import ReactLoading from 'react-loading';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch } from "react-redux";
+import { postAdd } from "../../redux/postSlice";
+
+
+import IsLoading from "../loading/IsLoading";
 function Upload({openUpload, setOpenUpload,avatar}) {
     //
     const navigate = useNavigate()
     //
+    const dispatch = useDispatch()
+
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [img, setImg] = useState(undefined)
-    const [inputs ,setIputs] = useState({})
+    const [inputs ,setInputs] = useState({})
     const [imgPercent, setImgPercent] = useState(0)
-    console.log(inputs)
-  
+    const [isLoading, setIsLoading] = useState(false)
     //get input 
     const handleChange= (e) => {
-        setIputs((pre)=>{
+        setInputs((pre)=>{
             return {...pre, [e.target.name] : e.target.value}
         })
     }
@@ -41,19 +47,19 @@ function Upload({openUpload, setOpenUpload,avatar}) {
                     break;
                 case 'running':
                     console.log(`is running`);
-
+                    setIsLoading(true)
                     break;
                 default:
-
                     break;
                 }
             },
             //handle error
             (error) => {console.log('Upload error: ' + error)},
             () => {
+                setIsLoading(false);
                 // Upload completed successfully, now we can get the download URL
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    setIputs((pre)=>{
+                    setInputs((pre)=>{
                         return {...pre, [type]:downloadURL}
                     })
                 });
@@ -71,15 +77,25 @@ function Upload({openUpload, setOpenUpload,avatar}) {
     const handlePost = (e) =>{
         e.preventDefault()
         const fectchPost = async() => {
+            setIsLoading(false)
             try {
                 const res = await axios.post('/post/create',{...inputs})
                 navigate('/newpost')
+                dispatch(postAdd(res.data))
+                setInputs({})
+                setImg(undefined)
+                setIsLoading(true)
+                window.location.reload()
+
             } catch (error) {
                 console.log('api error: ' + error)
             }
         }
         fectchPost()
         setOpenUpload(false)
+        setIsLoading(false)
+        
+
     }
     
     
@@ -97,13 +113,9 @@ function Upload({openUpload, setOpenUpload,avatar}) {
                         </button>
                     </div>
 
-                  
-                    {/* <div className="loading">
-                        <div className="loading-item">
-                            <ReactLoading type={"cylon"}/>;
-                        </div>
-                    </div>
-                    */}
+                {  isLoading &&
+                    <IsLoading/>
+                   }
                    
                    
                     <div className="items">
@@ -120,6 +132,7 @@ function Upload({openUpload, setOpenUpload,avatar}) {
                             <img src={inputs.imgPost} alt="" className="s-img" />
                             : <button className="input-btn">
                                 <input 
+                                id="file"
                                 className='input-file' 
                                 type="file" 
                                 accept="image/*"

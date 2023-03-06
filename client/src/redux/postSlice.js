@@ -36,11 +36,51 @@ export const postSlice = createSlice({
                 }
             })
                 
+        },
+        deletePost:(state, action) =>{
+            state.currentPost.map(post=>{
+                if (post._id === action.payload) {
+                    state.currentPost.splice(state.currentPost.findIndex(
+                        postId => postId !== action.payload
+                    ),1)
+                }
+            }
+             
+            )
+
+
+        },
+        postAdd: (state, action)=>{
+            state.currentPost.push(action.payload)
+            
+        }, 
+        delImg : (state, action)=>{
+            state.loading = false;
+            state.currentPost.map(post=>{
+                if(post._id === action.payload.postId )
+                {
+                    post.imgPost = ''
+                }
+            })
+            
+
+        },
+        postUpdate : (state, action)=>{
+            state.loading = false;
+            state.currentPost.map(post=>{
+                if(post._id === action.payload.postId )
+                {
+                    post.imgPost = action.payload.imgPost
+                    post.desc = action.payload.desc
+                }
+            })
+            
+
         }
 
     }
 })
 
-export const {postStart, postSuccess, postFail, likes} = postSlice.actions
+export const {postStart, postSuccess, postFail, likes, deletePost ,postAdd,postUpdate,delImg} = postSlice.actions
 
 export default postSlice.reducer

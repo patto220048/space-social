@@ -8,17 +8,21 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postFail, postStart, postSuccess } from "../../redux/postSlice";
 import Upload from "../upload/Upload";
+import Warning from "../warningSetting/Warning"
 
 
 
-function Feed({type,paramId,socket,setOpenUpload}) {
+function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost,setOpenMenuPost}) {
 
     const  {currentPost} = useSelector((state) => state.post)
     const   dispatch = useDispatch()
 
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
     const [activeTab, setActiveTab] = useState()
 
+    useEffect(()=>{
+        currentPost && setPosts(currentPost)
+    },[currentPost])
     const btnList = [{
         name: "#all",
         link : '/random' 
@@ -54,6 +58,7 @@ function Feed({type,paramId,socket,setOpenUpload}) {
 
 
     return ( 
+        <>
         <div className="feed-container">
             <div className="feed-wapper">
                 <Share setOpenUpload={setOpenUpload}/>
@@ -72,13 +77,21 @@ function Feed({type,paramId,socket,setOpenUpload}) {
 
                     </div>
                     :
-                    posts.map((post,index)=>(
-                        <Post post={post} key={index} socket={socket}/>
+                    posts?.map((post,index)=>(
+                        <Post post={post}
+                         key={index} 
+                         socket={socket} 
+                         setOpenWarningPost={setOpenWarningPost}
+                         openMenuPost={openMenuPost}
+                         setOpenMenuPost={setOpenMenuPost}
+                        
+                         />
                     ))
                     
                 }
             </div>
         </div>
+        </>
     );
 }
 

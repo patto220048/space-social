@@ -81,9 +81,9 @@ class PostController {
                 if( req.user.id === post.userId || req.user.admin)
                 {
                     await user.updateOne({$inc:{postCount : -1}})
-                    await Post.findByIdAndDelete(req.params.id)
+                   const postDel = await Post.findByIdAndDelete(req.params.id)
                     await Comment.deleteMany(comment._id)
-                    return res.status(200).json('Detele is complete')
+                    return res.status(200).json(postDel)
                 }   
                 else {
                     return res.status(401).json('You just detele only your post')

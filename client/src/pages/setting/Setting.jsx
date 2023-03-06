@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import CloseIcon from '@mui/icons-material/Close';
+import Warning from "../../components/warningSetting/Warning";
 function Setting() {
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const navigate = useNavigate()
@@ -234,21 +235,8 @@ function Setting() {
         </div>
 
         {openWarning &&
-        <div className="warning" ref={warningRef}>
-            <div className="warning-items">
-                <div className="head-items">
-                    <span>WARNING</span>
-                    <div className="icon" onClick={()=>setOpenWarning(false)}>
-                        <CloseIcon/>
-                    </div>
-                </div>
-                <p>You sure delete your account</p>
-                <div className="body-items">
-                    <button onClick={handleDelAcc}>Yes</button>
-                    <button onClick={()=>setOpenWarning(false)}>No</button>
-                </div>
-            </div>
-        </div>}
+            <Warning openWarning={openWarning} setOpenWarning={setOpenWarning} handleDelAcc={handleDelAcc} />
+        }
     </>
         
 
