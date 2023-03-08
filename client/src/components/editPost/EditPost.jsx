@@ -9,10 +9,10 @@ import app from "../../firebase/firebase";
 
 import CloseIcon from '@mui/icons-material/Close';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { postAdd, postDelImg } from '../../redux/postSlice';
-function EditPost({post ,openEditPost, setOpenEditPost, setText, setImg, img, handleEditPost ,setIputs, inputs, postImg ,handleDelImg,postDesc,setOpenMenuPost}) {
+import { postAdd, postDelImg, postUpdate } from '../../redux/postSlice';
+function EditPost({post ,text,openEditPost, setOpenEditPost, setText, setImg, img, handleEditPost ,setIputs, inputs, postImg ,handleDelImg,postDesc,setOpenMenuPost}) {
     const dispatch = useDispatch()
-
+    console.log(inputs.imgPost)
     const  {currentPost} = useSelector((state) => state.post)
 
     const uploadFile = (file, type ) =>{
@@ -31,6 +31,7 @@ function EditPost({post ,openEditPost, setOpenEditPost, setText, setImg, img, ha
                     break;
                 case 'running':
                     console.log(`is running`);
+                    
                     break;
                 default:
 
@@ -45,7 +46,12 @@ function EditPost({post ,openEditPost, setOpenEditPost, setText, setImg, img, ha
                     setIputs((pre)=>{
                         return {...pre, [type]:downloadURL}
                     })
+                 
                 });
+                dispatch(postUpdate({
+                    postId : post._id,
+                    imgPost : inputs.imgPost
+                }))
               }
 
             )
@@ -74,30 +80,17 @@ function EditPost({post ,openEditPost, setOpenEditPost, setText, setImg, img, ha
                     </div>
                     <div className="input">
                         <div className="input-items">
-                            <textarea type="text" placeholder={postDesc} onChange={e=>setText(e.target.value)} />
+                            <textarea type="text" placeholder={postDesc} onChange={e=>setText(e.target.value)} required/>
                            
-                           {!currentPost.some(postId => postId._id === post._id && postId.imgPost.length === 0 )
+                           {!currentPost.some(postId => postId._id === post._id && postId.imgPost?.length === 0 ) || inputs.imgPost
                            ?
                            <div className="img-post">
-                                
-                                {!currentPost.some(postId => postId._id === post._id && postId.imgPost.length !== 0 )
-                                ? 
-                                <img src={postImg} alt="" /> 
-
-                                :
-                                <button>
-                                    <input type='file' id='file' onChange={e=>setImg(e.target.files[0])}/>
-                                    <label htmlFor='file'>
-                                        <AddPhotoAlternateIcon className="icon1" fontSize='large' style={{cursor:'pointer'}}/>
-                                    </label>
-                                </button>
-                                } 
-                                
+                                <img src={postImg || inputs.imgPost} alt="" />  
                            </div>
                            
                            :
-                            <button>
-                                <input type='file' id='file' onChange={e=>setImg(e.target.files[0])}/>
+                            <button htmlFor='file'>
+                            <input type='file' id='file' onChange={e=>setImg(e.target.files[0])}/>
                                <label htmlFor='file'>
                                     <AddPhotoAlternateIcon className="icon1" fontSize='large' style={{cursor:'pointer'}}/>
                                 </label>
@@ -105,15 +98,28 @@ function EditPost({post ,openEditPost, setOpenEditPost, setText, setImg, img, ha
                             }
 
                         </div>
-                        {!currentPost.some(postId => postId._id === post._id && postId.imgPost.length !== 0 ) &&
+                        
+                      {  currentPost.some(postId => postId._id === post._id && postId.imgPost?.length !== 0) || inputs.imgPost
+                        ?
                         <div className="del-img">
-                            <CloseIcon onClick={handleDelImg}/>
+                           { !inputs.imgPost && <CloseIcon onClick={handleDelImg}/>}
                         </div>
-                        }
+                        :
+                        <></>
+                      }
+                
+                        
                     </div>
                
                     <div className="body-items">
+                      { text 
+                        ? 
                         <button onClick={handleEditPost}>Yes</button>
+
+                        :
+                        <button onClick={handleEditPost} disabled>Yes</button>
+
+                        }
                         <button onClick={handleCloseEitPost}>No</button>
                     </div>
                 

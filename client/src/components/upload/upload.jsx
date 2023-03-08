@@ -90,7 +90,7 @@ function Upload({openUpload, setOpenUpload,avatar}) {
             } catch (error) {
                 console.log('api error: ' + error)
             }
-        }
+        }   
         fectchPost()
         setOpenUpload(false)
         setIsLoading(false)

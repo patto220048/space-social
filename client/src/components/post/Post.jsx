@@ -42,7 +42,7 @@ function Post({post,socket}) {
     const [text , setText] = useState('')
     const [img, setImg] = useState(undefined)
     const [inputs ,setIputs] = useState({})
-    console.log(inputs)
+
 
 
     useEffect(()=>{
@@ -97,7 +97,12 @@ function Post({post,socket}) {
         const desertRef = ref(storage, httpsReference);
         deleteObject(desertRef)
         .then(() => {
+
             console.log("Img deleted successfully")
+            dispatch(delImg({
+                postId: post._id,
+                imgPost: ''
+            }))
           }).catch((error) => {
             console.log("Error", error)
           });
@@ -155,6 +160,7 @@ function Post({post,socket}) {
                     postId:post._id,
                     desc: text,
                     imgPost : inputs.imgPost
+                   
                 })) 
                 setOpenMenuPost(false)
                 setOpenEditPost(false)
@@ -170,13 +176,18 @@ function Post({post,socket}) {
     }
     const handleDelImg = () =>{
 
-        handleDeleteImgFormFirebase(post.imgPost)
+        handleDeleteImgFormFirebase(post.imgPost || inputs.imgPost)
         const fetchEdit = async() =>{
             try {
             const res = await axios.put(`/post/update/${post?._id}`,{
-                    imgPost : ''
+                imgPost : ''
                 })
-                dispatch(delImg(post._id))
+                console.log(res.data)
+               dispatch(delImg({
+                    postId:post._id,
+                    postData : res.data,
+                    postImg : '',
+                })) 
             }
             catch (error) {
                 console.log(error.message)
@@ -204,7 +215,8 @@ function Post({post,socket}) {
                 <EditPost
                     img={img} 
                     setImg={setImg}
-                    setText={setText} 
+                    setText={setText}
+                    text={text}
                     setOpenEditPost={setOpenEditPost} 
                     openEditPost={openEditPost} 
                     handleEditPost={handleEditPost}
@@ -213,7 +225,7 @@ function Post({post,socket}) {
                     postImg = {post.imgPost}
                     handleDelImg={handleDelImg}
                     post = {post}
-                    postDesc = {post.desc}
+                    postDesc = {post.desc}  
                     setOpenMenuPost={setOpenMenuPost}
                   />
             }

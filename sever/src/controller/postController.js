@@ -70,6 +70,34 @@ class PostController {
             
         }
     }
+    // remove img
+    async removeImg(req, res, next){
+        try {
+            const post =  await Post.findById(req.params.id)
+            if(!post) return res.status(403).json("Post not found")
+            else{
+                if(req.user.id === post.userId || req.user.admin)
+                {
+                    const removeImg = await Post.findByIdAndUpdate(req.params.id,{
+                        $set:req.body,
+                    },{
+                        new:true
+                    })
+                    const {imgPost, ...other} = removeImg._doc
+                    return res.status(200).json(other)
+
+
+                }
+                else {
+                    return res.status(401).json('You just update only your post')
+                }
+            }
+
+        } catch (err) {
+            res.status(500).json("CAN'T removeImg POST SEVER IS ERROR", err)
+            
+        }
+    }
     //delete post
     async deletePost(req, res, next){
         const user = await User.findById(req.user.id)

@@ -5,7 +5,7 @@ function IsLoading({type}) {
     return ( 
         <div className="loading">
             <div className="loading-item">
-                    <ReactLoading type={type}/>;
+                    <ReactLoading type={type}/>
             </div>
         </div>
      );

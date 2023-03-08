@@ -59,9 +59,9 @@ export const postSlice = createSlice({
             state.currentPost.map(post=>{
                 if(post._id === action.payload.postId )
                 {
-                    post.imgPost = ''
+                   post.imgPost = action.payload.imgPost
                 }
-            })
+            }) 
             
 
         },

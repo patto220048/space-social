@@ -23,6 +23,7 @@ router.put('/like',veryfiToken.verifyUser, postController.likePost)
 router.put('/dislike',veryfiToken.verifyUser, postController.dislikePost)
 //update post
 router.put('/update/:id',veryfiToken.verifyUser, postController.updatePost)
+router.put('/remove/:id',veryfiToken.verifyUser, postController.removeImg)
 
 
 module.exports  = router
