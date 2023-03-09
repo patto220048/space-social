@@ -1,0 +1,36 @@
+@import '../../gobal';
+.online-items{
+
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    
+    position: relative;
+    .online-img{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        padding: 3px;
+        border: 1px solid #D4D8F4;
+
+    }
+    .status{
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #78ea76;
+        top: 20px;
+        left: 45px;
+    }
+    .online-name{
+        
+        font-size: 25px;
+        color: $textColor;
+        font-weight: 600;
+        
+       
+    }
+}

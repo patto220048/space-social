@@ -4,19 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { loginFail, loginStart, loginSuccess } from "../../redux/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {signInWithPopup} from "firebase/auth";
 import { auth,providerGG } from "../../firebase/firebase";
+import ReactLoading from 'react-loading';
 
 import "./login.scss"
 //icon
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import IsLoading from "../../components/loading/IsLoading";
 
 
 
 function Login() {
+    const isLoading = useSelector((state) => state.user.loading)
+  
     const textRef = useRef() // itype
+
     //handle login
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -40,7 +45,7 @@ function Login() {
             }
         catch (err) {
                 setErr(err.response.data)
-                dispatch(loginFail("fail"))
+                dispatch(loginFail())
             }
         }
         fecthLogin()
@@ -63,15 +68,15 @@ function Login() {
                    navigate('/')
                 })
                 .catch(err => {
-                    setErr("error from api")
-                    console.log(err)
+                    setErr("LOGIN FAILED !!!")
                     dispatch(loginFail())
                 }) 
              
             })  
             
             .catch (err => {
-                setErr("error from google")
+                setErr("LOGIN FAILED !!!")
+                dispatch(loginFail())
                 console.log(err)
             })
     }
@@ -123,9 +128,15 @@ function Login() {
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" className="submit" onClick={handlelogin} >
-                                LOGIN
-                            </button>
+                                {isLoading ?
+                                <div className="loading-item">
+                                    <ReactLoading type='cylon' color='#000000'/>
+                                </div>
+                                :
+                                <button type="submit" className="submit" onClick={handlelogin} >  
+                                
+                                    LOGIN
+                                </button>}
                             <span className="forgot-pw">
                                 <a href="#">I forget my password?</a>
                                 <br />
@@ -135,7 +146,7 @@ function Login() {
                                 
                             </span>
                         </form>
-                        <span>&</span>
+                        <span style={{color:'white'}}>&</span>
                         <div className="login-social">
                             <button className="google" onClick={handleloginwithGG}>
                                 <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="" />

@@ -3,7 +3,7 @@
 .signup-container{
     width: 100%;
     position: relative;
-    background-color:  $softColor;
+    background-color:  $colorMain;
     .signup-wapper{
         
         width: 100%;
@@ -12,7 +12,7 @@
         align-items: center;
         .signup-item{
             box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-            background-color: $bgColor;
+            background-color: aliceblue;
 
             border-radius: 15px;
             width: 84%;

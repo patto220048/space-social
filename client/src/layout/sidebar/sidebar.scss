@@ -42,7 +42,7 @@ $height : 80px;
             gap: 10px;
             width: 100%;
             position: relative;
-            padding-left: 3px;
+            // padding-left: 3px;
             margin: 0 auto;
             transition: all 1s ease;
             
@@ -122,7 +122,7 @@ $height : 80px;
             .top-side{
                 margin-top: 15%;
                 justify-content: space-between;
-                padding: 5px;
+                padding: 0 5px;
                 display: flex;
                 flex-direction: column;
                 gap: 30px;  
@@ -137,7 +137,7 @@ $height : 80px;
                     gap: 10px;  
                     
                     .top-icon{
-                        margin-left: 50px;
+                        margin-left: 10px;
                         color: $textColor;
                         font-size: 25px;
                         padding:0 8px;

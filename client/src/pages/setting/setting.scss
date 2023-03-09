@@ -6,6 +6,7 @@
     padding-left: 40px;
 
     span{
+        color: $textColor;
 
         font-size: 70px;
         font-weight: 900;
@@ -20,6 +21,7 @@
 
         
        .left{
+            color: $textColor;
             display: flex;
             flex: 1;
             padding-top: 40px;
@@ -55,6 +57,7 @@
 
         }
        .right{
+            color: $textColor;
             flex: 3;
             .right-items{
                 padding-top: 40px;  
@@ -62,6 +65,8 @@
                 flex-direction: column;
                 gap: 10px;
                 .fullname{
+                    color: $textColor;
+
                     width: 70%;
                     padding-bottom: 30px;
                     display: flex;
@@ -85,6 +90,7 @@
                             border: none;
                             outline: none;
                             border-radius: 10px;
+                            background-color: $textColor;
                         }
                         .btn-list{
                             display: flex;

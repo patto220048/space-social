@@ -280,7 +280,7 @@ function Post({post,socket}) {
                                     
                                    {currentPost?.some(post=> post?._id=== onePost?._id && post?.like.includes(currentUser._id)) 
                                    ? 
-                                   <span style={{backgroundColor:'rgb(238, 78, 142',color:"white"}}><FavoriteIcon/>Liked?</span>
+                                   <span style={{backgroundColor:'rgb(238, 78, 142',color:"white"}}><FavoriteIcon/>Liked</span>
                                    :
                                    <span><FavoriteBorderIcon/>Like</span>}
                                 </button>
