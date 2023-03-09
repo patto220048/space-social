@@ -1,14 +1,32 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import './online.scss'
 
-function Online() {
+function Online({users}) {
+    const [friend, setFriend] = useState({})
+    const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
 
+    useEffect(()=>{
+        const fecthUser = async()=>{
+            
+            try{
+                const res = await axios.get(`/user/find/${users}`)
+                setFriend(res.data)
+            }
+            catch(err){
+                console.log(err.message);
+            }
+        }
+        fecthUser()
+
+    },[])
 
     
     return ( 
         <div className="online-items">
-            <img className="online-img" src="https://images.unsplash.com/photo-1675969268999-2c36d2589d65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=60" alt="" />
+            <img className="online-img" src={friend.userImg || noAvatar} alt="" />
             <span className="status"></span>
-            <span className="online-name">Alex</span>
+            <span className="online-name">{friend   .username}</span>
         </div> 
      );
 }

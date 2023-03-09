@@ -168,6 +168,7 @@ function Post({post,socket}) {
             }
             catch (error) {
                 console.log(error.message)
+                alert("You can just update your post!")
             }
                 
             
@@ -263,7 +264,7 @@ function Post({post,socket}) {
                         {post?.imgPost ? <img src={post?.imgPost} alt={post?.imgPost} /> : <></>}
                     </div>
                     <div className="post-info">
-                        {!currentPost.some(postId => postId?._id=== onePost?._id && postId?.like.includes(currentUser._id))
+                        {!currentPost.some(postId => postId?._id=== onePost?._id && postId?.like?.includes(currentUser._id))
                         ?
                         <span className="like-count">{post?.likes + like} like </span>
                         :  
@@ -278,7 +279,7 @@ function Post({post,socket}) {
                         <div className="action-btn">
                                 <button className="likeBtn" onClick={()=>handleLike(1)}>
                                     
-                                   {currentPost?.some(post=> post?._id=== onePost?._id && post?.like.includes(currentUser._id)) 
+                                   {currentPost?.some(post=> post?._id=== onePost?._id && post?.like?.includes(currentUser._id)) 
                                    ? 
                                    <span style={{backgroundColor:'rgb(238, 78, 142',color:"white"}}><FavoriteIcon/>Liked</span>
                                    :
@@ -287,7 +288,7 @@ function Post({post,socket}) {
                                 
                                     
                           
-                            <button className="likeBtn" onClick={()=>handleLike(2)}>
+                            <button className="likeBtn" >
                                 
                                 <span><ChatBubbleOutlineIcon/>Comment</span>
                             </button>

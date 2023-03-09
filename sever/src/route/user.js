@@ -18,7 +18,14 @@ router.put('/follow/:id',veryfiToken.verifyUser,userController.followUser)
 router.put('/unfollow/:id',veryfiToken.verifyUser,userController.unfollowUser)
 // search user
 router.get('/search',veryfiToken.verifyUser,userController.searchUser)
-
+// pendding
+router.put('/pendding/:id',veryfiToken.verifyUser,userController.pendding)  
+//unpending
+router.put('/unpendding/:id',veryfiToken.verifyUser,userController.unPendding)
+//accept
+router.put('/accept/:id',veryfiToken.verifyUser,userController.accept)
+//reject
+router.put('/reject/:id',veryfiToken.verifyUser,userController.reject)
 
 
 

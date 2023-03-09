@@ -14,7 +14,7 @@ router.get('/find/v1/:id',veryfiToken.verifyUser, postController.findOne)
 router.get('/newpost',veryfiToken.verifyUser, postController.newPost)
 //get post from user follwed
 router.get('/folowed',veryfiToken.verifyUser, postController.followedPost)
-//get my post   
+//get post is profile   
 router.get('/profile/:id',veryfiToken.verifyUser, postController.myPost)
 //delete post
 router.delete('/delete/:id',veryfiToken.verifyUser, postController.deletePost)

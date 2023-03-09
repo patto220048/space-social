@@ -148,6 +148,111 @@ class userController {
 
         }
     }
+    async pendding(req, res, next){
+    
+        if (req.user.id !== req.params.id){
+            try {
+                const currentUser = await User.findById(req.user.id)
+
+                const user = await User.findById(req.params.id)
+                if(!currentUser.friend.includes(req.params.id)){
+                    if (!user.pendding.includes(req.user.id)){
+                        await user.updateOne({$push:{pendding: req.user.id}})
+                        res.status(200).json('request is successful')
+                    }
+                    else {  
+                        res.status(403).json('You already request this user')
+                    }
+
+                }
+                else{
+                    res.status(403).json('You already make friend this user!!!')
+
+                }
+
+            } catch (err) {
+                res.status(500).json(err.message)   
+            }
+        }
+        else {
+            res.status(403).json("You can't request yourself")
+        }
+    }
+    async unPendding(req, res, next){
+        //unpendding user
+        if (req.user.id !== req.params.id){
+            try {
+                const user = await User.findById(req.params.id)
+                if (user.pendding.includes(req.user.id)){
+                    await user.updateOne( {$pull:{pendding: req.user.id}})
+                    res.status(200).json('unrequest is successful')
+                }
+                else {
+                    res.status(403).json('You already unPendding this user')
+                }
+
+                
+            } catch (err) {
+                res.status(500).json(err.message)
+            }
+        }
+        else {
+            res.status(403).json("You can't request yourself")
+        }
+    }
+    
+    async accept(req, res, next){
+       
+        if (req.user.id !== req.params.id){
+            try {
+                const currentUser = await User.findById(req.user.id)
+                const user = await User.findById(req.params.id)
+                
+                if (!currentUser.friend.includes(req.params.id)){
+                    await currentUser.updateOne( {$push:{friend: req.params.id}})
+                    await user.updateOne({$push:{friend: req.user.id}})
+                    await currentUser.updateOne( {$pull:{pendding: req.params.id}})
+                    res.status(200).json('Add friend is suscessfully')
+                }
+                else {
+                    res.status(403).json('You already friend this user')
+                }
+                
+            } catch (err) {
+                res.status(500).json(err.message)
+            }
+        }
+        else {
+            res.status(403).json("You can't request yourself")
+        }
+    }
+
+    async reject(req, res, next){
+       
+        if (req.user.id !== req.params.id){
+            try {
+                const currentUser = await User.findById(req.user.id)
+                const user = await User.findById(req.params.id)
+                
+                if (currentUser.pendding.includes(req.params.id)){
+                    await currentUser.updateOne({$pull:{pendding : req.params.id}})
+                    res.status(200).json('You reject is suscessfully')
+                }
+                else {
+                    res.status(403).json('You already reject this user')
+                }
+                
+            } catch (err) {
+                res.status(500).json(err.message)
+            }
+        }
+        else {
+            res.status(403).json("You can't request yourself")
+        }
+    }
+   
+   
+
 
 }
 

@@ -28,8 +28,8 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
 
     const [posts, setPosts] = useState(null)
     const [activeTab, setActiveTab] = useState()
-
-
+    // const [page, setPage] = useState(0)
+    // console.log(page)
     useEffect(()=>{
         currentPost && setPosts(currentPost)
 
@@ -49,13 +49,14 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
       const fecthPost = async() => {
         dispatch(postStart())
           try {
-              const res = paramId 
-            ? await axios.get(`/post/profile/${paramId}`)
-              : await axios.get(`/post/${type}`)
-              setPosts(res.data)
+            const res = paramId 
+                    ? await axios.get(`/post/profile/${paramId}`)
+                    : await axios.get(`/post/${type}`)
+                        // setPosts(res.data)
+            
             dispatch(postSuccess(res.data))
-
-          } catch (err) {
+          } 
+          catch (err) {
               console.log(err.message)
               dispatch(postFail(err.message))
               
@@ -63,12 +64,27 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
             
         } 
         fecthPost()
-
-
+       
   },[paramId,type])
   
+//   useEffect(()=>{
+//       let fetching = false
+//       const onScroll = (event)=>{
+//         const {scrollHeight, scrollTop, clientHeight} = event.target.scrollingElement
+
+//         if(!fetching && scrollHeight - scrollTop <= clientHeight * 1.5){
+//             fetching = true
+//             setPage(page => page + 1)
+//             fetching=false
 
 
+//         }
+//     }
+//     document.addEventListener('scroll', onScroll);
+//     return () =>{
+//         document.removeEventListener('scroll', onScroll);
+//     }
+//   },[])
 
     return ( 
         <>

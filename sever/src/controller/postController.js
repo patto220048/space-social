@@ -21,7 +21,8 @@ class PostController {
     }
     //get all
     async findPost(req,res,next){
-
+        // const page = req.query.q || 0
+        // const perPage = 5
         try {
             const getAllPost = await Post.aggregate([{$sample:{size: 40}}])
             res.status(200).json(getAllPost)
@@ -158,7 +159,8 @@ class PostController {
     }
     // new post
     async newPost(req, res, next){
-
+        // const page = req.query.q || 0
+        // const perPage = 5
         try {
             const post = await Post.find().sort({
                 createdAt : -1
@@ -173,12 +175,13 @@ class PostController {
 
     // get post from followed
     async followedPost(req, res, next){
+  
         try {
             const curentUser = await User.findById(req.user.id)
             const follwingUser = curentUser.flowing        
             const list = await Promise.all(follwingUser.map(postId=>{
                 return Post.find({userId:postId})
-                }))
+                })) 
             res.status(200).json(list.flat(Infinity).sort((a,b)=>b.createdAt - a.createdAt))
           
             
@@ -188,12 +191,13 @@ class PostController {
         }
 
     }
-    //get user all post
+    // get post in profile
     async myPost(req, res, next) {
         try {           
             const myPost = await Post.find({userId: req.params.id}).sort({
                 createdAt : -1
             })
+
             res.status(200).json(myPost)
             
         } catch (err) {

@@ -1,0 +1,53 @@
+@import '../../gobal';
+
+
+.suggest-friend{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+   
+
+    .friend-items{
+
+        background-color: $mainColor;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .friend-img{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .friend-name{
+            color: $textColor;
+            font-size: 18px;
+        }
+
+    }
+    .button{
+        display: flex;
+        gap: 10px;
+        button{
+            width: 60px;
+            padding: 5px;
+            border: none;
+            outline: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 1s ease;
+            
+            &:hover{
+                transform: scale(1.2);
+                background-color: #D4D8F4;
+                  
+            }
+        }
+        
+
+        
+    }
+    
+}

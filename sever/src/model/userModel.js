@@ -83,7 +83,16 @@ const User = new  Schema({
     descProfile: {
         type:String
 
-    }
+    },
+    friend : {
+        type:Array,
+        default:[]
+    },
+    pendding : {
+        type:Array,
+        default:[]
+    },
+
     
 
 

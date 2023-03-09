@@ -36,10 +36,22 @@ export const userSlice = createSlice({
             }
 
         }
+        ,
+        pendding:(state, action)=>{
+            if(state.currentUser.pendding.includes(action.payload)){
+                state.currentUser.pendding.splice(
+                    state.currentUser.pendding.findIndex(
+                        pagramId => pagramId === action.payload),1)
+            }
+            else{
+                state.currentUser.pendding.push(action.payload)
+            }
+
+        }
       
     }
 })
 
-export const {loginStart, loginSuccess, loginFail, logout, follow} = userSlice.actions
+export const {loginStart, loginSuccess, loginFail, logout, follow, pendding} = userSlice.actions
 
 export default userSlice.reducer

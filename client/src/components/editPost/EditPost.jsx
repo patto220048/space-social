@@ -65,7 +65,7 @@ function EditPost({post ,text,openEditPost, setOpenEditPost, setText, setImg, im
         setOpenEditPost(false)
         setOpenMenuPost(false)
        
-
+        // window.location.reload()
     }
     return ( 
         <>
@@ -80,30 +80,46 @@ function EditPost({post ,text,openEditPost, setOpenEditPost, setText, setImg, im
                     </div>
                     <div className="input">
                         <div className="input-items">
-                            <textarea type="text" placeholder={postDesc} onChange={e=>setText(e.target.value)} required/>
+                            <textarea type="text" placeholder={postDesc || post.desc } onChange={e=>setText(e.target.value)} required/>
                            
-                           {!currentPost.some(postId => postId._id === post._id && postId.imgPost?.length === 0 ) || inputs.imgPost
+                           {currentPost.some(postId => postId._id === post._id && postId.imgPost?.length !== 0 ) || inputs.imgPost || postImg
                            ?
-                           <div className="img-post">
-                                <img src={postImg || inputs.imgPost} alt="" />  
-                           </div>
-                           
-                           :
-                            <button htmlFor='file'>
+                            <>
+                                <div className="img-post">   
+        
+                                  {postImg || inputs.imgPost ? <img src={ postImg || inputs.imgPost} alt="" /> 
+                                  :
+                                  <button htmlFor='file'>
+                                    <input type='file' id='file' onChange={e=>setImg(e.target.files[0])}/>
+                                    <label htmlFor='file'>
+                                            <AddPhotoAlternateIcon className="icon1" fontSize='large' style={{cursor:'pointer'}}/>
+                                        </label>
+                                    </button>
+                                  }
+                                </div>
+                            </>
+                            :
+                            <>
+                          { !postImg && 
+                          <button htmlFor='file'>
                             <input type='file' id='file' onChange={e=>setImg(e.target.files[0])}/>
                                <label htmlFor='file'>
                                     <AddPhotoAlternateIcon className="icon1" fontSize='large' style={{cursor:'pointer'}}/>
                                 </label>
-                            </button>
+                            </button>}
+                            </>            
+                       
+                            
                             }
 
                         </div>
                         
-                      {  currentPost.some(postId => postId._id === post._id && postId.imgPost?.length !== 0) || inputs.imgPost
-                        ?
+                      {postImg || inputs.imgPost ? 
+                        
                         <div className="del-img">
-                           { !inputs.imgPost && <CloseIcon onClick={handleDelImg}/>}
+                        { !inputs.imgPost && <CloseIcon onClick={handleDelImg}/>}
                         </div>
+            
                         :
                         <></>
                       }

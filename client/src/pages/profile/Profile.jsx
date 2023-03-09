@@ -32,7 +32,7 @@ function Profile({posts}) {
 
     const [openEditDesc,setOpenEditDesc] = useState(false)
 
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState({})
     useEffect(()=>{
         const fecthUser = async()=>{
             
@@ -62,6 +62,22 @@ function Profile({posts}) {
            }
         }
         fecthFollow()
+    }
+    const handleFriend = () => {
+        const fecthFriend = async()=>{
+            try {
+                 currentUser.flowing?.includes(paramId.userId)
+                 ?
+                 await axios.put(`/user/unpendding/${paramId.userId}`)
+                 :
+                 await axios.put(`/user/pendding/${paramId.userId}`)
+                 dispatch(follow(paramId.userId))
+            } catch (error) {
+                console.log(error.message)
+            }
+         }
+         fecthFriend()
+
     }
     const handleUpdateDesc = () =>{
         const fecthUser = async()=>{
@@ -97,11 +113,24 @@ function Profile({posts}) {
                                 </button>
                             </div>
                             <div className="btn-fl">
-                                {/* <button className='follow1'> <AddIcon/>Follow</button> */}
                                 {currentUser._id === paramId.userId 
-                                ? <></>:
-                                <button className='follow2' onClick={handleFollow} >
-                                    {currentUser.flowing?.includes(paramId.userId) ? <span><CheckIcon/>Unfollow</span> :<span> <AddIcon/>Follow</span>}
+                                ?
+                                <></>
+                                :
+                                <button className='follow1' onClick={handleFriend}> 
+                                    <span><AddIcon/>Friend</span>
+
+                                </button>
+
+                                }
+                                {currentUser._id === paramId.userId 
+                                ? 
+                                <></>
+                                :<button className='follow2' onClick={handleFollow} >
+                                    {currentUser.flowing?.includes(paramId.userId) 
+                                    ? <span><CheckIcon/>Unfollow</span> 
+                                    :<span> <AddIcon/>Follow</span>
+                                    }
                                 </button> 
                                 } 
                             </div>  
@@ -204,7 +233,7 @@ function Profile({posts}) {
                     </div>
                 </div>
             </div>
-            <Rightbar/>
+            <Rightbar user = {user}/>
         </>
      );
 }

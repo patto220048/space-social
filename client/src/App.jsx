@@ -30,32 +30,22 @@ function App() {
   const  {currentUser} = useSelector((state) => state.user)
 
   useEffect(()=> {
-    setSocket(io('ws://localhost:8000',{
-      reconnection: true,
-      reconnectionAttempts: 5,
-      reconnectionDelay: 1000,
-      reconnectionDelayMax: 5000,
-    }))
-  },[])
-
-  useEffect(()=>{
-
+    setSocket(io('ws://localhost:8000'))
+    
     socket?.on('connect',()=>{
-      console.log('Connected to server!');
+
+      socket?.emit('addUser',currentUser._id)
+
+      socket?.on('getUsers' , user => {
+        console.log(user)
+        })
+  
+     
     })
     
-  },[])
-  useEffect(()=>{
-    socket?.emit('addUser',currentUser._id)
- },[]) 
+   
+  },[currentUser._id])
 
-  useEffect(()=>{
-    socket?.emit('addUser',currentUser._id)
-    socket?.on('getUsers' , user => {
-      console.log(user)
-      })
-  
- },[]) 
 
   const Layout= () => {
     return (

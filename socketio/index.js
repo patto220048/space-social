@@ -8,13 +8,13 @@ const io = require('socket.io')(8000,{
 })
 
 let users=[]
-let notification = []
 const addUser = (userId, socketId)=>{
-    !users.some((user)=> user.userId === userId) && 
+    // !users.some((user)=> user.userId === userId) && 
     users.push({userId,socketId})
 }
 const removeUser = (socketId) =>{
     users = users.filter((user)=>{user.socketId !== socketId})
+  
 
 }
 const getUser = (userId) =>{
@@ -56,15 +56,11 @@ io.on("connection", (socket) => {
     ///disconnect
    socket.on('disconnect',()=>{
         console.log('some body disconn')
-        removeUser(socket.id)
+        // removeUser(socket.id)    
         io.emit('getUsers', users)
 
     })
 
-    
-   
-
-   
 
 
 });   
