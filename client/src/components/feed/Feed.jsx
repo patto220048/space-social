@@ -7,21 +7,32 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postFail, postStart, postSuccess } from "../../redux/postSlice";
+import ReactLoading from 'react-loading';
+
+
+
+
 import Upload from "../upload/Upload";
 import Warning from "../warningSetting/Warning"
+import IsLoading from "../loading/IsLoading";
 
 
 
 function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost,setOpenMenuPost}) {
 
     const  {currentPost} = useSelector((state) => state.post)
+    const  isLoading = useSelector((state) => state.post.loading)
+ 
+
     const   dispatch = useDispatch()
 
     const [posts, setPosts] = useState(null)
     const [activeTab, setActiveTab] = useState()
 
+
     useEffect(()=>{
         currentPost && setPosts(currentPost)
+
     },[currentPost])
     const btnList = [{
         name: "#all",
@@ -39,18 +50,20 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
         dispatch(postStart())
           try {
               const res = paramId 
-              ? await axios.get(`/post/profile/${paramId}`)
+            ? await axios.get(`/post/profile/${paramId}`)
               : await axios.get(`/post/${type}`)
               setPosts(res.data)
-              dispatch(postSuccess(res.data))
+            dispatch(postSuccess(res.data))
+
           } catch (err) {
               console.log(err.message)
               dispatch(postFail(err.message))
-       
-          }
-         
-      } 
-      fecthPost()
+              
+            }
+            
+        } 
+        fecthPost()
+
 
   },[paramId,type])
   
@@ -60,6 +73,7 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
     return ( 
         <>
         <div className="feed-container">
+            
             <div className="feed-wapper">
                 <Share setOpenUpload={setOpenUpload}/>
              {type &&  
@@ -69,26 +83,35 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
                        <button  className={"tab-btn "+ (activeTab === index ? "active": "")} onClick={()=>setActiveTab(index)}>{list.name}</button>    
                     </Link>
                     ))}
+                 
                 </div>}
-                {posts?.length === 0
-                    ?
-                    <div className="notFound">
-                        <p>Not found post</p>
-
+                
+                    {   
+                    isLoading ?
+                    <div className="loading-item">
+                        <ReactLoading type='cylon'/>
                     </div>
-                    :
-                    posts?.map((post,index)=>(
-                        <Post post={post}
-                         key={index} 
-                         socket={socket} 
-                         setOpenWarningPost={setOpenWarningPost}
-                         openMenuPost={openMenuPost}
-                         setOpenMenuPost={setOpenMenuPost}
-                        
-                         />
-                    ))
-                    
-                }
+                     :
+                    <>
+                    {posts?.length === 0
+                        ?
+                        <div className="notFound">
+                            <p>Not found post</p>
+                        </div>
+                        :
+                        posts?.map((post,index)=>(
+                            <Post post={post}
+                            key={index} 
+                            socket={socket} 
+                            setOpenWarningPost={setOpenWarningPost}
+                            openMenuPost={openMenuPost}
+                            setOpenMenuPost={setOpenMenuPost}
+                            />
+                        ))
+
+                    }
+                   </>
+                     } 
             </div>
         </div>
         </>
