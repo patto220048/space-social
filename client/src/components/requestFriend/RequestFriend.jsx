@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './RequestFriend.scss'
+import {friend } from "../../redux/userSlice";
+import { Link } from 'react-router-dom';
 
 function RequestFriend({users}) {
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
 
     const [user, setUser] = useState({})
-    console.log(user._id)
+    const dispatch = useDispatch()
+    const  {currentUser} = useSelector((state) => state.user)
+    
     
     useEffect(()=>{
         const fecthUser = async()=>{
@@ -21,15 +26,14 @@ function RequestFriend({users}) {
         }
         fecthUser()
 
-    },[])
+    },[users])
 
     const hanldeAccept =()=>{
         const fecthAccept= async()=>{
             
             try{
-                const res = await axios.put(`/user/accept/${user._id}`)
-                alert("success")
-                console.log(res.data)
+                await axios.put(`/user/accept/${user._id}`)
+                dispatch(friend(user._id))
             }
             catch(err){
                 console.log(err.message);
@@ -41,9 +45,9 @@ function RequestFriend({users}) {
         const fecthReject= async()=>{
             
             try{
-                const res = await axios.put(`/user/reject/${user._id}`)
+                await axios.put(`/user/reject/${user._id}`)
                 alert("reject success")
-                console.log(res.data)
+              
             }
             catch(err){
                 console.log(err.message);
@@ -54,18 +58,28 @@ function RequestFriend({users}) {
     
     
     return ( 
-            <div className="suggest-friend">
-                    <div className="friend-items">
+        
+        <>
+           { currentUser.pendding.includes(user._id) 
+           ?
+           <div className="suggest-friend">
+                <Link to = {`/profile/${user._id}`} style={{textDecoration:'none'}}>
+                   <div className="friend-items">
                         <img className="friend-img" src={user.userImg || noAvatar} alt="" />
                         <span className="friend-name">{user.username}</span>
                     </div>
+                </Link>
                     <div className="button">
                         <button onClick={hanldeAccept}>Argee</button>
                         <button onClick={hanldeReject}>Reject</button>
                     </div>
 
-                </div>
-              
+            </div>
+            :
+            <></>
+            
+        }
+        </>
      );
 }
 

@@ -37,21 +37,46 @@ export const userSlice = createSlice({
 
         }
         ,
-        pendding:(state, action)=>{
-            if(state.currentUser.pendding.includes(action.payload)){
-                state.currentUser.pendding.splice(
-                    state.currentUser.pendding.findIndex(
+        waitting:(state, action)=>{
+            if(state.currentUser.waitting.includes(action.payload)){
+                state.currentUser.waitting.splice(
+                    state.currentUser.waitting.findIndex(
                         pagramId => pagramId === action.payload),1)
             }
             else{
-                state.currentUser.pendding.push(action.payload)
+                state.currentUser.waitting.push(action.payload)
             }
 
+            
         }
+        ,
+        friend:(state, action)=>{
+            if(!state.currentUser.friend.includes(action.payload)){
+                state.currentUser.friend.push(action.payload)
+                state.currentUser.pendding.splice(
+                    state.currentUser.waitting.findIndex(
+                        pagramId => pagramId === action.payload),1)
+            }
+            else{
+                state.currentUser.friend.pull(action.payload)
+            }
+
+
+        }
+        ,
+        remove:(state, action)=>{
+            if(state.currentUser.friend.includes(action.payload)){
+                state.currentUser.friend.splice(
+                    state.currentUser.friend.findIndex(
+                        pagramId => pagramId === action.payload),1)
+            }
+           
+        }
+
       
     }
 })
 
-export const {loginStart, loginSuccess, loginFail, logout, follow, pendding} = userSlice.actions
+export const {loginStart, loginSuccess, loginFail, logout, follow, waitting, friend ,remove} = userSlice.actions
 
 export default userSlice.reducer

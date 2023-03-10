@@ -70,9 +70,20 @@
 
                 }
                 .btn-fl{
-                    width:70%;
+                    width:80%;
                     position: relative;
                     display: flex;
+                    .icon-open-remove{
+                        position: absolute;
+                        left: 28%;
+                        top: 25px;
+                        color: #ffffff;
+                        cursor: pointer;
+                        font-size: large;
+                        &:hover{
+                            opacity: 0.7;
+                        }
+                    }
                     .follow1{
                         display: flex;
                         align-items: center;
@@ -130,6 +141,38 @@
                         &:hover{
                             background-color:aliceblue;
                             color: black;
+                            border: 1px solid black;
+                            transform: scale(1.1);  
+                            
+                        }
+
+                    }
+                    .follow3{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        left: 0;
+                        bottom: -60px;
+                        top: 70px;
+                        padding: 5px;
+                        width: 150px;
+                        height: 35px;
+                        border: none;
+                        background-color: $colorMain;
+                        color: $textColor;
+                        border-radius: 10px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.5s ease-in-out;
+                        span{
+                            font-size: 15px;
+                            display: flex;
+                            align-items: center;
+                        }
+                        &:hover{
+                            background-color:rgb(236, 73, 73);
+                            color: rgb(255, 255, 255);
                             border: 1px solid black;
                             transform: scale(1.1);  
                             
@@ -358,6 +401,7 @@
                                     gap: 5px;
                                     padding-bottom: 10px;
                                     margin-bottom: 10px;
+                                   
                                     p{
                                         text-overflow:ellipsis;
                                         word-wrap: break-word;
@@ -371,6 +415,7 @@
                                             right: -30px;
                                             color: rgb(11, 11, 11);
                                             border-radius: 50%;
+                                            text-align: center;
                                             
                                             
                                         }

@@ -3,6 +3,8 @@ import './profile.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import axios from 'axios';
+import {follow, loginSuccess, waitting , remove} from "../../redux/userSlice";
+import { Link } from 'react-router-dom';
 
 import EmailIcon from '@mui/icons-material/Email';
 import HouseIcon from '@mui/icons-material/House';
@@ -12,12 +14,11 @@ import Upload from "../../components/upload/Upload"
 import AddIcon from '@mui/icons-material/Add';
 import Feed from '../../components/feed/Feed';
 import DoneIcon from '@mui/icons-material/Done';
-import {follow, loginSuccess } from "../../redux/userSlice";
 import Rightbar from '../../layout/rightbar/Rightbar';
-import { Link } from 'react-router-dom';
 import UploadAvt from '../../components/uploadAvatar/UploadAvt';
-
-
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import CakeIcon from '@mui/icons-material/Cake';
 
 function Profile({posts}) {
     const [openUpload, setOpenUpload] = useState(false)
@@ -33,6 +34,9 @@ function Profile({posts}) {
     const [openEditDesc,setOpenEditDesc] = useState(false)
 
     const [user, setUser] = useState({})
+
+    const [openRemove, setOpenRemove] = useState(false)
+  
     useEffect(()=>{
         const fecthUser = async()=>{
             
@@ -66,12 +70,15 @@ function Profile({posts}) {
     const handleFriend = () => {
         const fecthFriend = async()=>{
             try {
-                 currentUser.flowing?.includes(paramId.userId)
+                 currentUser.waitting?.includes(paramId.userId)
                  ?
                  await axios.put(`/user/unpendding/${paramId.userId}`)
-                 :
-                 await axios.put(`/user/pendding/${paramId.userId}`)
-                 dispatch(follow(paramId.userId))
+                 
+             
+                 :await axios.put(`/user/pendding/${paramId.userId}`)
+            
+                 dispatch(waitting(paramId.userId))
+
             } catch (error) {
                 console.log(error.message)
             }
@@ -92,11 +99,23 @@ function Profile({posts}) {
                 console.log(err.message)
                 
             }
-        }
+        } 
         fecthUser()
     }
 
+    const handleRemove = () =>{
+        const fecthRemove = async()=>{
+            try {  
+                 await axios.put(`/user/remove/${paramId.userId}`)
+                dispatch(remove(paramId.userId))
+            } catch (err) {
+                console.log(err.message)
 
+            }
+        }
+        fecthRemove()
+
+    }
 
     return ( 
         <>
@@ -118,11 +137,27 @@ function Profile({posts}) {
                                 <></>
                                 :
                                 <button className='follow1' onClick={handleFriend}> 
-                                    <span><AddIcon/>Friend</span>
+                                    {currentUser.waitting?.includes(paramId.userId)
+                                     ?
+                                        <span><HourglassTopIcon/>Waitting...</span>
+                                        :
+                                        <>
+                                           {currentUser.friend?.includes(paramId.userId) ?
+                                                <span> <CheckIcon/>Friendly</span>
+                                                :
+                                                <span> <AddIcon/>Friend</span>
+
+                                            }
+                                        </>
+                                    }
 
                                 </button>
-
                                 }
+                                {currentUser.friend?.includes(paramId.userId) 
+                                && 
+                                <span className='icon-open-remove' onClick={()=>setOpenRemove(!openRemove)}>
+                                    <ArrowDropDownIcon fontSize='large'/>
+                                </span>}
                                 {currentUser._id === paramId.userId 
                                 ? 
                                 <></>
@@ -132,7 +167,23 @@ function Profile({posts}) {
                                     :<span> <AddIcon/>Follow</span>
                                     }
                                 </button> 
+
                                 } 
+                                
+                               {currentUser.friend?.includes(paramId.userId) 
+                                ?
+                                    <>
+
+                                  {openRemove&&
+                                    <button className='follow3' onClick={handleRemove} >
+                                        <span>Remove friend</span>   
+                                    </button>}
+                                    </>
+                                    :
+                                    <></>
+                                }
+                              
+                                 
                             </div>  
                             <div className="avatar">
                                 <img className='avatar-img' src={ user.userImg || noAvatar} alt={user.userImg} />
@@ -197,8 +248,8 @@ function Profile({posts}) {
                                         </div>}
                                        {user.age &&
                                         <div className="info-icon">
-                                            <span><AccessTimeFilledIcon/></span>
-                                            <p>Age {user.age}</p>
+                                            <span><CakeIcon/></span>
+                                            <p> {user.age}</p>
                                         </div>}
                                         <div className="info-icon">
                                             <span><AccessTimeFilledIcon/></span>
@@ -206,9 +257,14 @@ function Profile({posts}) {
                                         </div>
                                         
                                         <Link to= {`/setting`} style={{textDecoration:'none'}}>
+                                     {currentUser._id === paramId.userId  
+                                     ?
                                         <button className="info-btn">
                                             SETTING
                                         </button>
+                                        :
+                                        <></>
+                                        }
                                         </Link>
                                         
                                     </div>

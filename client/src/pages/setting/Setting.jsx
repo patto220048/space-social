@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 
 
-import CloseIcon from '@mui/icons-material/Close';
 import Warning from "../../components/warningSetting/Warning";
 function Setting() {
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
@@ -35,13 +34,13 @@ function Setting() {
 
     useEffect(()=>{
         warningRef.current?.scrollIntoView({ block: "start" })   
-        },[warningRef.current])
+        },[warningRef])
 
 
     const handleDelAcc = () => {
         const fetchDelAcc = async() =>{
             try {
-                const res = await axios.delete(`/user/delete/${currentUser._id}`)
+                await axios.delete(`/user/delete/${currentUser._id}`)
                 navigate('/login')
             } catch (err) {
                 console.log(err.message)
@@ -147,6 +146,7 @@ function Setting() {
                               placeholder={currentUser.username} 
                               onChange={(e)=>setInputUsername(e.target.value)}
                               required
+                              maxLength={30}
                                />
                             <div className="btn-list">
                                  <button className="btn" onClick={handleCancel}>Cancel</button>
@@ -178,10 +178,10 @@ function Setting() {
                          }
                      </div>
                      <div className="fullname">
-                         <div className="name">AGE :</div>
+                         <div className="name">BIRTHDAY :</div>
                          {editAge ?
                          <div className="name-items">
-                             <input className="name-input" type="number" onChange={(e)=>setInputAge(e.target.value)} />
+                             <input className="name-input" type="date" onChange={(e)=>setInputAge(e.target.value)} />
                              <div className="btn-list">
                                  <button className="btn" onClick={handleCancel}>Cancel</button>
                                  <button className="btn" onClick={handleSubmitAge}>OK</button>

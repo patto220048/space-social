@@ -30,7 +30,7 @@ const User = new  Schema({
         maxlength: 50
     },
     age: {
-        type: Number,
+        type: String,
     }
     ,
     friend:{
@@ -92,6 +92,11 @@ const User = new  Schema({
         type:Array,
         default:[]
     },
+
+    waitting:{
+        type:Array,
+        default:[]
+    }
 
     
 

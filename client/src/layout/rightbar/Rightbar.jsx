@@ -8,7 +8,6 @@ import "./rightbar.scss"
 
 function Rightbar() {
     const  {currentUser} = useSelector((state) => state.user)
-
     return ( 
         <div className="rightbar-container">
             <div className="rightbar-wapper">
@@ -17,9 +16,6 @@ function Rightbar() {
                     {currentUser.pendding.map((users,i)=>(
                         <RequestFriend users={users} key={i}/>
                     ))}
-
-                     
-                
             </div>
             <div className="user-online">
                 <h1 className="user-online-name">Friends</h1>

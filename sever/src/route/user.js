@@ -26,6 +26,8 @@ router.put('/unpendding/:id',veryfiToken.verifyUser,userController.unPendding)
 router.put('/accept/:id',veryfiToken.verifyUser,userController.accept)
 //reject
 router.put('/reject/:id',veryfiToken.verifyUser,userController.reject)
+//remove friend
+router.put('/remove/:id',veryfiToken.verifyUser,userController.removeFriend)
 
 
 
