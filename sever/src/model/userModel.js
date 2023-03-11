@@ -23,7 +23,7 @@ const User = new  Schema({
     },
     decs:{
         type: String,
-        maxlength: 50
+        maxlength: 100
     },
     region:{
         type: String,

@@ -130,7 +130,6 @@ function Setting() {
                  <div className="left-items">
                      <img src={currentUser.userImg || noAvatar} alt="" />
                      <span>{'@'+currentUser.username} </span>
-                     
                  </div>
 
              </div>

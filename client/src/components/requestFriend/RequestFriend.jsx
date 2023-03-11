@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 function RequestFriend({users}) {
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
 
-    const [user, setUser] = useState({})
     const dispatch = useDispatch()
     const  {currentUser} = useSelector((state) => state.user)
+    const [user, setUser] = useState({})
     
     
     useEffect(()=>{

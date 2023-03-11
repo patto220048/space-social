@@ -18,7 +18,7 @@ function Rightbar() {
                     ))}
             </div>
             <div className="user-online">
-                <h1 className="user-online-name">Friends</h1>
+                <h1 className="user-online-name">Online</h1>
                 {currentUser.friend.map((users,i)=>(
                     <Online users={users} key={i} /> 
                 ))}

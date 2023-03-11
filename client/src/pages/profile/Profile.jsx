@@ -19,6 +19,7 @@ import UploadAvt from '../../components/uploadAvatar/UploadAvt';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CakeIcon from '@mui/icons-material/Cake';
+import FriendsProfile from '../../components/friend/FriendsProfile';
 
 function Profile({posts}) {
     const [openUpload, setOpenUpload] = useState(false)
@@ -227,49 +228,59 @@ function Profile({posts}) {
                                         }                                   
                                     </div>   
                                     <div className="info">
-                                    <h1 className='detail'>Details</h1>
+                                        <h1 className='detail'>Details</h1>
 
-                                    <div className="info-item">
-                                        <div className="info-icon">
-                                            <span><EmailIcon/></span>
-                                            <div className="veryfire">
-                                                <p>{user.email}</p>
-                                               {user.emailVerified ?
-                                                <span  style={{color:'rgb(18, 207, 62)'}}><DoneIcon fontSize='small'/></span>
-                                                :
-                                               <></>
-                                            }
+                                        <div className="info-item">
+                                            <div className="info-icon">
+                                                <span><EmailIcon/></span>
+                                                <div className="veryfire">
+                                                    <p>{user.email}</p>
+                                                {user.emailVerified ?
+                                                    <span  style={{color:'rgb(18, 207, 62)'}}><DoneIcon fontSize='small'/></span>
+                                                    :
+                                                <></>
+                                                }
+                                                </div>
                                             </div>
+                                            {user.region &&
+                                            <div className="info-icon">
+                                                <span><HouseIcon/></span>
+                                                <p>{user.region}</p>
+                                            </div>}
+                                        {user.age &&
+                                            <div className="info-icon">
+                                                <span><CakeIcon/></span>
+                                                <p> {user.age}</p>
+                                            </div>}
+                                            <div className="info-icon">
+                                                <span><AccessTimeFilledIcon/></span>
+                                                <p>Join {user.createdAt}</p>
+                                            </div>
+                                            
+                                            <Link to= {`/setting`} style={{textDecoration:'none'}}>
+                                        {currentUser._id === paramId.userId  
+                                        ?
+                                            <button className="info-btn">
+                                                SETTING
+                                            </button>
+                                            :
+                                            <></>
+                                            }
+                                            </Link>
+                                            
                                         </div>
-                                        {user.region &&
-                                        <div className="info-icon">
-                                            <span><HouseIcon/></span>
-                                            <p>{user.region}</p>
-                                        </div>}
-                                       {user.age &&
-                                        <div className="info-icon">
-                                            <span><CakeIcon/></span>
-                                            <p> {user.age}</p>
-                                        </div>}
-                                        <div className="info-icon">
-                                            <span><AccessTimeFilledIcon/></span>
-                                            <p>Join {user.createdAt}</p>
-                                        </div>
-                                        
-                                        <Link to= {`/setting`} style={{textDecoration:'none'}}>
-                                     {currentUser._id === paramId.userId  
-                                     ?
-                                        <button className="info-btn">
-                                            SETTING
-                                        </button>
-                                        :
-                                        <></>
-                                        }
-                                        </Link>
-                                        
-                                    </div>
                                
-                                </div>           
+                                    </div>  
+                                    <>
+                                        <div className="friend-container">
+                                                <h1 className='friend'>FRIENDS  <span>{user.friend?.length}</span></h1>
+                                                <div className="other">
+                                                    {user.friend?.map((friends,i)=>(
+                                                        <FriendsProfile friend={friends} key={i}/>        
+                                                    ))}
+                                                </div>
+                                        </div> 
+                                    </>
                 
                                 </div>
                                
