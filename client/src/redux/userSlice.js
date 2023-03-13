@@ -9,7 +9,7 @@ const initialState = {
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState,
+    initialState : null,
     reducers: {
         loginStart: (state)=>{
             state.loading = true;

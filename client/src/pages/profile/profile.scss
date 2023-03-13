@@ -188,18 +188,20 @@
                     position: relative;
                     margin: 0 auto;
                     transform: translateY(-50%);
+                    align-items: center;
                     z-index: 1;
                     .avatar-img{
-                        border: 1px solid #424242;
-                        padding: 2px;
-                        border-radius: 50%;
+                        border: 6px solid $bgColor;
+                        // padding: 2px;
+                        border-radius: 50%; 
                         width: 130px;
                         height: 130px;
                         object-fit: cover;
                     }
                     button{
-                        width: 130px;
-                        height: 130px;
+                        
+                        width: 121px;
+                        height: 121px;
                         position: absolute;
                         border-radius: 50%;
                         margin: 0 auto;

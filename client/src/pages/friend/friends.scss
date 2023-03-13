@@ -1,0 +1,11 @@
+@import '../../gobal';
+
+.container-friend{
+    flex: 5.2;
+    margin-top: 20px;
+    .container-friend{
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+}

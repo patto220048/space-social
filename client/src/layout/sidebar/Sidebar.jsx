@@ -16,10 +16,11 @@ import { fontSize } from "@mui/system";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { logout } from "../../redux/userSlice";
+import { loginSuccess, logout } from "../../redux/userSlice";
 
-function Sidebar({setlectItem,setSetlectItem}) {
+function Sidebar() {
     const  {currentUser} = useSelector((state) => state.user)
+    const  {currentPost} = useSelector((state) => state.post)
     const dispatch = useDispatch()
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [active, setActive] = useState()
@@ -28,12 +29,13 @@ function Sidebar({setlectItem,setSetlectItem}) {
     const handleLogout = async () => {
         const res = await axios.get('/auth/signout')
         dispatch(logout("Logged out successfully"))
+        dispatch(loginSuccess('Logged out successfully'))
     }
 
     const listTop = [{icon :<HomeIcon/>, span : <span>HOME</span>, link: "/" },
                     { icon :<AccountCircleIcon />, span : <span>PROFILE</span>, link: `/profile/${currentUser._id}` },
             
-                    { icon :<GroupIcon/>, span :<span>FRIEND</span>,link: "/" },
+                    { icon :<GroupIcon/>, span :<span>FRIEND</span>,link:`/friend/${currentUser._id}`},            
                     { icon :<ChatIcon/>, span : <span>MESSAGE</span>,link: "/"  },
                     { icon : <SettingsIcon/>, span :<span>SETTING</span>,link: "/setting"  },
                     { icon :<HelpIcon/> , span : <span>HELP</span>,link: "/"  },

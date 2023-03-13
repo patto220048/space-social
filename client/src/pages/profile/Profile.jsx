@@ -19,7 +19,8 @@ import UploadAvt from '../../components/uploadAvatar/UploadAvt';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CakeIcon from '@mui/icons-material/Cake';
-import FriendsProfile from '../../components/friend/FriendsProfile';
+import FriendsProfile from '../../components/friendProfile/FriendsProfile';
+
 
 function Profile({posts}) {
     const [openUpload, setOpenUpload] = useState(false)
@@ -273,10 +274,12 @@ function Profile({posts}) {
                                     </div>  
                                     <>
                                         <div className="friend-container">
+                                            <Link to = {`/friend/${user._id}`} style={{textDecoration:'none'}}>
                                                 <h1 className='friend'>FRIENDS  <span>{user.friend?.length}</span></h1>
+                                            </Link>
                                                 <div className="other">
-                                                    {user.friend?.map((friends,i)=>(
-                                                        <FriendsProfile friend={friends} key={i}/>        
+                                                    {user.friend?.map((friendId,i)=>(
+                                                        <FriendsProfile friendId={friendId} key={i}/>        
                                                     ))}
                                                 </div>
                                         </div> 
@@ -292,7 +295,7 @@ function Profile({posts}) {
 
                         
                         </div>
-
+                                                            
                     
                     
                     

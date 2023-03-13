@@ -85,6 +85,7 @@
                     transition: all 1s ease;
                     border-radius: 15px;
                     margin-bottom: 5px;
+                    color: $textColor;
                     
 
 
@@ -105,11 +106,12 @@
 
                     }
                     &:hover{
+                        color: $colorMain;
                         background-color: rgb(250, 250, 250);
                         border-radius: 15px;
                         span{
-                           
-                            color:$mainColor;
+                            color: $colorMain;
+        
                         }
                         img{
                             transform: scale(1.3);

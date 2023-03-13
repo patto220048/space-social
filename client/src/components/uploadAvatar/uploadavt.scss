@@ -9,6 +9,7 @@
     padding-top: 100px;
     position: fixed;
     .upload-avt-wapper{
+        
         display: flex;
         background-color: $colorMain;
         width: 500px;
@@ -75,7 +76,9 @@
                         height: 150px;
                         object-fit: cover;
                         border-radius: 50%;
-                        border: 1px solid $softColor;
+                        // border: 1px solid $softColor;
+                        border: 6px solid $colorMain;
+
                     }
                 }
                 .input{

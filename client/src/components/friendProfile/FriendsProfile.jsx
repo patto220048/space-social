@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import './friendsProfile.scss'
 
 
-function FriendsProfile({friend}) {
+function FriendsProfile({friendId}) {
 
     const [user, setUser] = useState({})
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
@@ -14,7 +14,7 @@ function FriendsProfile({friend}) {
         const fecthUser = async()=>{
             
             try{
-                const res = await axios.get(`/user/find/${friend}`)
+                const res = await axios.get(`/user/find/${friendId}`)
                 setUser(res.data)
             }
             catch(err){
@@ -23,7 +23,7 @@ function FriendsProfile({friend}) {
         }
         fecthUser()
 
-    },[friend])
+    },[friendId])
 
     return ( 
         <>

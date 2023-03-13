@@ -21,6 +21,7 @@ import Navbar from './layout/navbar/Navbar';
 import Rightbar from './layout/rightbar/Rightbar';
 import Sidebar from './layout/sidebar/Sidebar';
 import Home from './pages/home/Home';
+import Friends from './pages/friend/Friends';
 
 
 
@@ -97,6 +98,10 @@ function App() {
         {
           path:"/setting",
           element: <Setting/>
+        },
+        { 
+          path:"/friend/:friendId", 
+          element: <Friends/>
         }
       ]
     },

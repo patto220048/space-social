@@ -11,7 +11,7 @@ function Rightbar() {
     return ( 
         <div className="rightbar-container">
             <div className="rightbar-wapper">
-                <h1 className="suggest-name">Suggest</h1>
+                {/* <h1 className="suggest-name">Suggest</h1> */}
                     
                     {currentUser.pendding.map((users,i)=>(
                         <RequestFriend users={users} key={i}/>

@@ -22,6 +22,11 @@ export const postSlice = createSlice({
             state.loading = false;
            
         },
+        logoutPost:(state)=>{
+            return initialState
+
+        }
+        ,
         likes:(state, action)=>{
             state.currentPost.map((post, index)=>{
                 if(post._id === action.payload.postId ){
@@ -81,6 +86,6 @@ export const postSlice = createSlice({
     }
 })
 
-export const {postStart, postSuccess, postFail, likes, deletePost ,postAdd,postUpdate,delImg} = postSlice.actions
+export const {postStart, postSuccess, postFail, likes, deletePost ,postAdd,postUpdate,delImg, logoutPost} = postSlice.actions
 
 export default postSlice.reducer

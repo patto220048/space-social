@@ -19,6 +19,7 @@ import IsLoading from "../loading/IsLoading";
 
 
 function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost,setOpenMenuPost}) {
+    const  {currentUser} = useSelector((state) => state.user)
 
     const  {currentPost} = useSelector((state) => state.post)
     const  isLoading = useSelector((state) => state.post.loading)
@@ -91,7 +92,7 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
         <div className="feed-container">
             
             <div className="feed-wapper">
-                <Share setOpenUpload={setOpenUpload}/>
+             {currentUser._id === paramId && <Share setOpenUpload={setOpenUpload}/>}
              {type &&  
                 <div className="tab-btn ">
                     {btnList.map((list,index)=>(
