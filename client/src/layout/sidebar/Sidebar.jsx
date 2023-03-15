@@ -1,4 +1,13 @@
 import "./sidebar.scss"
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import {logout } from "../../redux/userSlice";
+import { logoutPost } from "../../redux/postSlice";
+
+
+
 import HomeIcon from '@mui/icons-material/Home';
 import GroupIcon from '@mui/icons-material/Group';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -6,30 +15,18 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
-
-import Contents from "../../pages/home/Home";
-import { useEffect, useState } from "react";
-import { fontSize } from "@mui/system";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { loginSuccess, logout } from "../../redux/userSlice";
 
 function Sidebar() {
     const  {currentUser} = useSelector((state) => state.user)
-    const  {currentPost} = useSelector((state) => state.post)
     const dispatch = useDispatch()
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [active, setActive] = useState()
 
 
     const handleLogout = async () => {
-        const res = await axios.get('/auth/signout')
+        await axios.get('/auth/signout')
         dispatch(logout("Logged out successfully"))
-        dispatch(loginSuccess('Logged out successfully'))
+        dispatch(logoutPost('Logged out successfully'))
     }
 
     const listTop = [{icon :<HomeIcon/>, span : <span>HOME</span>, link: "/" },

@@ -246,15 +246,15 @@
                 }
                 .profile-mid{
                     color: $textColor;
-                    
                     display: flex;  
                     justify-content: space-between;
-                    width: 70%;
+                    width: 100%;
                     margin: 0 auto;
-                    gap: 10px;
+           
                     padding: 20px;
-                    // transform: translateY(-100%);
+           
                     p{
+                        color: $textColor;
                         width: 200px;
                         text-align: center;       
                         font-size: 20px;
@@ -473,23 +473,22 @@
 
         //mobile
         @media (max-width:767px){
-            width: 100%;
+          
             
-            transform: translateX(-18%);
             .profile-item{
                 .profile-top{
-                //  background-color: #D4D8F4;  
+          
                  width: 100%;
                  margin: 0;
                  padding: 0;
                     .background{
                         .background-img{
-                            width: 320px;
+                            width: 350px;
                             height: 200px;
                         }
                         button{
                             width: 220px;
-                            height: 200px;
+                            height: 200px;  
 
                         }
                     }
@@ -506,23 +505,27 @@
                         }
                     }
                     .name-user{
-                        padding-top: 20px ;
-                        font-size: 20px;
-                        max-width: 50%;
-                        text-align: center;
+                      
+                    }
+
+                    .profile-mid{
+                        width: 100%;
+                        padding-top: 0;
+                        p{
+                            font-size: 15px;
+                        }
                     }
 
                 }
+               
                 .profile-bottom{
                     
                     margin: 0 auto;
                     display: flex;
-                    width: 81%;
                     flex-direction: column;
                     .left{
-                        position:static;
-                        transform: translateX(12%);
-                        // display: none;
+                        
+                        padding: 0;
                         .edit{
                             display: flex;
                             flex-direction: column;
@@ -535,11 +538,7 @@
                         }
                     }
                     .right{
-                        display: flex;
-                        justify-content: flex-start;
-                        width: 100%;
-                        margin-left: 40px;
-                        // transform: translateX(12%);
+                       
                         
                     }
 
@@ -554,16 +553,15 @@
         //ipad
         @media (min-width:768px) and (max-width:1280px){
             .profile-item{
-                transform: translateX(-10%);
                 .profile-top{
-              
+                    width: 500px;
                     .background{
                         .background-img{
-                            width: 600px;
+                            width: 500px;
                             height: 250px;
                         }
                         button{
-                            width: 600px;
+                            width: 500px;
                             height: 250px;
 
                         }
@@ -575,8 +573,8 @@
 
                         }
                         button{
-                            width: 130px;
-                            height: 130px;
+                            width: 125px;
+                            height: 125px;
 
                         }
                     }
@@ -586,7 +584,7 @@
                     .profile-mid{
                         width: 100%;
                         margin: 0;
-                        ;
+                        
                     }
 
                 }
@@ -594,16 +592,13 @@
                     
                     margin: 0 auto;
                     display: flex;
-                    width: 80%;
+                 
                     flex-direction: column;
                     .left{
+                        padding: 0;
                         .introduce{
-                  
 
                         }
-                        position:static;
-                
-                        // display: none;
                         .edit{
                             display: flex;
                             flex-direction: column;
@@ -616,11 +611,7 @@
                         }
                     }
                     .right{
-                        display: flex;
-                        justify-content: flex-start;
-                        width: 100%;
-                        margin-left: 65px;
-                        // transform: translateX(12%);
+                       
                         
                     }
 

@@ -101,7 +101,15 @@ function App() {
         },
         { 
           path:"/friend/:friendId", 
-          element: <Friends/>
+          element: <Friends type= 'friend'/>
+        },
+        { 
+          path:"/follower/:friendId", 
+          element: <Friends type= 'follower'/>
+        },
+        { 
+          path:"/following/:friendId", 
+          element: <Friends type= 'following'/>
         }
       ]
     },

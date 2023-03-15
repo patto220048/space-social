@@ -43,7 +43,8 @@ function Post({post,socket}) {
     const [img, setImg] = useState(undefined)
     const [inputs ,setIputs] = useState({})
 
-
+    ///cmt
+    const [focusCmt, setFocusCmt] = useState(false)
 
     useEffect(()=>{
         //fecth user
@@ -197,9 +198,8 @@ function Post({post,socket}) {
         fetchEdit()
       
 
-    }
+    }   
 
-    
     return ( 
         <>
         <div className="post-container">
@@ -288,9 +288,9 @@ function Post({post,socket}) {
                                 
                                     
                           
-                            <button className="likeBtn" >
+                            <button className="likeBtn" onClick={()=>setFocusCmt(true)}>
                                 
-                                <span><ChatBubbleOutlineIcon/>Comment</span>
+                                <span><ChatBubbleOutlineIcon />Comment</span>
                             </button>
                             <button className="likeBtn">    
                                 <span><ReplyIcon  />Share</span>
@@ -298,7 +298,8 @@ function Post({post,socket}) {
                         </div>
                     </div>
                     <div className="line"></div>
-                    <Comments post={post} socket={socket}/>
+                
+                    <Comments post={post} socket={socket} focusCmt={focusCmt} setFocusCmt={setFocusCmt}/>
 
 
                 </div>

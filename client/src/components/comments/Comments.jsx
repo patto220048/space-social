@@ -8,19 +8,31 @@ import Comment from "../comment/Comment";
 import ReactLoading from 'react-loading';
 import SendIcon from '@mui/icons-material/Send';
 
-function Comments({post,socket}) {
+function Comments({post,socket,focusCmt, setFocusCmt}) {
+    
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [comments, setComments] = useState([])
     const [desc , setDesc] = useState("")
     const [isloading, setIsLoading] = useState(false)
-    const [decsSocket, setDecsSocket ] = useState(null) // *
-    ///socketio handle
+    const [decsSocket, setDecsSocket ] = useState(null) //
+
+
+    //focus cmt
+    const focus = useRef(null)
+    useEffect(()=>{
+        focusCmt && focus.current.focus()
+        setFocusCmt(false)
+        focusCmt && focus.current.scrollIntoView({ block : "center" , behavior: "smooth"})   
+    },[focusCmt,focus])
+ 
+
+
     useEffect(()=>{
         // take data from sever
         socket?.on('getDecs', data=>{
             setDecsSocket({
-                userId: data.user.userId,
+                userId: data?.user.userId,
                 comment : data.decs,
                 postId : data?.postId,
                 createdAt: Date.now(),
@@ -78,17 +90,24 @@ function Comments({post,socket}) {
         createComment()
     }
 
+    const handleClose = () =>{
+        focus.current.value = ''
+    }
+
     return ( 
+        <>
         <div className="comments-container">
             <div className="comments-wapper">
                 <div className="comments-item">
-                    <img className="comments-img" src={currentUser.userImg || noAvatar} alt={currentUser.userImg} />
-                    <textarea 
+                <img className="comments-img" src={currentUser.userImg || noAvatar} alt={currentUser.userImg} />
+                  <textarea 
                         className="comments-input"
                         type="text" 
                         placeholder="Enter your comment here..."
-                        value={desc}
-                        onChange={(e)=>setDesc(e.target.value)}
+                        value = {desc}
+                        onChange = {(e)=>setDesc(e.target.value)}
+                        ref={focus}
+                        onBlur= {handleClose}
                     />
                  
                    {!desc ? <button type="submit" disabled className="comments-button1 active" onClick={handleCreateComment}>
@@ -106,7 +125,6 @@ function Comments({post,socket}) {
                 { isloading ?
                  <ReactLoading type={"cylon"}/> :
                     comments.map((comment,index)=>(
-                    
                     <Comment  comment={comment} key={index}/>
                 ))
                 }
@@ -114,12 +132,12 @@ function Comments({post,socket}) {
               
 
             </div>
-                
+           
                 
         
         </div>
-        
-
+        {/* <span className="more">. . . MORE</span> */}
+        </>
     
         
 

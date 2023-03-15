@@ -1,5 +1,5 @@
 import './search.scss'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios'
 import { Link } from "react-router-dom";
 
@@ -13,10 +13,9 @@ function Search() {
     const  {currentUser} = useSelector((state) => state.user)
 
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
-    const [focus, setFocus] = useState(false)
-
     const [users, setUsers] = useState([])
     const [query, setQuery] = useState('')
+    const inputRef = useRef(null)
     useEffect(()=>{
         const fecthUser = async()=>{
             try {   
@@ -26,7 +25,7 @@ function Search() {
                 console.log(err.message)
             }
         }
-        if( query.length === 2 ||query.length > 2){
+        if( query.length === 2 || query.length > 2 ){
             fecthUser() 
         }
         setUsers([])
@@ -34,8 +33,9 @@ function Search() {
 
     const handleClose = ()=>{
         setUsers([])
-        setQuery('')
+        setQuery("")
     }
+ 
     
     return (
         <div className="search"  >
@@ -46,15 +46,16 @@ function Search() {
                         type="text" 
                         onChange={(e)=>setQuery(e.target.value)}
                        
+                        ref={inputRef}
                  />
                     
                    { !query ?   
-                    <button className="search-icon"  onClick = {()=> setFocus(true)}><SearchIcon fontSize='medium'/></button>
+                    <button className="search-icon" ><SearchIcon fontSize='medium'/></button>
                    :
                     <button className='close-icon' onClick={handleClose}><CloseIcon fontSize='medium' /></button>}
-                    { query ?
+                    { query.length > 2 ?
                         <div className='data-result'>
-                           {users.length === 0 ?
+                           {!users.length > 0 ?
                             <div className="data-items">
                                 <div className="notFound">
                                     <span >Not found</span>

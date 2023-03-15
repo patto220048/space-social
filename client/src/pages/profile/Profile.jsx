@@ -20,6 +20,7 @@ import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CakeIcon from '@mui/icons-material/Cake';
 import FriendsProfile from '../../components/friendProfile/FriendsProfile';
+import IsLoading from '../../components/loading/IsLoading';
 
 
 function Profile({posts}) {
@@ -38,19 +39,24 @@ function Profile({posts}) {
     const [user, setUser] = useState({})
 
     const [openRemove, setOpenRemove] = useState(false)
+
+    const [isloading, setIsLoading] = useState(false)
   
     useEffect(()=>{
         const fecthUser = async()=>{
-            
+            setIsLoading(false)
             try{
                 const res = await axios.get(`/user/find/${paramId.userId}`)
                 setUser(res.data)
+                setIsLoading(true)
+
             }
             catch(err){
                 console.log(err.message);
             }
         }
         fecthUser()
+        setIsLoading(false)
 
     },[paramId.userId])
     
@@ -198,9 +204,17 @@ function Profile({posts}) {
                             <h1 className="name-user">{user.username}</h1>
                             
                             <div className="profile-mid">
+                                <Link to = {`/following/${user._id}`} style={{textDecoration:'none'}}>
                                 <p className='following-count'><span>{user.followUser}</span>following</p>
+                                </Link>
+                                <Link to = {`/follower/${user._id}`} style={{textDecoration:'none'}}>
                                 <p className='follower-count'><span>{user.follower?.length} </span>follower</p>
+                                </Link>
+                               
                                 <p className='post-count'><span>{user.postCount} </span>post</p>
+                            
+                               
+                               
 
                             </div>
                         </div>
@@ -278,6 +292,8 @@ function Profile({posts}) {
                                                 <h1 className='friend'>FRIENDS  <span>{user.friend?.length}</span></h1>
                                             </Link>
                                                 <div className="other">
+                                                    
+                                                 { !isloading &&  <IsLoading type='cylon'/>}
                                                     {user.friend?.map((friendId,i)=>(
                                                         <FriendsProfile friendId={friendId} key={i}/>        
                                                     ))}

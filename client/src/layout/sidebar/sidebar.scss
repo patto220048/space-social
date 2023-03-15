@@ -72,13 +72,14 @@ $height : 80px;
                     opacity: 1; //  
                
                     .name-items{
-                        max-width: 250px;
+                        // max-width: 250px;
                         font-size: 25px;
                         font-weight: 700;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
+                        text-overflow:ellipsis;
                         overflow: hidden;
-                      
+                    
+                       
+                        
                         
                     }
                     .name-status{
@@ -264,11 +265,9 @@ $height : 80px;
         // }
         //mobile
         @media (max-width:768px) {
-            // flex: 3;
-            width:43%;
             padding: 0;
             margin: 0;
-            
+            display: none;
             .sidebar-item{
                     opacity: 0;
                     // padding: 0;
@@ -296,12 +295,12 @@ $height : 80px;
         }
         //ipad
         @media (min-width:769px) and (max-width:1280px){
-            width:45%;
-            // flex: 1;
-            // display: none;
+            width: 100%;
             .avatar{
                 .name{
-                    display: none;
+                    .name-items{
+                        font-size: 20px !important;
+                    }
                     }
                 }
            
@@ -309,10 +308,12 @@ $height : 80px;
                     .top{
                         margin: 0 auto;
                         .top-icon{
-                            display: flex;
+                           
                             }
                         span{
-                           opacity: 0;
+                      
+                        font-size: 20px !important;
+
                         }
                                 
                    }
@@ -326,17 +327,11 @@ $height : 80px;
 
 
     }
-   
-    @media (max-width:768px){
-        z-index: 1;
-        transform: translateX(-10px);
 
 
-    }
-    @media (min-width:769px) and (max-width:1280px){
-        transform: translateX(-10px);
-        z-index: 1;
-
+    @media (max-width:768px) {
+        margin-top: 0;
+        
     }
     
 }

@@ -32,9 +32,9 @@ function Setting() {
 
 
 
-    useEffect(()=>{
-        warningRef.current?.scrollIntoView({ block: "start" })   
-        },[warningRef])
+    // useEffect(()=>{
+    //     warningRef.current?.scrollIntoView({ block: "start" })   
+    // },[warningRef])
 
 
     const handleDelAcc = () => {

@@ -54,6 +54,7 @@ function Comment({comment,socket}) {
         fetchDelCmt()
     }
     return (
+        <>
         <div className="comment-container">
             <div className="comment-wapper">
                 <div className="comment-items">
@@ -79,11 +80,14 @@ function Comment({comment,socket}) {
 
 
                 </div>
+               
 
 
             </div>
             
+            
         </div>
+        </>
      );
 }
 

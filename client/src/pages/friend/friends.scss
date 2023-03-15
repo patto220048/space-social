@@ -8,4 +8,28 @@
         gap: 30px;
         flex-wrap: wrap;
     }
+    .tags{
+        display: flex;
+        gap: 20px;
+        .tags-btn{
+            font-size: 15px;
+            padding: 5px 10px;
+            font-weight: 600;
+            background-color: $colorMain;
+            color: $textColor;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            &:hover{
+                background-color: aliceblue;
+                color: $colorMain;   
+            }
+        }
+        .active{
+            background-color: aliceblue;
+            color: $colorMain;
+        }
+    }
 }
