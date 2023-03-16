@@ -61,7 +61,6 @@ io.on("connection", (socket) => {
   })
      socket.on('sendNotification',({senderId,receiverId,senderName,senderImg,type})=>{
       addUser(receiverId, socket.id)
-      checkUser(receiverId, socket.id)
         const receiver = getUser(receiverId)
             io.to(receiver?.socketId).emit("getNotification",{
                 senderId,

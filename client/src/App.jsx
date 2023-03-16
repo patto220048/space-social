@@ -25,7 +25,6 @@ import Friends from './pages/friend/Friends';
 
 
 
-
 function App() {
   const [socket, setSocket] = useState(null)
   const  {currentUser} = useSelector((state) => state.user)
@@ -37,6 +36,10 @@ function App() {
       console.log('user connect clinet')
     
     })
+    return () =>{
+      socket?.disconnect()
+    }
+
     
   },[])
   useEffect(()=>{
