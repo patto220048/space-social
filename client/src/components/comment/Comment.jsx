@@ -3,7 +3,6 @@ import "./comment.scss"
 import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 import {format} from "timeago.js"
-import {io} from 'socket.io-client'
 import { Link, useNavigate } from "react-router-dom";
 
 

@@ -17,7 +17,7 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
     const [isloading, setIsLoading] = useState(false)
     const [decsSocket, setDecsSocket ] = useState(null) //
 
-
+    
     //focus cmt
     const focus = useRef(null)
     useEffect(()=>{
@@ -31,10 +31,11 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
     useEffect(()=>{
         // take data from sever
         socket?.on('getDecs', data=>{
+            console.log(data)
             setDecsSocket({
-                userId: data?.user.userId,
+                userId: data.user.userId,
                 comment : data.decs,
-                postId : data?.postId,
+                postId : data.postId,
                 createdAt: Date.now(),
             })
         })
@@ -72,7 +73,7 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
             socket?.emit('getCmt',{
                 userId : currentUser._id, 
                 decs: desc,
-                postId: post?._id ,
+                postId: post._id ,
             })
             try {
                 const res = await axios.post(`/comment/create`,{

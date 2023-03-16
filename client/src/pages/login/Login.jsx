@@ -128,7 +128,7 @@ function Login() {
                                     </div>
                                 </div>
                             </div>
-                                {isLoading ?
+                                { isLoading ?
                                 <div className="loading-item">
                                     <ReactLoading type='cylon' color='#000000'/>
                                 </div>

@@ -111,14 +111,15 @@ function Post({post,socket}) {
     
     //like post
     const handleLike=(type)=>{
+        socket?.emit('sendNotification',{
+            senderId: currentUser._id,
+            receiverId: post.userId,
+            senderName: currentUser.username,
+            senderImg:currentUser.userImg,
+            type:type
+        })
         const fetchLikePost = async () =>{
-            socket?.emit('sendNotification',{
-                senderId: currentUser._id,
-                receiverId: post?.userId,
-                senderName: currentUser.username,
-                senderImg:currentUser.userImg,
-                type:type
-            })
+           
             try {
                 currentPost.map(async(post, index)=>{
                     //socket handle like

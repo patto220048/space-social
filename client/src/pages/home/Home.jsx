@@ -24,7 +24,7 @@ function Home({type,socket}) {
             <div className="container-home">
                 <Upload openUpload={openUpload} setOpenUpload={setOpenUpload}/>
                 <div className="wapper-home">
-                    <Share setOpenUpload={setOpenUpload}/>
+                    <Share setOpenUpload={setOpenUpload} />
                     <Feed 
                     type = {type} 
                     setOpenUpload={setOpenUpload} 

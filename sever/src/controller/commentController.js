@@ -26,7 +26,7 @@ class CommentController{
     async getComment(req, res, next) {
         try {
 
-            const comments = await Comment.find({postId : req.params.postId}).sort({_id:1})
+            const comments = await Comment.find({postId : req.params.postId}).sort({_id:1}).limit(5)
             res.status(200).json(comments)
             
         } catch (err) {

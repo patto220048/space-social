@@ -31,21 +31,22 @@ function App() {
   const  {currentUser} = useSelector((state) => state.user)
 
   useEffect(()=> {
-    setSocket(io('ws://localhost:8000'))
+    setSocket(io('ws://localhost:4000'))
     
     socket?.on('connect',()=>{
-
-      socket?.emit('addUser',currentUser._id)
-
-      socket?.on('getUsers' , user => {
-        console.log(user)
-        })
-  
-     
+      console.log('user connect clinet')
+    
     })
     
-   
-  },[currentUser._id])
+  },[])
+  useEffect(()=>{
+    socket?.emit('addUser',currentUser?._id)
+
+    socket?.on('getUsers' , user => {
+      console.log(user)
+      })
+    
+  },[currentUser])
 
 
   const Layout= () => {

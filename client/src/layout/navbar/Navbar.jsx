@@ -17,8 +17,8 @@ function Navbar({socket}) {
     const [notifications, setNotifications] = useState([])
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const logo = process.env.REACT_APP_PUBLIC_FOLDER + "logo.png" 
-
-    // console.log(notifications)
+    
+    console.log(notifications)
     // useEffect(() => {
     //     const fectchNotifi = async()=>{
     //         try {
@@ -31,8 +31,9 @@ function Navbar({socket}) {
     //     fectchNotifi()
     // },[])
     useEffect(()=>{
-        socket?.on('getNotification',data=>
-            setNotifications(prev=>[...prev, data]) 
+        socket?.on('getNotification', data=>
+          
+        setNotifications((prev)=>[...prev, data])
         )
     },[socket])
 
@@ -78,7 +79,7 @@ function Navbar({socket}) {
                                    {openNotifi && 
                                    <div className="notifi-items">
                                     {
-                                    notifications.map((notification,index)=>(  
+                                    notifications?.map((notification,index)=>(  
                                          <div className='items' key={index}>
                                             <img src={notification.senderImg || noAvatar} alt="" />
                                             <p> <span>{notification.senderName}</span>{displayNotifications(notification.type)} your post</p>
