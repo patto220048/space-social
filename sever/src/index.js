@@ -21,7 +21,6 @@ const server = http.createServer(app)
 const io = new Server(server, {
   cors:{
     origin:'http://localhost:3000',
-    methods:["GET","POST"]
   }
 })
 
@@ -46,9 +45,9 @@ io.on("connection", (socket) => {
  console.log('user connected '+ socket.id)
   // take currentUserId and soketid
  socket.on('addUser', userId =>{
-      addUser(userId, socket.id)
-      checkUser(userId, socket.id)
-      io.emit('getUsers', users)
+        addUser(userId, socket.id)
+        // checkUser(userId, socket.id)
+      socket.emit('getUsers', users)  
       
  })
   socket.on('getCmt', ({userId, decs ,postId})=>{
@@ -72,8 +71,8 @@ io.on("connection", (socket) => {
    })
 
    socket.on('disconnect',()=>{
-        console.log('some body disconn')
-        // removeUser(socket.id)    
+        console.log('some body disconnect')
+        removeUser(socket.id)    
     })
 })
 

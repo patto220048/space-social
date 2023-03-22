@@ -23,7 +23,7 @@ import FriendsProfile from '../../components/friendProfile/FriendsProfile';
 import IsLoading from '../../components/loading/IsLoading';
 
 
-function Profile({posts}) {
+function Profile({posts,openRightbar}) {
     const [openUpload, setOpenUpload] = useState(false)
     const [openUploadAvt, setOpenUploadAvt] = useState(false)
     const  {currentUser} = useSelector((state) => state.user)
@@ -184,7 +184,7 @@ function Profile({posts}) {
 
                                   {openRemove&&
                                     <button className='follow3' onClick={handleRemove} >
-                                        <span>Remove friend</span>   
+                                        <span>Remove</span>   
                                     </button>}
                                     </>
                                     :
@@ -319,7 +319,7 @@ function Profile({posts}) {
                     </div>
                 </div>
             </div>
-            <Rightbar user = {user}/>
+            <Rightbar user = {user} openRightbar={openRightbar}/>
         </>
      );
 }

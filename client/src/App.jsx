@@ -22,44 +22,35 @@ import Rightbar from './layout/rightbar/Rightbar';
 import Sidebar from './layout/sidebar/Sidebar';
 import Home from './pages/home/Home';
 import Friends from './pages/friend/Friends';
-
+import Conversation from './pages/conversation/Conversation';
 
 
 function App() {
-  const [socket, setSocket] = useState(null)
   const  {currentUser} = useSelector((state) => state.user)
-
+  const [openSideBarMb, setOpenSideBarMb] = useState(false)
+  const [openRightbar, setOpenRightbar] = useState(false)
+  const socketio = useRef() 
   useEffect(()=> {
-    setSocket(io('ws://localhost:4000'))
-    
-    socket?.on('connect',()=>{
-      console.log('user connect clinet')
-    
-    })
-    return () =>{
-      socket?.disconnect()
-    }
-
-    
+    socketio.current = (io('ws://localhost:4000'))
   },[])
   useEffect(()=>{
-    socket?.emit('addUser',currentUser?._id)
+    socketio.current.emit('addUser',currentUser?._id)
 
-    socket?.on('getUsers' , user => {
+    socketio.current.on('getUsers' , user => {
       console.log(user)
-      })
+    })
     
-  },[currentUser])
+  },[currentUser])  
 
 
   const Layout= () => {
     return (
       <>
-        <Navbar socket={socket}/>
+      <Navbar socket={socketio.current} setOpenSideBarMb= {setOpenSideBarMb} openSideBarMb={openSideBarMb} openRightbar={openRightbar} setOpenRightbar={setOpenRightbar}  />
         <div className='main'>
-          <Sidebar/>
+         <Sidebar openSideBarMb ={openSideBarMb} setOpenSideBarMb={setOpenSideBarMb} />
             <Outlet/>
-          {/* <Rightbar/> */}
+          {/* <Rightbar openRightbar={openRightbar}/> */}
 
       </div>
 
@@ -81,7 +72,7 @@ function App() {
       children:[
         {
           path:"/",
-          element: <Home socket={socket}  type="random"  />
+          element: <Home socket={socketio.current} openRightbar={openRightbar} type="random"  />
         },
         {
           path:"/newpost",
@@ -97,7 +88,7 @@ function App() {
         },
         {
           path:"/profile/:userId",
-          element: <Profile />
+          element: <Profile openRightbar={openRightbar}/>
         },
         {
           path:"/setting",
@@ -114,7 +105,7 @@ function App() {
         { 
           path:"/following/:friendId", 
           element: <Friends type= 'following'/>
-        }
+        },
       ]
     },
     {
@@ -125,10 +116,11 @@ function App() {
       path: "/signup",
       element: <Signup/>,
     }, 
-    // {
-    //   path: "/profile/:id",
-    //   element: <ProtectRoute><Profile openSearch={openSearch} setOpenSearch={setOpenSearch}/></ProtectRoute>,
-    // },
+    { 
+      path:"/message", 
+      element: <Conversation/>
+    }
+  
   ]);
 
 

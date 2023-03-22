@@ -59,9 +59,7 @@
     
     }
     
-    @media (max-width:768px){
-        display: none;    
-    }
+   
     @media (min-width:769px) and (max-width:1280px){
         display: none;    
         // flex: 1;
@@ -74,4 +72,28 @@
     }
 
 }
+ @media (max-width:768px){
 
+        .rightbar-container{
+            display: none;
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            z-index: 10;
+            top: 60px;
+            width: 100%;
+            position: fixed;
+            .rightbar-wapper{
+                width: 100%;
+            }
+            .user-online{
+                margin: 0;
+                height: 100%;
+            }
+        }
+       
+    }
+.active {
+    display: block;
+}
+    

@@ -4,10 +4,10 @@
 .main{
     background-color: $bgColor;
     display: flex;
-    // padding-top: 10px;
-    // gap: 30px
+  
     @media (max-width:767px){
-      // display: block;
-
+      display: block;
+        
+     
     }
 }

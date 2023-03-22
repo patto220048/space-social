@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import Online from "../../components/onlineUser/Online";
 import RequestFriend from "../../components/requestFriend/RequestFriend";
 import "./rightbar.scss"
-function Rightbar() {
+function Rightbar({openRightbar}) {
     const  {currentUser} = useSelector((state) => state.user)
     return ( 
-        <div className="rightbar-container">
+        <div className={"rightbar-container "+( openRightbar ? 'active' : <></>)}>
             <div className="rightbar-wapper">
                     {currentUser.pendding?.map((users,i)=>(
                         <RequestFriend users={users} key={i}/>

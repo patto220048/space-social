@@ -40,7 +40,7 @@ function Friends({type}) {
         <div className="container-friend">
             <div className="tags">
             {tagsList.map((btn, index)=>(
-                <Link to ={`${btn.link}/${paramId.friendId}`} key={index}>
+                <Link to ={`${btn.link}/${paramId.friendId}`} key={index} style={{textDecoration:'none'}}>
                 <button className={"tags-btn "+ (activeTab=== index && 'active')} onClick={()=>setActiveTab(index)}>{btn.name}</button>
                 </Link>
             ))}

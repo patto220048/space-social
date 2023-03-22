@@ -157,5 +157,37 @@
        }
     }
    
+   
     
+}
+
+
+@media (max-width:767px){
+    .container-setting{
+        
+        // display: flex;
+        padding: 0;
+        .wapper-setting{
+            align-items: center;
+            flex-direction: column;
+            display: flex;
+            width:  100%;
+            gap: 30px;
+            .left{
+                padding: 0;
+            }
+            .right{
+                width: 100%;
+                flex: 0;
+                .right-items{
+                    padding: 0;
+                    margin: 0;
+                    .fullname{
+                        width: 100%;
+                        padding-left: 60px;
+                    }
+                }
+            }
+        }
+    }
 }

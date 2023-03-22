@@ -9,9 +9,10 @@ import { async } from '@firebase/util';
 import axios from 'axios';
 import {io} from 'socket.io-client'
 import { useSelector } from 'react-redux';
-
-
-function Navbar({socket}) {
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+import CloseIcon from '@mui/icons-material/Close';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+function Navbar({socket, setOpenSideBarMb, openSideBarMb , openRightbar, setOpenRightbar}) {
     const  {currentPost} = useSelector((state) => state.post)
     const [openNotifi, setNotifi] = useState(false)
     const [notifications, setNotifications] = useState([])
@@ -65,7 +66,13 @@ function Navbar({socket}) {
                     
                     <h1 className="logo"><img src={logo} alt="" />SPACE</h1>
                 </Link> 
+                <div className="mobile-menu">
+                    <span onClick={()=>setOpenSideBarMb(!openSideBarMb)}><DensityMediumIcon/></span>
+                </div>
                 <Search/>
+                <div className="mobile-menu">
+                    <span onClick={()=>setOpenRightbar(!openRightbar)}><PeopleAltIcon/></span>
+                </div>
                 <div className="nav-items">
                     <div className="nav-user">
                         <div className="nav-link">
@@ -94,18 +101,7 @@ function Navbar({socket}) {
                                     </div>
                                     }
                         </div>
-                        {/* <img src="https://images.unsplash.com/photo-1675372339768-14ed0300cd37?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" />
-                        <div className="menu-icon">
-                            <ArrowDropDownIcon/>
-                        </div>
-                        <div className="menu-options">
-                            <div className="menu-items">
-                                <p>hello</p>
-                                <p>123</p>
-                                <p>123</p>
-                                <p>123</p>
-                            </div>
-                        </div> */}
+                       
                     </div>
                 </div>
             </div>

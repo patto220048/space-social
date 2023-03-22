@@ -12,7 +12,7 @@ import EditPost from "../../components/editPost/EditPost";
 import Share from "../../components/share/Share";
 
 
-function Home({type,socket}) {
+function Home({type,socket,openRightbar}) {
     
     
     const [openMenuPost, setOpenMenuPost] = useState(false)
@@ -36,7 +36,7 @@ function Home({type,socket}) {
                 </div>
                 
             </div>
-            <Rightbar/>
+            <Rightbar openRightbar={openRightbar}/>
         </>
       );
   

@@ -1,0 +1,38 @@
+@import '../../gobal';
+.friendMsg-container{
+    // background-color: rgba($color: $bgColor, $alpha: 0.6);
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba($color: $colorMain, $alpha: 0.4); 
+    }
+    .items{
+        padding-left: 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .last-msg{
+            span{
+                color: $textColor;
+                font-size: 25px;
+                font-weight: 600;
+            }
+            p{
+                color: $textColor;
+                text-overflow:ellipsis;
+                max-height: 50px;
+                overflow: hidden;
+                
+            }
+
+        }
+       
+    }
+}

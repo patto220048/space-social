@@ -5,15 +5,20 @@ const Notification = require('../model/notificationModel')
 class NotificationController{
     //create commnet
     async createNotifi(req, res, next){
-        const newNoti = await Notification({...req.body})
-        try {
-            const savedNoti = await newNoti.save()
-            res.status(200).json(savedNoti)     
-            
-        } catch (err) {
-            res.status(500).json(err.message)
-            
-        }
+        
+            const newNoti = await Notification({...req.body})
+            try {
+                const savedNoti = await newNoti.save()
+                res.status(200).json(savedNoti)     
+                
+            } catch (err) {
+                res.status(500).json(err.message)
+                
+            }
+
+        
+       
+      
 
 
     }

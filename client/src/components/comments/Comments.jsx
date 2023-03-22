@@ -17,7 +17,8 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
     const [isloading, setIsLoading] = useState(false)
     const [decsSocket, setDecsSocket ] = useState(null) //
 
-    
+  
+
     //focus cmt
     const focus = useRef(null)
     useEffect(()=>{
@@ -35,15 +36,15 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
             setDecsSocket({
                 userId: data.user.userId,
                 comment : data.decs,
-                postId : data.postId,
+                postId : data?.postId,
                 createdAt: Date.now(),
             })
         })
     },[])
 
     useEffect(()=>{
-        decsSocket && setComments((prev)=>[...prev, decsSocket])
-    },[decsSocket])
+        decsSocket?.postId && setComments((prev)=>[...prev, decsSocket])
+    },[decsSocket?.postId])
 
 
     

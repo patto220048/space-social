@@ -250,7 +250,6 @@
                     justify-content: space-between;
                     width: 100%;
                     margin: 0 auto;
-           
                     padding: 20px;
            
                     p{
@@ -492,6 +491,21 @@
 
                         }
                     }
+                    .btn-fl{
+                        .follow1{
+                            left: -30px;
+                            width: 100px;
+                        }
+                        .follow2{
+                            right: -30px;
+                            width: 100px;
+                        }
+                        .follow3{
+                            left: -30px;
+                            width: 100px;
+                            z-index: 1;
+                        }
+                    }
                     .avatar{
                         .avatar-img{
                             width: 80px;
@@ -505,14 +519,25 @@
                         }
                     }
                     .name-user{
-                      
+                       
+                        transform: translateY(-20%);
                     }
 
                     .profile-mid{
                         width: 100%;
-                        padding-top: 0;
+                        padding-top: 0px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        
                         p{
                             font-size: 15px;
+                            width: 100px;
+
+                            span{
+                                font-size: 20px;
+                            }
                         }
                     }
 

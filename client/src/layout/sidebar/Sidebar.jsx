@@ -16,7 +16,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-function Sidebar() {
+function Sidebar({openSideBarMb, setOpenSideBarMb}) {
     const  {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
@@ -33,14 +33,15 @@ function Sidebar() {
                     { icon :<AccountCircleIcon />, span : <span>PROFILE</span>, link: `/profile/${currentUser._id}` },
             
                     { icon :<GroupIcon/>, span :<span>FRIEND</span>,link:`/friend/${currentUser._id}`},            
-                    { icon :<ChatIcon/>, span : <span>MESSAGE</span>,link: "/"  },
+                    { icon :<ChatIcon/>, span : <span>MESSAGE</span>,link: "/message"  },
                     { icon : <SettingsIcon/>, span :<span>SETTING</span>,link: "/setting"  },
                     { icon :<HelpIcon/> , span : <span>HELP</span>,link: "/"  },
                     { icon : <LogoutIcon onClick={handleLogout}/> , span :<span onClick={handleLogout}>LOGOUT</span>},
                     ]
                     
     return ( 
-        <div className="sidebar-container">
+        <>
+            <div className={"sidebar-container "+(openSideBarMb ? 'active' : <></>)}>
             <div className="sidebar">
                 <div className="sidebar-item">
                     <div className="avatar">
@@ -59,7 +60,7 @@ function Sidebar() {
                     <div className="line"></div>
                     <div className="top-side" > 
                         {listTop.map((item,index)=>
-                          <Link  key={index} style={{textDecoration:"none"}} to={item.link}>
+                          <Link  key={index} style={{textDecoration:"none"}} to={item.link} onClick={()=>setOpenSideBarMb(false)} >
                             <div className={"top " + (active === index ? "active" : "none" )} onClick={()=> setActive(index)} >
                           
                                 <div className="top-icon "  >
@@ -76,15 +77,9 @@ function Sidebar() {
                    
               
                 </div>
-                <div className="touch">  
-                </div>
-                
-
-
             </div>
-          
-           
         </div>
+        </>
      );
 }
 

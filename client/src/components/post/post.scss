@@ -52,7 +52,7 @@
                    
                 }
                 .option{
-                    padding-right: 10px;
+                    // padding-right: 10px;
                     position: relative;
                     button{
                         cursor: pointer;
@@ -208,6 +208,28 @@
                  }
                
             }
+            }
+        }
+    }
+}
+
+@media (max-width:767px){
+    .post-container{
+        .post-wapper{
+            .post-items{
+                .user-info{
+
+                }
+                .post-action{
+                    .action-btn{
+                        width: 100%;
+                        .likeBtn{
+                            span{
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

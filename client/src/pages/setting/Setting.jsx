@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import Warning from "../../components/warningSetting/Warning";
+import Rightbar from "../../layout/rightbar/Rightbar";
 function Setting() {
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const navigate = useNavigate()
@@ -110,6 +111,7 @@ function Setting() {
 
     const handleCancel = () =>{
         setEditUsername(false)
+        setInputUsername('')
         setEditCountry(false)
         setEditAge(false)
         setEditPass(false)
@@ -140,7 +142,8 @@ function Setting() {
                          {editUsername ?
                          <div className="name-items">
                              <input 
-                             className="name-input"
+                             value={inputUsername}
+                                className="name-input"
                               type="text" 
                               placeholder={currentUser.username} 
                               onChange={(e)=>setInputUsername(e.target.value)}
@@ -236,6 +239,12 @@ function Setting() {
         {openWarning &&
             <Warning openWarning={openWarning} setOpenWarning={setOpenWarning} handleDelAcc={handleDelAcc} />
         }
+
+    
+
+       
+        
+
     </>
         
 
