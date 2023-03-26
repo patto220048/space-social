@@ -19,7 +19,7 @@ function Navbar({socket, setOpenSideBarMb, openSideBarMb , openRightbar, setOpen
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const logo = process.env.REACT_APP_PUBLIC_FOLDER + "logo.png" 
     
-    console.log(notifications)
+    // console.log(notifications)
     // useEffect(() => {
     //     const fectchNotifi = async()=>{
     //         try {

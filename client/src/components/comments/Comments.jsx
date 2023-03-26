@@ -76,6 +76,7 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
                 decs: desc,
                 postId: post._id ,
             })
+            // socketio.current.emit("test1", {uid : currentUser._id, ssid :ssId, decs : 'hello world' } )
             try {
                 const res = await axios.post(`/comment/create`,{
                     postId : post?._id ,

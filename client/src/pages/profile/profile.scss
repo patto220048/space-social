@@ -179,6 +179,40 @@
                         }
 
                     }
+                    .follow4{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        right: 0;
+                        bottom: -60px;
+                        top: 70px;
+                        padding: 5px;
+                        width: 150px;
+                        height: 35px;
+                        border: none;
+                        background-color: $colorMain;
+                        color: $textColor;
+                        border-radius: 10px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.5s ease-in-out;
+                        span{
+                            font-size: 15px;
+                            display: flex;
+                            align-items: center;
+                        }
+                        &:hover{
+                            background-color:aliceblue;
+                            color: black;
+                            border: 1px solid black;
+                            transform: scale(1.1);  
+                             
+                            
+                        }
+
+
+                    }
                     
                 }
 

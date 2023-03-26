@@ -12,7 +12,6 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { postAdd, postDelImg, postUpdate } from '../../redux/postSlice';
 function EditPost({post ,text,openEditPost, setOpenEditPost, setText, setImg, img, handleEditPost ,setIputs, inputs, postImg ,handleDelImg,postDesc,setOpenMenuPost}) {
     const dispatch = useDispatch()
-    console.log(inputs.imgPost)
     const  {currentPost} = useSelector((state) => state.post)
 
     const uploadFile = (file, type ) =>{

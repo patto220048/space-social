@@ -252,8 +252,12 @@ function Post({post,socket}) {
                              </button>
                            { openMenuPost &&
                            <div className="option-menu">
+                               { currentPost.some(post=> post.userId === currentUser._id ) &&
+                                <>
                                 <span onClick={handleOpenWarning} >Delete </span>
                                 <span onClick={()=>setOpenEditPost(true)}>Edit</span>
+                                </>
+                               }
                                 <span>Report</span>
                             </div>}
                         </div>

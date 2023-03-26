@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+
 
 import { loginFail, loginStart, loginSuccess } from "../../redux/userSlice";
 
@@ -27,6 +30,17 @@ function Signup() {
     const handleSignup= (e) => {
         e.preventDefault();
         dispatch(loginStart())
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode,errorMessage )
+            });
         try {
                 const fecthSignup = async() => {
                 try {
@@ -92,7 +106,7 @@ function Signup() {
                                     name="username" 
                                     placeholder="username" 
                                     required
-                                    pattern="" 
+                                    // pattern="" 
                                     minLength={3} 
                                     maxLength={16}
                                     onBlur ={()=>setFocused1(true)}
@@ -143,7 +157,7 @@ function Signup() {
                             </button>
                             <span className="forgot-pw">
                                 <Link to="/login">
-                                <a href="#">Login</a>
+                                <span href="#">Login</span>
                                 </Link>
                             </span>
                         </form>

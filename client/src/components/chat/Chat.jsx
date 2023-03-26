@@ -1,14 +1,32 @@
 import './chat.scss'
 
 import { format } from 'timeago.js'; 
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
-function Chat({message,owner}) {
+function Chat({message,owner, friendId}) {
+    const [user,setUser] = useState([])
+    const  {currentUser} = useSelector((state) => state.user)
+    const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
+
+    useEffect(()=>{
+        const fetchUser = async() =>{
+            try {
+                const res = await axios.get(`/user/find/${friendId}`)
+                setUser(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchUser()
+    },[friendId])
     return ( 
             <div className={owner ? "contents owner" :"contents" }>
                 
                 <div className= "item">
-                    <img src="https://images.unsplash.com/photo-1674574124475-16dd78234342?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" />
+                    <img src={owner ? (currentUser.userImg || noAvatar ):(user.userImg || noAvatar )  }/>
                     <div className="message">
                         <p className="msg">{message.text}</p>
                         <span className="time">{format(message.createdAt)}</span>

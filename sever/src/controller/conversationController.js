@@ -12,7 +12,7 @@ class ConversationController{
             const savedConver =   await newConversation.save()
             res.status(200).json(savedConver)
         } catch (err) {
-            res.status(500).json(err.message)
+            res.status(500).json(err.message)   
             
         }
     }

@@ -8,16 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {signInWithPopup} from "firebase/auth";
 import { auth,providerGG } from "../../firebase/firebase";
 import ReactLoading from 'react-loading';
-
+import { v4 as uuidv4 } from 'uuid';
 import "./login.scss"
 //icon
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import IsLoading from "../../components/loading/IsLoading";
 
+function Login({socket}) {
 
-
-function Login() {
     const isLoading = useSelector((state) => state.user.loading)
   
     const textRef = useRef() // itype
@@ -33,15 +32,27 @@ function Login() {
     const [watchPassword, setWatchPassword] = useState(false)
 
 
+    const generateSessionId = () =>{
+        const sessionId = uuidv4(); // generate a random UUID
+        return sessionId;
+    }
 
     const handlelogin = (e) =>{
         e.preventDefault();
         dispatch(loginStart())
+        // soket connection
+        const sessionId =  generateSessionId()
+        localStorage.setItem("sessionID", sessionId);
+        socket.auth = { sessionId };
+        socket.emit('sessionId', sessionId);
+        socket.connect();
+
         const fecthLogin = async () =>{
+           
         try {
             const res = await axios.post('/auth/login',{email,password})
-            dispatch(loginSuccess(res.data))
-            navigate(`/`)
+                dispatch(loginSuccess(res.data))
+                navigate(`/`)
             }
         catch (err) {
                 setErr(err.response.data)
@@ -54,6 +65,12 @@ function Login() {
     }
     const handleloginwithGG = () => {
         dispatch(loginStart())
+         // soket connection
+         const sessionId =  generateSessionId()
+         localStorage.setItem("sessionID", sessionId);
+         socket.auth = { sessionId };
+         socket.emit('sessionId', sessionId);
+         socket.connect()
         signInWithPopup(auth, providerGG)
             .then((result)=>{
                 axios.post('/auth/withgg',{

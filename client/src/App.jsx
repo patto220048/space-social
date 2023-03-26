@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {io} from 'socket.io-client'
-
+import { loginSuccess, logout } from './redux/userSlice';
 
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
@@ -29,18 +29,53 @@ function App() {
   const  {currentUser} = useSelector((state) => state.user)
   const [openSideBarMb, setOpenSideBarMb] = useState(false)
   const [openRightbar, setOpenRightbar] = useState(false)
-  const socketio = useRef() 
-  useEffect(()=> {
-    socketio.current = (io('ws://localhost:4000'))
-  },[])
+  const dispatch = useDispatch()
+  
+  const socketio = useRef(io('ws://localhost:4000' ,{
+    autoConnect: false 
+ }) )
+  
+ useEffect(()=> {
+  socketio.current = (io('ws://localhost:4000' ,{
+     autoConnect: false 
+  }))
+},[])
+
+ useEffect(()=>{
+
+  const sessionId = localStorage.getItem("sessionID");
+  if (sessionId) {
+    socketio.current.auth = { sessionId };
+    socketio.current.connect();
+  }
+ },[])
+
+
+
   useEffect(()=>{
-    socketio.current.emit('addUser',currentUser?._id)
+    //login err
+    socketio.current.on("connect_error", (err) => {
+      if (err.message === "invalid sessionId") {
+          console.log('invalid sessionId')
+          dispatch(logout())
+      }else{
+        socketio.current.off("connect_error");
+      }
+    });
+
+
+    socketio.current.on('users', (users) => console.log(users))
+    
+    //test 
+
+    socketio.current.on('test', data=> console.log(data))
+   
+    socketio.current.emit('addUser', currentUser?._id)
 
     socketio.current.on('getUsers' , user => {
       console.log(user)
     })
-    
-  },[currentUser])  
+  },[])  
 
 
   const Layout= () => {
@@ -106,20 +141,21 @@ function App() {
           path:"/following/:friendId", 
           element: <Friends type= 'following'/>
         },
+        { 
+          path:"/message", 
+          element: <Conversation socket={socketio.current}  openSideBarMb ={openSideBarMb} />
+        }
       ]
     },
     {
       path: "/login",
-      element: <Login/>,
+      element: <Login socket={socketio.current}/>,
     },
     {
       path: "/signup",
       element: <Signup/>,
     }, 
-    { 
-      path:"/message", 
-      element: <Conversation/>
-    }
+   
   
   ]);
 

@@ -5,20 +5,24 @@ import Navbar from '../../layout/navbar/Navbar';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import Sidebar from '../../layout/sidebar/Sidebar';
 
 
 
 
-function Message() {
+function Message({socket}) {
+  const sessionId = localStorage.getItem("sessionID");
 
     const [conversation , setConversation] = useState([])
     const  {currentUser} = useSelector((state) => state.user)
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
+    const [arrMessage, setArrMessage] = useState(null)
     const scrollRef = useRef()
-    useEffect(()=>{
 
+
+    useEffect(()=>{
         const getConversation = async () => {
             try {
                 const res = await axios.get(`/conversation/${currentUser._id}`)
@@ -53,6 +57,16 @@ function Message() {
             sender: currentUser._id ,
             text: newMessage ,
         }
+        //socket io send data to sv
+        const receiverId = currentChat.members.find(member => member !== currentUser._id)
+        socket?.emit('sendMessage', {
+            senderId: currentUser._id,
+            receiverId: receiverId,
+            text: newMessage,
+        })
+
+
+
         try {
             const res = await axios.post(`/message`,message )
             setMessages([...messages, res.data])
@@ -62,6 +76,21 @@ function Message() {
         setNewMessage('')
 
     }
+    // get data from server
+    useEffect(()=>{
+        socket?.on('getMessage', data =>{
+            setArrMessage({
+                sender:data.senderId,
+                text:data.text,
+                createdAt: Date.now(),
+            })
+        })
+    },[])
+
+    useEffect(()=>{
+        arrMessage  && currentChat?.members.includes(arrMessage.sender) && 
+        setMessages(prev => [...prev, arrMessage])
+    },[arrMessage, currentChat])
 
     
     useEffect(()=>{
@@ -71,15 +100,14 @@ function Message() {
 
     return ( 
         <>
-        <Navbar/>
         <div className="conversation-container">
             <div className="conversation-wapper">
                 <div className="conversation-items">
                     <div className="left">
                         <h1>Friends</h1>
-                        {conversation.map((conver, index)=>(
-                            <div onClick={()=>setCurrentChat(conver)} key={index}>
-                                <FriendMsg conversation = {conver}/>
+                        {conversation.map((conversation, index)=>(
+                            <div onClick={()=>setCurrentChat(conversation)} key={index}>
+                                <FriendMsg conversation = {conversation}/>
                             </div>
                         ))}
                     </div>
@@ -89,7 +117,9 @@ function Message() {
                            <div className="chat-container">
                             {messages.map((message, index)=>(
                                 <div ref={scrollRef} key= {index}>
-                                    <Chat message={message} owner = {message.sender === currentUser._id}/>
+                                    <Chat message={message} owner = {message.sender === currentUser._id} 
+                                        friendId = {currentChat.members.find(member => member !== currentUser._id)}
+                                        />
                                 </div>
 
                             ))}

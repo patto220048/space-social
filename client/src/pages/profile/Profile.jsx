@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './profile.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import {follow, loginSuccess, waitting , remove} from "../../redux/userSlice";
 import { Link } from 'react-router-dom';
@@ -29,6 +29,7 @@ function Profile({posts,openRightbar}) {
     const  {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const paramId = useParams()
+    const navigate = useNavigate()
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const noBg = process.env.REACT_APP_PUBLIC_FOLDER + "no_bg2.png" 
 
@@ -125,6 +126,23 @@ function Profile({posts,openRightbar}) {
 
     }
 
+    const handleMessage = async() =>{
+        try {  
+
+           const res =  await axios.post(`/conversation`,{
+                senderId: currentUser._id,
+                receiverId : paramId.userId
+           })
+           navigate('/message')
+
+       } catch (err) {
+           console.log(err.message)
+
+       }
+        
+
+    }
+
     return ( 
         <>
             <div className="profile-container">
@@ -182,13 +200,23 @@ function Profile({posts,openRightbar}) {
                                 ?
                                     <>
 
-                                  {openRemove&&
+                                  {openRemove &&
                                     <button className='follow3' onClick={handleRemove} >
                                         <span>Remove</span>   
                                     </button>}
                                     </>
                                     :
                                     <></>
+                                }
+
+                                {currentUser._id === paramId.userId 
+                                    ?
+                                    <></>
+                                    :
+                                   <button className='follow4' onClick={handleMessage} >
+                                        <span>Message</span>   
+                                    </button>
+                                    
                                 }
                               
                                  
