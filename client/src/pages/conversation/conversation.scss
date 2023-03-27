@@ -34,8 +34,9 @@
                 }
             }
             .right{
-                padding-top:20px ;
+                padding-top:30px ;
                 width: 100%;
+                height: 100%;
                 flex: 3;
                 background-color: $bgColor;
                 position: relative;
@@ -44,8 +45,7 @@
                     flex-direction: column;
                     justify-content: space-between;
                     overflow-y: scroll;
-                  
-                    max-height: 750px ;
+                    height:90%;
                     &::-webkit-scrollbar{
                         display: none;
                     }
@@ -114,6 +114,42 @@
                 display: flex;
                 cursor: default;
                 
+            }
+        }
+    }
+    @media (max-width:767px){
+
+        .conversation-wapper{
+            .conversation-items{
+                flex-direction: column;
+                .left{
+                    gap: 10px;
+                    flex: 0.425;
+                    h1{
+                        display: none;
+                    }
+                    padding: 0;
+                    flex-direction:row;
+                }
+                .right{
+                    padding-top: 0;
+                    height: 80%;
+                    .chat-container{
+                        height:90%
+                    }
+                    .input{
+                        padding-bottom: 0;
+                       .text-message{
+                        gap: 5px;
+                        padding: 5px;
+                            textarea{
+                                border-radius: 5px;
+                                
+                            }
+                       }
+                    }
+
+                }
             }
         }
     }

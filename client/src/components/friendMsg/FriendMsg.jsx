@@ -29,7 +29,7 @@ function FriendMsg({conversation}) {
                 
                 <img src={user?.userImg || noAvatar } alt="" />
                <div className="last-msg">
-                    <span>{user?.username}</span>
+                    <span>{user?.username }</span>
            
                </div>
                 

@@ -112,8 +112,8 @@ function Message({socket}) {
                         ))}
                     </div>
                     <div className="right">
+                    
                         {currentChat ?
-
                            <div className="chat-container">
                             {messages.map((message, index)=>(
                                 <div ref={scrollRef} key= {index}>

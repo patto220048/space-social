@@ -50,8 +50,16 @@
             }
         
         }
-        
-   }
+
+        @media (max-width:767px){
+
+            .item{
+                padding-left: 10px;
+                gap: 10px;
+            }
+        }
+
+}
    
       
 

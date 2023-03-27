@@ -23,16 +23,35 @@
                 color: $textColor;
                 font-size: 25px;
                 font-weight: 600;
-            }
-            p{
-                color: $textColor;
                 text-overflow:ellipsis;
-                max-height: 50px;
-                overflow: hidden;
-                
+                max-width:50px;
+                overflow: hidden; 
             }
+
 
         }
        
+    }
+    @media (max-width:767px){
+        padding: 0;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .items{
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+           
+            .last-msg{
+                span{
+                    font-weight: 600;
+                    text-overflow:ellipsis;
+                    max-width:20px;
+                    overflow: hidden;
+                    font-size: 10px;
+                }
+            }
+        }
     }
 }

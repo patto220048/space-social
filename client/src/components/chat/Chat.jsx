@@ -24,7 +24,6 @@ function Chat({message,owner, friendId}) {
     },[friendId])
     return ( 
             <div className={owner ? "contents owner" :"contents" }>
-                
                 <div className= "item">
                     <img src={owner ? (currentUser.userImg || noAvatar ):(user.userImg || noAvatar )  }/>
                     <div className="message">
