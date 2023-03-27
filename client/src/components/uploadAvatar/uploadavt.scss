@@ -92,6 +92,8 @@
                         display: flex;
                         flex-direction: column;
                         padding-bottom: 10px;
+                        gap:10px;
+
 
                         .name{
                             color: $textColor;
@@ -161,4 +163,35 @@
          }
         
     }
+    @media (max-width:767px){
+        padding-top: 20px;
+        .upload-avt-wapper{
+            width: 360px;
+            height: 570px;
+            .items{
+                .wapper-items{
+                    .background{
+                        .background-img{
+                            width: 360px;
+                            height: 100px;
+                        }
+
+                    }
+                    .avatar{
+                        .avatar-img{
+                            width: 100px;
+                            height: 100px;
+                        }
+                    }
+                    .input{
+                        .input-avt{
+                            gap:10px
+                        }
+                    }
+                }
+            }
+
+        }
+    
+}
 }
