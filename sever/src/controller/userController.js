@@ -3,7 +3,6 @@ const Post = require('../model/postModel')
 const Comment = require('../model/commentModel')
 
 const bcrypt = require('bcryptjs')
-const { query } = require('express')
 
 class userController {
 

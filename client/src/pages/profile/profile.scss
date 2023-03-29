@@ -539,6 +539,13 @@
                             width: 100px;
                             z-index: 1;
                         }
+                        .follow4{
+                            width: 100px;
+                            right: -30px;
+                            z-index: 1;
+
+
+                        }
                     }
                     .avatar{
                         .avatar-img{
@@ -554,7 +561,8 @@
                     }
                     .name-user{
                        
-                        transform: translateY(-20%);
+                        transform: translateY(5%);
+                        padding: 30px;
                     }
 
                     .profile-mid{

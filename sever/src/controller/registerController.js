@@ -40,12 +40,12 @@ class loginController{
         try {
             const user = await User.findOne({email:req.body.email})
             
-            if(!user) return res.status(403).json("User not found")
+            if(!user) return res.status(403).json("USER NOT FOUND !")
 
             const isCorrectPassword = await bcrypt.compare(req.body.password, user.password)
 
             if(!isCorrectPassword) {
-                res.status(403).json("Invalid password")
+                res.status(403).json("INVALID PASSWORD !")
             }
             else {
                 const token = jwt.sign(
@@ -120,6 +120,30 @@ class loginController{
     async signout (req, res ,next){
         res.clearCookie('access_token')
         res.status(200).json('Clear cookies successfully!!')
+    }
+
+
+    async findEmail(req, res, next){
+        try {
+            const user = await User.findOne({email:req.body.email})
+            const token = jwt.sign(
+                {id:user._id, admin:user.admin}
+                ,process.env.JWT_PW,
+                { expiresIn: '1d' })
+            const {_id,email} = user._doc
+            const cookie = res.cookie('access_token', token,{
+                httpOnly: true,
+                path: '/',
+
+            })
+            res.status(200).json(_id)
+            
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+        
+
+        
     }
     
 }

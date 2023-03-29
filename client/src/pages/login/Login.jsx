@@ -14,18 +14,21 @@ import "./login.scss"
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import IsLoading from "../../components/loading/IsLoading";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function Login({socket}) {
-
     const isLoading = useSelector((state) => state.user.loading)
-  
+    const [resetPass, setResetPass] = useState(false)
+    const [verifyEmail, setVerifyEmail] = useState(false)
+    const [emailId, setEmailId] = useState('')
     const textRef = useRef() // itype
-
+    
     //handle login
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [err, setErr] = useState('')
-
+    const [newPassword, setNewPassword] = useState('')
+    const [focusPass, setFocusPass] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     //watch password
@@ -85,17 +88,47 @@ function Login({socket}) {
                    navigate('/')
                 })
                 .catch(err => {
-                    setErr("LOGIN FAILED !!!")
+                    setErr("LOGIN FAILED !")
                     dispatch(loginFail())
                 }) 
              
             })  
             
             .catch (err => {
-                setErr("LOGIN FAILED !!!")
+                setErr("LOGIN FAILED !")
                 dispatch(loginFail())
                 console.log(err)
             })
+    }
+
+    const hanldeResetPassword = async(e) =>{
+        e.preventDefault();
+        try {
+            const res = await axios.post('/auth/reset',{email})
+            setEmailId(res.data)
+            setVerifyEmail(true)
+           
+            }
+        catch (err) {
+            setErr("EMAIL NOT FOUND !")
+            }
+        
+    }
+    const hanldeSubmitNewPass = async (e) =>{
+        e.preventDefault();
+        try {
+            const res = await axios.put(`/user/edit/${emailId}`,{password: newPassword})
+            alert("Password changed successfully!")
+            navigate('/')
+            }
+        catch (err) {
+            console.log(err.message)
+        }
+
+    }
+    const handleForget = () =>{
+        setResetPass(true)
+        setErr('')
     }
 
     useEffect(()=>{
@@ -121,7 +154,7 @@ function Login({socket}) {
 
                     </div>
                     <div className="right">
-                        <h1>LOGIN</h1>
+                       { resetPass ? <h1>reset</h1>:<h1>LOGIN</h1>}
                         <h2 className="err">{err}</h2>
                         <form className="login-form" >
                             <div className="loign-input">
@@ -131,31 +164,82 @@ function Login({socket}) {
                                     className="email" 
                                     placeholder="email" 
                                     onChange={(e)=>setEmail(e.target.value)} />
+                                    {verifyEmail &&
+                                        <div className="verify">
+                                        <CheckCircleIcon />
+                                    </div>}
                                 </div>
+                                {verifyEmail &&
+                                <div className="pass">
+                                    <input 
+                                    type={ watchPassword ? "text":"password"} 
+                                    className="password" 
+                                    placeholder="new password" 
+                                    onBlur={()=>setFocusPass(true)}
+                                    focused = {focusPass.toString()}
+                                    required 
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    onChange={(e)=>setNewPassword(e.target.value)} 
+                                    />
+                                    
+                                    <span className="watchPass" onClick= {()=>setWatchPassword(!watchPassword)}>
+                                        { watchPassword ?<RemoveRedEyeRoundedIcon/>:<VisibilityOffRoundedIcon/>}
+                                    </span>
+                                    <p className="valid">Password not valid ( min "8" characters or number, and one "A" and one "a" )</p>
+                                </div>
+                                
+                                }
+                                {!resetPass && 
                                 <div className="pass">
                                     <input 
                                     type={watchPassword ? "text":"password"} 
                                     className="password" 
                                     placeholder="password" 
                                     onChange={(e)=>setPassword(e.target.value)} 
-                                   
                                     />
                                     <div className="watchPass" onClick= {()=>setWatchPassword(!watchPassword)}>
                                    { watchPassword ?<RemoveRedEyeRoundedIcon/>:<VisibilityOffRoundedIcon/>}
                                     </div>
                                 </div>
+                                }
                             </div>
                                 { isLoading ?
                                 <div className="loading-item">
                                     <ReactLoading type='cylon' color='#000000'/>
                                 </div>
                                 :
-                                <button type="submit" className="submit" onClick={handlelogin} >  
+                                <>
+
+                                {resetPass ?
+                                <>
+                                {verifyEmail ?
+                                    <button type="submit" className="submit" onClick={hanldeSubmitNewPass}> 
+                                        Change
+                                    </button> 
+                                    :
+                                     <button type="submit" className="submit" onClick={hanldeResetPassword}> 
+                                     OK
+                                    </button>
+                                }
+                                   
+                                </>
                                 
+                                :
+                                <button type="submit" className="submit" onClick={handlelogin} >  
                                     LOGIN
-                                </button>}
+                                </button>
+                                }
+                                </>
+                                }
                             <span className="forgot-pw">
-                                <a href="#">I forget my password?</a>
+
+                               {!resetPass ?
+                                <span onClick={handleForget}>I forget my password?</span>
+                                :
+                                <Link to='/'>
+                                <span>Login?</span>
+                                </Link>
+                                }
                                 <br />
                                 <Link to='/signup'>
                                 <span>Sign up</span>
@@ -163,7 +247,7 @@ function Login({socket}) {
                                 
                             </span>
                         </form>
-                        <span style={{color:'white'}}>&</span>
+                        <span >&</span>
                         <div className="login-social">
                             <button className="google" onClick={handleloginwithGG}>
                                 <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="" />
