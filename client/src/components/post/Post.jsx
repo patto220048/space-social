@@ -30,7 +30,7 @@ function Post({post,socket}) {
     ////// user ///////////
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [user, setUser] = useState([])
-
+ 
     const [onePost, setOnePost] = useState({})  
     const [like, setLike] = useState(0)
     const [openMenuPost, setOpenMenuPost] = useState(false)
@@ -252,14 +252,15 @@ function Post({post,socket}) {
                              </button>
                            { openMenuPost &&
                            <div className="option-menu">
-                               { currentPost.some(post=> post.userId === currentUser._id ) &&
+                               {currentPost.some((post =>post._id === onePost?._id && post.userId === currentUser._id)) &&  
                                 <>
                                 <span onClick={handleOpenWarning} >Delete </span>
                                 <span onClick={()=>setOpenEditPost(true)}>Edit</span>
                                 </>
                                }
                                 <span>Report</span>
-                            </div>}
+                            </div>
+                            }
                         </div>
                     </div>
                     <div className="line"></div>
