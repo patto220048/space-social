@@ -12,7 +12,11 @@ import { useDispatch } from "react-redux";
 import { postAdd } from "../../redux/postSlice";
 
 
+import PanoramaIcon from '@mui/icons-material/Panorama';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+
 import IsLoading from "../loading/IsLoading";
+
 function Upload({openUpload, setOpenUpload,avatar}) {
     //
     const navigate = useNavigate()
@@ -21,9 +25,12 @@ function Upload({openUpload, setOpenUpload,avatar}) {
 
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [img, setImg] = useState(undefined)
+    console.log(img)
     const [inputs ,setInputs] = useState({})
     const [imgPercent, setImgPercent] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
+    //open menu upload img/video
+    const [openImgAndVideo , setOpenImgAndVideo] = useState(false)
     //get input 
     const handleChange= (e) => {
         setInputs((pre)=>{
@@ -107,11 +114,7 @@ function Upload({openUpload, setOpenUpload,avatar}) {
                
                 <div className="upload-wapper">
                    
-                    <div className="close">
-                        <button className="close-btn" onClick={()=>setOpenUpload(false)}> 
-                            <CloseIcon/>
-                        </button>
-                    </div>
+                    
 
                 {  isLoading &&
                     <IsLoading/>
@@ -119,6 +122,11 @@ function Upload({openUpload, setOpenUpload,avatar}) {
                    
                    
                     <div className="items">
+                        <div className="close">
+                            <button className="close-btn" onClick={()=>setOpenUpload(false)}> 
+                                <CloseIcon/>
+                            </button>
+                        </div>
                         <h1 className="create-title">Create Post</h1>
                         <span className="line"></span>
                         <div className="input-upload">
@@ -126,7 +134,24 @@ function Upload({openUpload, setOpenUpload,avatar}) {
                             required
                             name="desc" 
                             id=""  
-                            placeholder="What do you thinking ?" onChange={handleChange}></textarea>
+                            placeholder="What do you thinking ?" onChange={handleChange}>
+                            </textarea>
+                       
+                            <div className="btn-menu">
+                                <button className="img-video" onClick={()=>setOpenImgAndVideo(!openImgAndVideo)}>
+                                    <PanoramaIcon /> 
+                                    <span>Img/Video</span>
+                                </button>
+                                <button className="img-video" onClick={() =>alert("This function is not available yet !")}>
+                                    <LocalOfferIcon style={{color:'rgb(30, 30, 205)'}}/>
+                                     <span>Tag</span>
+                                </button>
+                               
+                            </div>
+                          
+
+                        { openImgAndVideo ?
+                         <>
                             {inputs.imgPost 
                             ? 
                             <img src={inputs.imgPost} alt="" className="s-img" />
@@ -137,9 +162,13 @@ function Upload({openUpload, setOpenUpload,avatar}) {
                                 type="file" 
                                 accept="image/*"
                                 onChange={(e)=>setImg(e.target.files[0])}
-                                  />
-                            </button>}
-                            
+                                />
+                            </button>
+                            }
+                            </>
+                            :
+                            <></>
+                            }
                         </div>
                     </div>
                     {inputs.desc

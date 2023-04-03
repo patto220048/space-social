@@ -22,6 +22,7 @@ import WarningPost from "../warningPost/WarningPost";
 import IsLoading from "../loading/IsLoading";
 import EditPost from "../editPost/EditPost";
 
+
 function Post({post,socket}) {
     const  {currentUser} = useSelector((state) => state.user)
     const  {currentPost} = useSelector((state) => state.post)
@@ -77,7 +78,7 @@ function Post({post,socket}) {
                 dispatch(deletePost(post._id))
                 setOpenMenuPost(false)
                 setOpenWarningPost(false)
-         
+                
             } catch (error) {
                 setOpenMenuPost(false);
                 alert("Opps! You just deleted only your post")
@@ -252,7 +253,7 @@ function Post({post,socket}) {
                              </button>
                            { openMenuPost &&
                            <div className="option-menu">
-                               {currentPost.some((post =>post._id === onePost?._id && post.userId === currentUser._id)) &&  
+                               {currentPost.some((post =>post._id === onePost?._id && post.userId === currentUser._id)) || currentUser.admin &&  
                                 <>
                                 <span onClick={handleOpenWarning} >Delete </span>
                                 <span onClick={()=>setOpenEditPost(true)}>Edit</span>
@@ -267,7 +268,13 @@ function Post({post,socket}) {
                     <span className="desc">{post?.desc}
                     </span>
                     <div className="post-img">
-                        {post?.imgPost ? <img src={post?.imgPost} alt={post?.imgPost} /> : <></>}
+                        {post?.imgPost ?
+                        <>
+                            <img className ='img' src={post.imgPost } alt={post.imgPost }/>
+                        </>
+                         : 
+                         <></>
+                         }
                     </div>
                     <div className="post-info">
                         {!currentPost.some(postId => postId?._id=== onePost?._id && postId?.like?.includes(currentUser._id))
@@ -290,7 +297,7 @@ function Post({post,socket}) {
                                    <span style={{backgroundColor:'rgb(238, 78, 142',color:"white"}}><FavoriteIcon/>Liked</span>
                                    :
                                    <span><FavoriteBorderIcon/>Like</span>}
-                                </button>
+                                </button>   
                                 
                                     
                           

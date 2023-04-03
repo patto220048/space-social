@@ -21,6 +21,7 @@ const Post = new  Schema({
 
      imgPost:{
           type:String,
+        
      },
 
      tag:{

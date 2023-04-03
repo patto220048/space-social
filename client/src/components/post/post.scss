@@ -117,14 +117,20 @@
                 
             }
             .post-img{
-                width: 100%;
-                img{
-                    width:100%;
+                
+                display: flex;
+                flex-wrap: wrap;
+                
+                .img{
                     height: 720px;
+                    width: 100%;
                     object-fit: cover;
-                    
+                   
                 }
 
+                
+                
+               
             }
             .post-info{
                 width: 100%;

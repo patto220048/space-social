@@ -16,12 +16,12 @@ $black : #000000;
         display: flex;
         background-color: $colorMain;
         width: 500px;
-        height: 600px;
         margin: 0 auto;
         flex-direction: column;
         border-radius: 15px;
         justify-content: space-around;
         position: relative;
+        gap: 20px;
        
         .loading{
             position: absolute;
@@ -39,32 +39,31 @@ $black : #000000;
         
         
         
-        .close{
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            .close-btn{
-                border: none;
-                outline: none;
-                background-color: transparent;
-                margin: 5px;
-                cursor: pointer;
-                width: 35px;
-                height: 35px;
-                color: $textColor;
-                &:hover{
-                    
-                    opacity: 0.7;
-                }
-            }
-           
-        }
+       
         .items{
+            position: relative;
             flex: 3;
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+            .close{
+                position: absolute;
+                right: 0;
+                .close-btn{
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+                    margin: 5px;
+                    cursor: pointer;
+                    width: 35px;
+                    height: 35px;
+                    color: $textColor;
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                }
+               
+            }
             .create-title{
                 font-size: 30px;
                 font-weight: 700;
@@ -76,11 +75,10 @@ $black : #000000;
             }   
             .input-upload{
                 margin-top: 20px;
-               
+      
                 display: flex;
                 flex-direction: column;
-                width: 90%;
-                align-items: center;
+                width: 95%;
 
                 textarea{
                     height: 80px;
@@ -92,12 +90,38 @@ $black : #000000;
                     background-color: transparent;
                     column-count:unset;
                 }
+                .btn-menu{
+                    display: flex;
+                    gap: 20px;
+                    padding-bottom: 20px;
+                    .img-video{
+                        background-color: $mainColor;
+                        color: rgb(30, 155, 37);
+                        border: none;
+                        outline: none;
+                        padding: 10px;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        span{
+                            font-size: 15px;
+                            color: $textColor;
+                        }
+                        &:hover{
+                            background-color: rgba($color: $mainColor, $alpha: 0.5);
+                        }
+                    }
+                }
+
                 .input-btn{
                     
                     border-radius: 15px;    
                     width: 100%;
                     height: 200px;
                     border: none;
+                    
                     
                    
                 }
@@ -141,22 +165,23 @@ $black : #000000;
 
     @media (max-width:767px){
 
-
+        padding-top: 30px;
 
         .upload-wapper{
            width: 330px;
-           height: 400px;
            z-index: 3;
            .items{
 
                 .create-title{
-
                     font-size: 30px;
                 }
                 .input-upload{
-                    align-items: center;
+                 
                     textarea{
                         height: 100px;
+                    }
+                    .s-img{
+                        height: 230px;
                     }
                     .input-btn{
                         display: flex;

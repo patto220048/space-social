@@ -85,16 +85,16 @@ function EditPost({post ,text,openEditPost, setOpenEditPost, setText, setImg, im
                            ?
                             <>
                                 <div className="img-post">   
-        
-                                  {postImg || inputs.imgPost ? <img src={ postImg || inputs.imgPost} alt="" /> 
-                                  :
-                                  <button htmlFor='file'>
-                                    <input type='file' id='file' onChange={e=>setImg(e.target.files[0])}/>
-                                    <label htmlFor='file'>
-                                            <AddPhotoAlternateIcon className="icon1" fontSize='large' style={{cursor:'pointer'}}/>
-                                        </label>
-                                    </button>
-                                  }
+                                    {postImg || inputs.imgPost ? <img src={ postImg || inputs.imgPost} alt="" /> 
+                                        
+                                    :
+                                    <button htmlFor='file'>
+                                        <input type='file' id='file' onChange={e=>setImg(e.target.files[0])}/>
+                                        <label htmlFor='file'>
+                                                <AddPhotoAlternateIcon className="icon1" fontSize='large' style={{cursor:'pointer'}}/>
+                                            </label>
+                                        </button>
+                                        }
                                 </div>
                             </>
                             :
