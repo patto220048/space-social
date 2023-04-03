@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './friendMsg.scss'
 function FriendMsg({conversation}) {
-
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
 
@@ -14,7 +16,7 @@ function FriendMsg({conversation}) {
         const friendId = conversation.members.find(m => m !== currentUser._id)
         const getUser = async () =>{
             try {
-                const res = await axios.get(`/user/find/${friendId}`)
+                const res = await axiosInstance.get(`/user/find/${friendId}`)
                 setUser(res.data)             
             } catch (err) {
                 console.log(err.message)

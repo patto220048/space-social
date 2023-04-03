@@ -14,7 +14,7 @@ import Share from "../../components/share/Share";
 
 function Home({type,socket,openRightbar}) {
     
-    
+        
     const [openMenuPost, setOpenMenuPost] = useState(false)
     const [openUpload, setOpenUpload] = useState(false)
 

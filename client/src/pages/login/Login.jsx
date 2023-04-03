@@ -17,6 +17,9 @@ import IsLoading from "../../components/loading/IsLoading";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function Login({socket}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })  
     const isLoading = useSelector((state) => state.user.loading)
     const [resetPass, setResetPass] = useState(false)
     const [verifyEmail, setVerifyEmail] = useState(false)
@@ -53,7 +56,7 @@ function Login({socket}) {
         const fecthLogin = async () =>{
            
         try {
-            const res = await axios.post('/auth/login',{email,password})
+            const res = await axiosInstance.post('/auth/login',{email,password})
                 dispatch(loginSuccess(res.data))
                 navigate(`/`)
             }
@@ -76,7 +79,7 @@ function Login({socket}) {
          socket.connect()
         signInWithPopup(auth, providerGG)
             .then((result)=>{
-                axios.post('/auth/withgg',{
+                axiosInstance.post('/auth/withgg',{
                     username: result.user.displayName,
                     email: result.user.email,
                     userImg: result.user.photoURL,
@@ -104,7 +107,7 @@ function Login({socket}) {
     const hanldeResetPassword = async(e) =>{
         e.preventDefault();
         try {
-            const res = await axios.post('/auth/reset',{email})
+            const res = await axiosInstance.post('/auth/reset',{email})
             setEmailId(res.data)
             setVerifyEmail(true)
            
@@ -117,7 +120,7 @@ function Login({socket}) {
     const hanldeSubmitNewPass = async (e) =>{
         e.preventDefault();
         try {
-            const res = await axios.put(`/user/edit/${emailId}`,{password: newPassword})
+            const res = await axiosInstance.put(`/user/edit/${emailId}`,{password: newPassword})
             alert("Password changed successfully!")
             navigate('/')
             }

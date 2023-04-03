@@ -13,6 +13,9 @@ import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import CloseIcon from '@mui/icons-material/Close';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 function Navbar({socket, setOpenSideBarMb, openSideBarMb , openRightbar, setOpenRightbar}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const  {currentPost} = useSelector((state) => state.post)
     const [openNotifi, setNotifi] = useState(false)
     const [notifications, setNotifications] = useState([])
@@ -23,7 +26,7 @@ function Navbar({socket, setOpenSideBarMb, openSideBarMb , openRightbar, setOpen
     // useEffect(() => {
     //     const fectchNotifi = async()=>{
     //         try {
-    //             const res = axios.get(`/notification/v1/get`)
+    //             const res = axiosInstance.get(`/notification/v1/get`)
     //             setNotifications(res.data)
     //         } catch (err) {
     //             console.log(err.message)

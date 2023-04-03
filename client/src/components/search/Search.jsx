@@ -10,6 +10,9 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 function Search() {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const  {currentUser} = useSelector((state) => state.user)
 
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
@@ -19,7 +22,7 @@ function Search() {
     useEffect(()=>{
         const fecthUser = async()=>{
             try {   
-                const res = await axios.get(`/user/search?q=${query}`) 
+                const res = await axiosInstance.get(`/user/search?q=${query}`) 
                 setUsers(res.data.map(data=>data))
             } catch (err) {
                 console.log(err.message)

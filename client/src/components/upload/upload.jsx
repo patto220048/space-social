@@ -18,6 +18,9 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import IsLoading from "../loading/IsLoading";
 
 function Upload({openUpload, setOpenUpload,avatar}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     //
     const navigate = useNavigate()
     //
@@ -86,7 +89,7 @@ function Upload({openUpload, setOpenUpload,avatar}) {
         const fectchPost = async() => {
             setIsLoading(false)
             try {
-                const res = await axios.post('/post/create',{...inputs})
+                const res = await axiosInstance.post('/post/create',{...inputs})
                 navigate('/newpost')
                 dispatch(postAdd(res.data))
                 setInputs({})

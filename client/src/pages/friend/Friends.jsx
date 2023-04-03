@@ -7,6 +7,9 @@ import axios from 'axios';
 
 
 function Friends({type}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const paramId = useParams()
     const [user, setUser] = useState({})
     const [activeTab, setActiveTab] = useState(0)
@@ -26,7 +29,7 @@ function Friends({type}) {
 
         const fetchUser = async() =>{
             try {
-                const res = await axios.get(`/user/find/${paramId.friendId}`)
+                const res = await axiosInstance.get(`/user/find/${paramId.friendId}`)
                 setUser(res.data)
             } catch (err) {
                 console.log(err);

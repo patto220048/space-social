@@ -12,6 +12,9 @@ import { useNavigate } from "react-router-dom";
 import Warning from "../../components/warningSetting/Warning";
 import Rightbar from "../../layout/rightbar/Rightbar";
 function Setting() {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })  
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -41,7 +44,7 @@ function Setting() {
     const handleDelAcc = () => {
         const fetchDelAcc = async() =>{
             try {
-                await axios.delete(`/user/delete/${currentUser._id}`)
+                await axiosInstance.delete(`/user/delete/${currentUser._id}`)
                 navigate('/login')
             } catch (err) {
                 console.log(err.message)
@@ -53,7 +56,7 @@ function Setting() {
     const handleSubmitUsername=() =>{
         const fetchEditUser = async() =>{
             try {
-                const res = await axios.put(`/user/edit/${currentUser._id}`,{
+                const res = await axiosInstance.put(`/user/edit/${currentUser._id}`,{
                     username:inputUsername,
                 })  
                 dispatch(loginSuccess(res.data))
@@ -68,7 +71,7 @@ function Setting() {
     const handleSubmitCountry=() =>{
         const fetchEditUser = async() =>{
             try {
-                const res = await axios.put(`/user/edit/${currentUser._id}`,{
+                const res = await axiosInstance.put(`/user/edit/${currentUser._id}`,{
                     region : inputCountry,
                 })  
                 dispatch(loginSuccess(res.data))
@@ -83,7 +86,7 @@ function Setting() {
     const handleSubmitAge=() =>{
         const fetchEditUser = async() =>{
             try {
-                const res = await axios.put(`/user/edit/${currentUser._id}`,{
+                const res = await axiosInstance.put(`/user/edit/${currentUser._id}`,{
                     age:inputAge,
                 })  
                 dispatch(loginSuccess(res.data))
@@ -97,7 +100,7 @@ function Setting() {
     const handleSubmitPass=() =>{
         const fetchEditUser = async() =>{
             try {
-                const res = await axios.put(`/user/edit/${currentUser._id}`,{
+                const res = await axiosInstance.put(`/user/edit/${currentUser._id}`,{
                     password : inputPass
                 })  
                 dispatch(loginSuccess(res.data))

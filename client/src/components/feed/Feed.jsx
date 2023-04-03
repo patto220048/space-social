@@ -19,6 +19,9 @@ import IsLoading from "../loading/IsLoading";
 
 
 function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost,setOpenMenuPost}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const  {currentUser} = useSelector((state) => state.user)
 
     const  {currentPost} = useSelector((state) => state.post)
@@ -51,8 +54,8 @@ function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost
         dispatch(postStart())
           try {
             const res = paramId 
-                    ? await axios.get(`/post/profile/${paramId}`)
-                    : await axios.get(`/post/${type}`)
+                    ? await axiosInstance.get(`/post/profile/${paramId}`)
+                    : await axiosInstance.get(`/post/${type}`)
                         // setPosts(res.data)
             
             dispatch(postSuccess(res.data))

@@ -8,6 +8,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import { loginSuccess } from '../../redux/userSlice';
 function UploadAvt({openUploadAvt,setOpenUploadAvt}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     //current user
     const  {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
@@ -71,7 +74,7 @@ function UploadAvt({openUploadAvt,setOpenUploadAvt}) {
     const handlePost = (e) =>{
         const fectchPost = async() => {
             try {
-                const res = await axios.put(`/user/edit/${currentUser._id}`,{...inputs})
+                const res = await axiosInstance.put(`/user/edit/${currentUser._id}`,{...inputs})
                 dispatch(loginSuccess(res.data))
             } catch (error) {
                 console.log('api error: ' + error)

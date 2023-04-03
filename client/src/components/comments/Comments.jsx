@@ -9,7 +9,9 @@ import ReactLoading from 'react-loading';
 import SendIcon from '@mui/icons-material/Send';
 
 function Comments({post,socket,focusCmt, setFocusCmt}) {
-    
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [comments, setComments] = useState([])
@@ -54,7 +56,7 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
             setIsLoading(true)
             
           try{
-            const res = await axios.get(`/comment/${post._id}/find`)
+            const res = await axiosInstance.get(`/comment/${post._id}/find`)
             setComments(res.data)
             setIsLoading(false)
 
@@ -78,7 +80,7 @@ function Comments({post,socket,focusCmt, setFocusCmt}) {
             })
             // socketio.current.emit("test1", {uid : currentUser._id, ssid :ssId, decs : 'hello world' } )
             try {
-                const res = await axios.post(`/comment/create`,{
+                const res = await axiosInstance.post(`/comment/create`,{
                     postId : post?._id ,
                     comment: desc   
                 })

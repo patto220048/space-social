@@ -17,6 +17,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Sidebar({openSideBarMb, setOpenSideBarMb}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const  {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
@@ -24,7 +27,7 @@ function Sidebar({openSideBarMb, setOpenSideBarMb}) {
 
 
     const handleLogout = async () => {
-        await axios.get('/auth/signout')
+        await axiosInstance.get('/auth/signout')
         dispatch(logout("Logged out successfully"))
         dispatch(logoutPost('Logged out successfully'))
     }

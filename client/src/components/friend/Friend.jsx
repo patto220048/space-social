@@ -7,7 +7,9 @@ import FriendPage from '../friendPage/FriendPage';
 import { Link } from 'react-router-dom';
 
 function Friend({friendId}) {
-
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const [user, setUser] = useState({})
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const noBg = process.env.REACT_APP_PUBLIC_FOLDER + "no_bg2.png" 
@@ -16,7 +18,7 @@ function Friend({friendId}) {
 
         const fetchUser = async() =>{
             try {
-                const res = await axios.get(`/user/find/${friendId}`)
+                const res = await axiosInstance.get(`/user/find/${friendId}`)
                 setUser(res.data)
             } catch (err) {
                 console.log(err);

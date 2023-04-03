@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import './online.scss'
 
 function Online({users}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const [friend, setFriend] = useState({})
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const  {currentUser} = useSelector((state) => state.user)
@@ -12,7 +15,7 @@ function Online({users}) {
     useEffect(()=>{
         const fecthUser = async()=>{
             try{
-                const res = await axios.get(`/user/find/${users}`)
+                const res = await axiosInstance.get(`/user/find/${users}`)
                 setFriend(res.data)
           
 

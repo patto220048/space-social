@@ -16,6 +16,9 @@ import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
 function Signup() {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     //itype
     const textRef = useRef()
     //handle signup
@@ -44,7 +47,7 @@ function Signup() {
         try {
                 const fecthSignup = async() => {
                 try {
-                    const res = await axios.post('/auth/signup',{username,email,password})
+                    const res = await axiosInstance.post('/auth/signup',{username,email,password})
                     dispatch(loginSuccess(res.data))
                     navigate(`/`)
                     

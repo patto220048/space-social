@@ -24,6 +24,9 @@ import IsLoading from '../../components/loading/IsLoading';
 
 
 function Profile({posts,openRightbar}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })  
     const [openUpload, setOpenUpload] = useState(false)
     const [openUploadAvt, setOpenUploadAvt] = useState(false)
     const  {currentUser} = useSelector((state) => state.user)
@@ -47,7 +50,7 @@ function Profile({posts,openRightbar}) {
         const fecthUser = async()=>{
             setIsLoading(false)
             try{
-                const res = await axios.get(`/user/find/${paramId.userId}`)
+                const res = await axiosInstance.get(`/user/find/${paramId.userId}`)
                 setUser(res.data)
                 setIsLoading(true)
 
@@ -66,9 +69,9 @@ function Profile({posts,openRightbar}) {
            try {
                 currentUser.flowing?.includes(paramId.userId)
                 ?
-                await axios.put(`/user/unfollow/${paramId.userId}`)
+                await axiosInstance.put(`/user/unfollow/${paramId.userId}`)
                 :
-                await axios.put(`/user/follow/${paramId.userId}`)
+                await axiosInstance.put(`/user/follow/${paramId.userId}`)
                 dispatch(follow(paramId.userId))
            } catch (error) {
                console.log(error.message)
@@ -81,10 +84,10 @@ function Profile({posts,openRightbar}) {
             try {
                  currentUser.waitting?.includes(paramId.userId)
                  ?
-                 await axios.put(`/user/unpendding/${paramId.userId}`)
+                 await axiosInstance.put(`/user/unpendding/${paramId.userId}`)
                  
              
-                 :await axios.put(`/user/pendding/${paramId.userId}`)
+                 :await axiosInstance.put(`/user/pendding/${paramId.userId}`)
             
                  dispatch(waitting(paramId.userId))
 
@@ -98,7 +101,7 @@ function Profile({posts,openRightbar}) {
     const handleUpdateDesc = () =>{
         const fecthUser = async()=>{
             try {  
-                const res = await axios.put(`/user/edit/${paramId.userId}`,{
+                const res = await axiosInstance.put(`/user/edit/${paramId.userId}`,{
                     descProfile : descProfile
                 })
                 dispatch(loginSuccess(res.data))
@@ -115,7 +118,7 @@ function Profile({posts,openRightbar}) {
     const handleRemove = () =>{
         const fecthRemove = async()=>{
             try {  
-                 await axios.put(`/user/remove/${paramId.userId}`)
+                 await axiosInstance.put(`/user/remove/${paramId.userId}`)
                 dispatch(remove(paramId.userId))
             } catch (err) {
                 console.log(err.message)
@@ -129,7 +132,7 @@ function Profile({posts,openRightbar}) {
     const handleMessage = async() =>{
         try {  
 
-           const res =  await axios.post(`/conversation`,{
+           const res =  await axiosInstance.post(`/conversation`,{
                 senderId: currentUser._id,
                 receiverId : paramId.userId
            })

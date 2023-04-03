@@ -11,7 +11,11 @@ import Sidebar from '../../layout/sidebar/Sidebar';
 
 
 function Message({socket}) {
-  const sessionId = localStorage.getItem("sessionID");
+
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
+    const sessionId = localStorage.getItem("sessionID");
 
     const [conversation , setConversation] = useState([])
     const  {currentUser} = useSelector((state) => state.user)
@@ -25,7 +29,7 @@ function Message({socket}) {
     useEffect(()=>{
         const getConversation = async () => {
             try {
-                const res = await axios.get(`/conversation/${currentUser._id}`)
+                const res = await axiosInstance.get(`/conversation/${currentUser._id}`)
                 setConversation(res.data)
             } catch (err) {
                 console.log(err.message)
@@ -39,7 +43,7 @@ function Message({socket}) {
 
         const getMessage = async () => {
             try {
-                const res = await axios.get(`/message/${currentChat?._id}`)
+                const res = await axiosInstance.get(`/message/${currentChat?._id}`)
                 setMessages(res.data)
             } catch (err) {
                 console.log(err.message)
@@ -68,7 +72,7 @@ function Message({socket}) {
 
 
         try {
-            const res = await axios.post(`/message`,message )
+            const res = await axiosInstance.post(`/message`,message )
             setMessages([...messages, res.data])
         } catch (err) {
             console.log(err.message)  

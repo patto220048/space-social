@@ -6,6 +6,9 @@ import {friend } from "../../redux/userSlice";
 import { Link } from 'react-router-dom';
 
 function RequestFriend({users}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
 
     const dispatch = useDispatch()
@@ -17,7 +20,7 @@ function RequestFriend({users}) {
         const fecthUser = async()=>{
             
             try{
-                const res = await axios.get(`/user/find/${users}`)
+                const res = await axiosInstance.get(`/user/find/${users}`)
                 setUser(res.data)
             }
             catch(err){
@@ -32,7 +35,7 @@ function RequestFriend({users}) {
         const fecthAccept= async()=>{
             
             try{
-                await axios.put(`/user/accept/${user._id}`)
+                await axiosInstance.put(`/user/accept/${user._id}`)
                 dispatch(friend(user._id))
             }
             catch(err){
@@ -45,7 +48,7 @@ function RequestFriend({users}) {
         const fecthReject= async()=>{
             
             try{
-                await axios.put(`/user/reject/${user._id}`)
+                await axiosInstance.put(`/user/reject/${user._id}`)
                 alert("reject success")
               
             }

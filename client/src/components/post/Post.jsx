@@ -24,6 +24,9 @@ import EditPost from "../editPost/EditPost";
 
 
 function Post({post,socket}) {
+    const axiosInstance = axios.create({
+        baseURL : process.env.REACT_APP_API_URL
+    })
     const  {currentUser} = useSelector((state) => state.user)
     const  {currentPost} = useSelector((state) => state.post)
     const dispatch = useDispatch()
@@ -52,8 +55,8 @@ function Post({post,socket}) {
         const fecthUser = async()=>{
         
             try{
-                const res = await axios.get(`/user/find/${post?.userId}`)
-                const onePost = await axios.get(`/post/find/v1/${post?._id}`)
+                const res = await axiosInstance.get(`/user/find/${post?.userId}`)
+                const onePost = await axiosInstance.get(`/post/find/v1/${post?._id}`)
                 setUser(res.data)
                 setOnePost(onePost.data)
             }
@@ -72,7 +75,7 @@ function Post({post,socket}) {
         const fectchDelete = async()=>{
       
             try {
-                const res = await axios.delete(`/post/delete/${post?._id}`)
+                const res = await axiosInstance.delete(`/post/delete/${post?._id}`)
                 handleDeleteImgFormFirebase(post?.imgPost)
                 alert("Post deleted successfully!!")
                 dispatch(deletePost(post._id))
@@ -128,11 +131,11 @@ function Post({post,socket}) {
                     if(post?._id === onePost._id){
                       
                         if(post?.like.includes(currentUser._id)){
-                            await axios.put(`/post/dislike?q=${onePost._id}`)
+                            await axiosInstance.put(`/post/dislike?q=${onePost._id}`)
                             setLike(like-1)
                         }
                         else{
-                            await axios.put(`/post/like?q=${onePost._id}`)
+                            await axiosInstance.put(`/post/like?q=${onePost._id}`)
                             setLike(like+1)
                         }
                     }
@@ -155,7 +158,7 @@ function Post({post,socket}) {
     const handleEditPost =() => {
         const fetchEdit = async() =>{
             try {
-            const res = await axios.put(`/post/update/${post?._id}`,{
+            const res = await axiosInstance.put(`/post/update/${post?._id}`,{
                     desc: text,
                     imgPost : inputs.imgPost
                 })
@@ -183,7 +186,7 @@ function Post({post,socket}) {
         handleDeleteImgFormFirebase(post.imgPost || inputs.imgPost)
         const fetchEdit = async() =>{
             try {
-            const res = await axios.put(`/post/update/${post?._id}`,{
+            const res = await axiosInstance.put(`/post/update/${post?._id}`,{
                 imgPost : ''
                 })
                 console.log(res.data)
