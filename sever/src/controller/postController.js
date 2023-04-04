@@ -29,7 +29,6 @@ class PostController {
             
         } catch (err) {
             res.status(500).json("CAN'T GET POST SEVER IS ERROR", err)
-            
         }
 
     }

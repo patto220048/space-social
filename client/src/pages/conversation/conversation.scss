@@ -45,7 +45,7 @@
                     flex-direction: column;
                     justify-content: space-between;
                     overflow-y: scroll;
-                    height:90%;
+                    max-height:90%;
                     &::-webkit-scrollbar{
                         display: none;
                     }
@@ -133,7 +133,7 @@
                 }
                 .right{
                     padding-top: 0;
-                    height: 80%;
+                    max-height: 80%;
                     .chat-container{
                         height:90%
                     }

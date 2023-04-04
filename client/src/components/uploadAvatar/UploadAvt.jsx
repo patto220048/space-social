@@ -9,7 +9,11 @@ import axios from 'axios';
 import { loginSuccess } from '../../redux/userSlice';
 function UploadAvt({openUploadAvt,setOpenUploadAvt}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     //current user
     const  {currentUser} = useSelector((state) => state.user)

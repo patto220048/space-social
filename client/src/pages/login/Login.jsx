@@ -18,7 +18,11 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function Login({socket}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })  
     const isLoading = useSelector((state) => state.user.loading)
     const [resetPass, setResetPass] = useState(false)

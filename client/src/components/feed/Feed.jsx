@@ -10,17 +10,13 @@ import { postFail, postStart, postSuccess } from "../../redux/postSlice";
 import ReactLoading from 'react-loading';
 
 
-
-
-import Upload from "../upload/Upload";
-import Warning from "../warningSetting/Warning"
-import IsLoading from "../loading/IsLoading";
-
-
-
 function Feed({type,paramId,socket,setOpenUpload,setOpenWarningPost,openMenuPost,setOpenMenuPost}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     const  {currentUser} = useSelector((state) => state.user)
 

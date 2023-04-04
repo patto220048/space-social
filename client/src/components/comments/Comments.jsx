@@ -10,7 +10,11 @@ import SendIcon from '@mui/icons-material/Send';
 
 function Comments({post,socket,focusCmt, setFocusCmt}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     const  {currentUser} = useSelector((state) => state.user)
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 

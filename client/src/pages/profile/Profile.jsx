@@ -25,7 +25,11 @@ import IsLoading from '../../components/loading/IsLoading';
 
 function Profile({posts,openRightbar}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })  
     const [openUpload, setOpenUpload] = useState(false)
     const [openUploadAvt, setOpenUploadAvt] = useState(false)

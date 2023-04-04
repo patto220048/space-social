@@ -13,7 +13,11 @@ import Warning from "../../components/warningSetting/Warning";
 import Rightbar from "../../layout/rightbar/Rightbar";
 function Setting() {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })  
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const navigate = useNavigate()

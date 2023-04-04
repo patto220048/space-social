@@ -25,7 +25,11 @@ import EditPost from "../editPost/EditPost";
 
 function Post({post,socket}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     const  {currentUser} = useSelector((state) => state.user)
     const  {currentPost} = useSelector((state) => state.post)
@@ -75,7 +79,7 @@ function Post({post,socket}) {
         const fectchDelete = async()=>{
       
             try {
-                const res = await axiosInstance.delete(`/post/delete/${post?._id}`)
+                await axiosInstance.delete(`/post/delete/${post?._id}`)
                 handleDeleteImgFormFirebase(post?.imgPost)
                 alert("Post deleted successfully!!")
                 dispatch(deletePost(post._id))
@@ -256,13 +260,15 @@ function Post({post,socket}) {
                              </button>
                            { openMenuPost &&
                            <div className="option-menu">
-                               {currentPost.some((post =>post._id === onePost?._id && post.userId === currentUser._id)) || currentUser.admin &&  
+                               {currentPost.some((post =>post._id === onePost?._id && post.userId === currentUser._id)) || currentUser.admin ?  
                                 <>
                                 <span onClick={handleOpenWarning} >Delete </span>
                                 <span onClick={()=>setOpenEditPost(true)}>Edit</span>
-                                </>
-                               }
                                 <span>Report</span>
+                                </>
+                                :
+                                <span>Report</span>
+                            }
                             </div>
                             }
                         </div>

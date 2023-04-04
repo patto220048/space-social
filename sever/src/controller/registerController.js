@@ -57,6 +57,7 @@ class loginController{
                 const cookie = res.cookie('access_token', token,{
                     httpOnly: true,
                     path: '/',
+                    
     
                 })
                 res.status(200).json(other)
@@ -131,7 +132,7 @@ class loginController{
                 ,process.env.JWT_PW,
                 { expiresIn: '1d' })
             const {_id,email} = user._doc
-            const cookie = res.cookie('access_token', token,{
+            res.cookie('access_token', token,{
                 httpOnly: true,
                 path: '/',
 

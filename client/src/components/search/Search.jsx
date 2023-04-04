@@ -11,7 +11,11 @@ import SearchIcon from '@mui/icons-material/Search';
 
 function Search() {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     const  {currentUser} = useSelector((state) => state.user)
 

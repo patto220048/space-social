@@ -13,7 +13,11 @@ import Sidebar from '../../layout/sidebar/Sidebar';
 function Message({socket}) {
 
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     const sessionId = localStorage.getItem("sessionID");
 

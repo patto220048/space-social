@@ -5,7 +5,16 @@
     position: sticky;
     top:70px;
     height: 100%;
-    
+    h1{
+        padding: 0 5px;
+        font-size: 25px;
+        font-weight: 700;
+        color:$textColor;
+        position: sticky;
+        top: 0;
+        background-color: $mainColor;
+        z-index: 2;
+    }
     .rightbar-wapper{
         
         

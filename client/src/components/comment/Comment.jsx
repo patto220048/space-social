@@ -12,7 +12,11 @@ import { useSelector } from "react-redux"
 
 function Comment({comment,socket}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     const navigate = useNavigate()
     const srcollRef = useRef()

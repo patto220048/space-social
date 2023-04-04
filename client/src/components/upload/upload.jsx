@@ -19,7 +19,11 @@ import IsLoading from "../loading/IsLoading";
 
 function Upload({openUpload, setOpenUpload,avatar}) {
     const axiosInstance = axios.create({
-        baseURL : process.env.REACT_APP_API_URL
+        baseURL : process.env.REACT_APP_API_URL,
+        withCredentials: true,
+        headers: {
+        "Content-type": "application/json",
+        },
     })
     //
     const navigate = useNavigate()
@@ -28,7 +32,6 @@ function Upload({openUpload, setOpenUpload,avatar}) {
 
     const noAvatar = process.env.REACT_APP_PUBLIC_FOLDER + "no_avatar1.jpg" 
     const [img, setImg] = useState(undefined)
-    console.log(img)
     const [inputs ,setInputs] = useState({})
     const [imgPercent, setImgPercent] = useState(0)
     const [isLoading, setIsLoading] = useState(false)

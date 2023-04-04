@@ -10,15 +10,14 @@ function Rightbar({openRightbar}) {
     const  {currentUser} = useSelector((state) => state.user)
     return ( 
         <div className={"rightbar-container "+( openRightbar ? 'active' : <></>)}>
+           { currentUser.pendding.length > 0 && <h1 >REQEST FRIENDS</h1>}
             <div className="rightbar-wapper">
                     {currentUser.pendding?.map((users,i)=>(
                         <RequestFriend users={users} key={i}/>
                     ))}
             </div>
+            <h1 className="user-online-name">ONLINE</h1>
             <div className="user-online">
-             
-                <h1 className="user-online-name">Online</h1>
-             
                 {currentUser.friend?.map((users,i)=>(
                     <Online users={users} key={i} /> 
                 ))}
