@@ -1,8 +1,6 @@
-import "./home.scss"
+import "./home.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import axios from "axios"
 
 import UploadFile from "../../components/upload/UploadFile";
 import Feed from "../../components/feed/Feed";
