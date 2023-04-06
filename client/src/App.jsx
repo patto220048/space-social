@@ -31,14 +31,12 @@ function App() {
   const [openRightbar, setOpenRightbar] = useState(false)
   const dispatch = useDispatch()
   
-  const socketio = useRef(io('ws://localhost:4000' ,{
+  const socketio = useRef(io('ws://18.183.13.67:4000' ,{
     autoConnect: false 
  }) )
   
  useEffect(()=> {
-  socketio.current = (io('ws://localhost:4000' ,{
-     autoConnect: false 
-  }))
+  socketio.current = (io('ws://18.183.13.67:4000'))
 },[])
 
  useEffect(()=>{

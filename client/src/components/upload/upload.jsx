@@ -4,9 +4,7 @@ import app from "../../firebase/firebase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
-import ReactLoading from 'react-loading';
+    
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from "react-redux";
 import { postAdd } from "../../redux/postSlice";

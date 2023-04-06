@@ -6,21 +6,26 @@ import axios from 'axios';
 import {follow, loginSuccess, waitting , remove} from "../../redux/userSlice";
 import { Link } from 'react-router-dom';
 
+
+import Upload from '../../components/upload/Upload'
+import Feed from '../../components/feed/Feed';
+import Rightbar from '../../layout/rightbar/Rightbar';
+import UploadAvt from '../../components/uploadAvatar/UploadAvt';
+import FriendsProfile from '../../components/friendProfile/FriendsProfile';
+import IsLoading from '../../components/loading/IsLoading';
+
+
+
+
 import EmailIcon from '@mui/icons-material/Email';
 import HouseIcon from '@mui/icons-material/House';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import CheckIcon from '@mui/icons-material/Check';
-import Upload from "../../components/upload/Upload"
 import AddIcon from '@mui/icons-material/Add';
-import Feed from '../../components/feed/Feed';
 import DoneIcon from '@mui/icons-material/Done';
-import Rightbar from '../../layout/rightbar/Rightbar';
-import UploadAvt from '../../components/uploadAvatar/UploadAvt';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CakeIcon from '@mui/icons-material/Cake';
-import FriendsProfile from '../../components/friendProfile/FriendsProfile';
-import IsLoading from '../../components/loading/IsLoading';
 
 
 function Profile({posts,openRightbar}) {
