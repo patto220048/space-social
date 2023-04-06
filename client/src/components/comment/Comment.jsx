@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { useSelector } from "react-redux"
 
 function Comment({comment,socket}) {
     const axiosInstance = axios.create({
@@ -46,7 +45,7 @@ function Comment({comment,socket}) {
 
            try {
             setOpenDelCmt(false)
-            const res = await axiosInstance.delete(`/comment/${comment._id}/delete`)
+            await axiosInstance.delete(`/comment/${comment._id}/delete`)
               
             alert('Comment deleted successfully!!')
             window.location.reload(true);

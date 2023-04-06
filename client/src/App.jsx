@@ -9,16 +9,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
+
 import {io} from 'socket.io-client'
-import { loginSuccess, logout } from './redux/userSlice';
+import { logout } from './redux/userSlice';
 
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
 import Signup from './pages/signup/Signup';
 import Setting from './pages/setting/Setting';
 import Navbar from './layout/navbar/Navbar';
-import Rightbar from './layout/rightbar/Rightbar';
+
 import Sidebar from './layout/sidebar/Sidebar';
 import Home from './pages/home/Home';
 import Friends from './pages/friend/Friends';
