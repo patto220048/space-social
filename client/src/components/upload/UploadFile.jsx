@@ -1,4 +1,4 @@
-import "./upload.scss"
+import "./uploadFile.scss"
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from "../../firebase/firebase";
 import { useEffect, useState } from "react";

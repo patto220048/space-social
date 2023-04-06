@@ -7,7 +7,7 @@ import {follow, loginSuccess, waitting , remove} from "../../redux/userSlice";
 import { Link } from 'react-router-dom';
 
 
-import Upload from '../../components/upload/Upload'
+import UploadFile from '../../components/upload/UploadFile'
 import Feed from '../../components/feed/Feed';
 import Rightbar from '../../layout/rightbar/Rightbar';
 import UploadAvt from '../../components/uploadAvatar/UploadAvt';
@@ -158,7 +158,7 @@ function Profile({posts,openRightbar}) {
     return ( 
         <>
             <div className="profile-container">
-                <Upload openUpload={openUpload} setOpenUpload={setOpenUpload} />
+                <UploadFile openUpload={openUpload} setOpenUpload={setOpenUpload} />
                 <UploadAvt openUploadAvt={openUploadAvt} setOpenUploadAvt={setOpenUploadAvt}/>
                 <div className="profile-warpper">
                     <div className="profile-item">
