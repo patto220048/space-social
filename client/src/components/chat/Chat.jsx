@@ -1,5 +1,4 @@
 import './chat.scss'
-
 import { format } from 'timeago.js'; 
 import { useEffect, useState } from 'react';
 import axios from 'axios';

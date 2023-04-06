@@ -1,19 +1,13 @@
 
 const {
   override,
-  addDecoratorsLegacy,
-  disableEsLint,
-  addBundleVisualizer,
-  addWebpackAlias,
-  adjustWorkbox
+  addWebpackResolve
 } = require("customize-cra");
 
-module.exports = function override(config, env) {
-    //do stuff with the webpack config...
-    return config;
+module.exports = override({
+  resolve: {
+    extensions: [".js", ".jsx"]
   }
- module.exports = {
-    resolve: {
-        extensions: [".js", ".jsx"]
-      },
-  };
+  }
+)
+  
