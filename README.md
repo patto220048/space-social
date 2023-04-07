@@ -186,7 +186,7 @@ I using AWS EC2 follow step by step in below :
 * Let's create a new pm2 instance
 
 ```
-  pm2 start --name api index.js   
+  pm2 start --name api src/index.js   
 ```
 
 ```
