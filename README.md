@@ -66,19 +66,19 @@ I using AWS EC2 follow step by step in below :
 
 * Install Nginx
 
-`
-apt install nginx
-`
+```
+  apt install nginx
+```
 
 * Installing and configure Firewall 
 
-`
-apt install ufw
-`
+```
+  apt install ufw
+```
 
-`
-ufw allow "Nginx Full"
-`
+```
+  ufw allow "Nginx Full"
+```
 
 * Delete the default server configuration
 
