@@ -48,10 +48,34 @@ Runs the app in the development mode.\
 ## Image Sample :
 
 
-![image](https://user-images.githubusercontent.com/108036581/230587529-0b997cfc-aae6-4269-9eda-4af9084490e1.png)
+![image](https://user-images.githubusercontent.com/108036581/230596281-2f1fd916-25c8-4b54-8a2f-b870ad42cca5.png)
 
 
-![image](https://user-images.githubusercontent.com/108036581/230587651-42794c6a-f307-4f8b-8f28-baccf3233615.png)
+
+![image](https://user-images.githubusercontent.com/108036581/230596449-541f8fc9-f184-43c8-bb4f-f3c34829147d.png)
+
+
+
+![image](https://user-images.githubusercontent.com/108036581/230596568-4e2728c3-890b-4f31-8524-eeeaf81f1c00.png)
+
+
+
+
+![image](https://user-images.githubusercontent.com/108036581/230596710-a363c96e-ad91-4547-abee-f45d6f998b29.png)
+
+
+
+![image](https://user-images.githubusercontent.com/108036581/230596837-47cd7a59-119f-40c3-bbbe-3eb251f12b19.png)
+
+
+
+![image](https://user-images.githubusercontent.com/108036581/230596996-5d549690-03f6-410c-8538-4b8bb5fb91f6.png)
+
+
+
+![image](https://user-images.githubusercontent.com/108036581/230597140-250949da-8cb1-456d-80bf-ab5bc2f4d90b.png)
+
+
 
 
 
