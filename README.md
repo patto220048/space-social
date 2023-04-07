@@ -1,11 +1,11 @@
 # space-social
-# Getting Started with Create React App
+# Getting Started 
 
-This project demo :  (https://space-social.online/login).
+#This project demo :  (https://space-social.online/login).
 
 ## Teachnical : 
 
-* Nodejs
+* Nodejs (expressjs)
 * React
 * Firebase
 * Redux
