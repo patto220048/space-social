@@ -76,7 +76,13 @@ Runs the app in the development mode.\
 ![image](https://user-images.githubusercontent.com/108036581/230597140-250949da-8cb1-456d-80bf-ab5bc2f4d90b.png)
 
 
+![image](https://user-images.githubusercontent.com/108036581/230597399-0fbafd61-1197-43e3-991c-36b8c5242c8b.png)
 
+
+![image](https://user-images.githubusercontent.com/108036581/230597543-1d4aa638-5857-4daf-af35-b07b89c2bb2a.png)
+
+
+![image](https://user-images.githubusercontent.com/108036581/230597722-93577239-d93a-489f-8a96-47ef15b7b8f6.png)
 
 
 ## Deployment :
