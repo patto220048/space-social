@@ -282,7 +282,7 @@ I using AWS EC2 follow step by step in below :
    server_name space-social www.space-social.online;
 
   location / {
-   root /var/www/netflix/client;
+   root /var/www/space/client;
    index  index.html index.htm;
    proxy_http_version 1.1;
    proxy_set_header Upgrade $http_upgrade;
